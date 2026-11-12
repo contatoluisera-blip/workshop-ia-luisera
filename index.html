@@ -3080,6 +3080,7 @@ function LocalStore() {
       const q = db.perguntas[id]; if (!q) return; const m = new Set(q.mais || []);
       m.has(pid) ? m.delete(pid) : m.add(pid); q.mais = [...m]; salvar(); emitir("perguntas");
     },
+    async limparCols(cols) { fresco(); cols.forEach(c => db[c] = {}); salvar(); cols.forEach(emitir); },
     async limpar() { db = vazio(); salvar(); emitirTudo(); }
   };
 }
@@ -3111,6 +3112,12 @@ async function FirebaseStore() {
     toggleMais(id, pid, jaTem) {
       const F = firebase.firestore.FieldValue;
       return base.collection("perguntas").doc(id).update({ mais: jaTem ? F.arrayRemove(pid) : F.arrayUnion(pid) });
+    },
+    async limparCols(cols) {
+      for (const col of cols) {
+        const q = await base.collection(col).get();
+        for (let i = 0; i < q.docs.length; i += 400) { const bt = fs.batch(); q.docs.slice(i, i + 400).forEach(d => bt.delete(d.ref)); await bt.commit(); }
+      }
     },
     async limpar() {
       for (const col of COLS) {
@@ -3165,7 +3172,7 @@ function iniciarPlateia() {
 function ouvirEu(pid) {
   store.listenDoc("participantes", pid, d => {
     if (pid !== PL.pid) return;
-    if (!d) { PL.pid = null; PL.eu = null; PL.meusVotos = {}; PL.enviados = {}; LS.del("ws-pid-" + CONFIG.sessao); salvarLocal(); }
+    if (!d) { PL.pid = null; PL.eu = null; PL.meusVotos = {}; PL.enviados = {}; LS.del("ws-pid-" + CONFIG.sessao); LS.del("ws-ancora-" + CONFIG.sessao); salvarLocal(); }
     else PL.eu = d;
     renderPlateia();
   });
@@ -3953,14 +3960,13 @@ function listaPessoas() {
 }
 
 function botaoZerarP() {
-  return `<button class="mini" data-act="zerar-participantes" style="border-color:var(--lar);color:var(--lar);margin-right:8px">${TL.confirmaZerarP ? "Toque de novo: todos saem e os times somem" : "Zerar participantes e times"}</button>`;
+  return `<button class="mini" data-act="zerar-participantes" style="border-color:var(--lar);color:var(--lar);margin-right:8px">${TL.confirmaZerarP ? "Toque de novo: apaga pessoas, times e respostas (a planilha baixa antes)" : "Zerar participantes, times e respostas"}</button>`;
 }
 async function zerarParticipantes() {
   if (temRespostas()) exportarRespostas();
-  const ids = P.map(p => p.id);
   TL.cartasVistas.clear();
-  await Promise.all(ids.map(id => store.del("participantes", id)));
-  await store.setEstado({ cartas: null, cartasDono: null, viradas: [], todasViradas: false, timesSorteados: false });
+  await store.limparCols(["participantes", "votos", "respostas", "envios", "perguntas"]);
+  await store.setEstado({ cartas: null, cartasDono: null, viradas: [], todasViradas: false, timesSorteados: false, placar: null, feitos: null, vencedor: null, destaque: null });
 }
 
 /* ---------- registro das respostas (planilha) ---------- */
