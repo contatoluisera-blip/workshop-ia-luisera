@@ -398,7 +398,14 @@ const OPCOES_PROMPT = {
   ]
 };
 /* Imagens de backup (Creator Lab), uma para cada opção, na mesma ordem. Vazio = sem backup para aquela opção. */
-const BACKUP_IMAGENS = { atalho: ["", "", ""], ferramenta: ["", "", ""] };
+const BACKUP_IMAGENS = {
+  atalho: [
+    "https://firebasestorage.googleapis.com/v0/b/luisera-lab.firebasestorage.app/o/gen-outputs%2Fp9UMCdWdRRTJfCjm5EfcwvCJbXq1%2F01794497515336-75f547d5%2F0.png?alt=media&token=373af8ea-18a7-48ed-aefa-9cd9043747c8",
+    "https://firebasestorage.googleapis.com/v0/b/luisera-lab.firebasestorage.app/o/gen-outputs%2Fp9UMCdWdRRTJfCjm5EfcwvCJbXq1%2F01794497552020-34b8c814%2F0.png?alt=media&token=77ae623c-0c84-43fa-96cd-ac62c1077fa8",
+    "https://firebasestorage.googleapis.com/v0/b/luisera-lab.firebasestorage.app/o/gen-outputs%2Fp9UMCdWdRRTJfCjm5EfcwvCJbXq1%2F01794497624397-bf17fd22%2F0.jpg?alt=media&token=1fd3ab4c-5e50-45e9-af03-4ae8dba66edb"
+  ],
+  ferramenta: ["", "", ""] // pendente: o provedor de geração ficou sem saldo
+};
 /* As perguntas que um bom prompt responde: aparece na revelação do duelo de Prompt. */
 const PERGUNTAS_PROMPT = ["Quem é o personagem?", "Onde ele está?", "Que luz e que hora?", "Que câmera e que lente?", "Que formato e composição?", "Que cores e texturas?", "Que sensação?", "O que evitar?"];
 const DUELOS = {
