@@ -357,6 +357,15 @@ textarea{resize:vertical;min-height:92px;line-height:1.45}
 .pessoa b{font-weight:600}.pessoa i{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 .pessoa em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--mut2)}
 .pessoa span{grid-column:1/-1;color:var(--mut);font-size:12.5px}
+.guia{display:grid;grid-template-columns:1fr 1.15fr;gap:1vw;margin-top:2vw}
+.guia .t-card{padding:1.4vw 1.7vw;display:flex;flex-direction:column;gap:.6vw}
+.guia .g0,.guia .g1,.guia .g3{grid-column:1}.guia .g2{grid-column:2;grid-row:1 / span 3}
+.guia b{font-size:1.6vw;font-weight:600;letter-spacing:-.01em}
+.guia em{font-style:normal;font-weight:600;color:var(--mint);font-size:1.45vw;line-height:1.35}
+.guia .g-lin{display:flex;justify-content:space-between;align-items:baseline;gap:1vw;padding:.75vw 0;border-top:1px solid var(--line)}
+.guia .g-lin span{color:var(--mut);font-size:1.25vw}.guia .g-lin em{text-align:right}
+.guia-cel{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.guia-cel b{display:block;font-size:15px;margin-bottom:4px}.guia-cel p{font-size:14.5px;color:var(--mint);line-height:1.45}.guia-cel span{color:var(--mut)}
 </style>
 </head>
 <body>
@@ -576,6 +585,12 @@ const METODO = [
   { k: "Critério", q: "Isso está bom o bastante para levar adiante?" }
 ];
 const OPTS_CASE = [ { v: "atalho", l: "Atalho" }, { v: "ferramenta", l: "Ferramenta" }, { v: "depende", l: "Depende" } ];
+const GUIA_IA = [
+  { nome: "Gerador de Prompts", itens: [["", ["ChatGPT", "Claude"]]] },
+  { nome: "Gerar Imagem", itens: [["", ["Nano Banana 2", "ChatGPT Images 2.5"]]] },
+  { nome: "Gerar Vídeo", itens: [["Com fala", ["Veo 3.1"]], ["Realismo", ["Seedance 2.5"]], ["Custo mais baixo", ["Kling"]], ["Troca de personagem", ["Seedance 2.5", "Wan Animate"]]] },
+  { nome: "Montagem de Vídeo", itens: [["", ["Creator Lab (Claude)"]]] }
+];
 const FUNCOES = ["Criador de conteúdo", "Social media", "Fotógrafo ou videomaker", "Designer", "Empreendedor", "Agência ou marketing", "Estudante"];
 const COLS = ["participantes", "votos", "perguntas", "respostas", "envios", "midias"];
 const CHAVES_ESTADO = ["passo", "sub", "duelo", "rodada", "feitos", "placar", "caseIdx", "quizIdx", "votacao", "ordemA", "slotTexto", "timerFim", "timesSorteados", "cartas", "cartasDono", "viradas", "todasViradas", "destaque", "vencedor", "mostrarAncora"];
@@ -3200,7 +3215,7 @@ function renderPlateia() {
 
   if (!PL.pid) {
     h += `<div class="p-card glass"><div class="eyebrow">Bem-vindo ao workshop</div><h2>IA como ferramenta, não como atalho.</h2>
-      <p class="mut">Seu celular é o controle desta aula: você vota, escolhe o caminho, recebe missões e manda perguntas.</p>
+      <p class="mut">Você pode participar por aqui: votar, responder junto com a sala e mandar perguntas a qualquer momento.</p>
       <div class="campo"><label>Seu nome</label>${campo("nome", "Como quer ser chamado")}</div>
       <div class="campo"><label>O que você faz</label><input data-k="funcao" list="funcoes" placeholder="Ex.: criador de conteúdo" value="${esc(PL.drafts.funcao || "")}">
       <datalist id="funcoes">${FUNCOES.map(f => `<option value="${esc(f)}">`).join("")}</datalist></div>
@@ -3226,7 +3241,8 @@ function plateiaSlide(it) {
   if (it.cel === "creatorlab") return `<div class="p-card glass"><div class="eyebrow">Creator Lab</div><h2>Quer conhecer a ferramenta que a gente construiu?</h2>
     <p class="mut" style="margin-top:6px">Gerador de Prompts, Gerar Imagem, Gerar Vídeo e Montagem de Vídeo, no mesmo lugar.</p>
     <a class="btn" style="text-align:center;text-decoration:none" href="${esc(CONFIG.urlCreatorLab)}" target="_blank" rel="noopener">Abrir a Creator Lab</a>
-    ${CONFIG.cupom ? `<p class="ok">Cupom: ${esc(CONFIG.cupom)}</p>` : ""}<p class="mut" style="margin-top:10px">${esc(CONFIG.linkCreatorLab)}</p></div>`;
+    ${CONFIG.cupom ? `<p class="ok">Cupom: ${esc(CONFIG.cupom)}</p>` : ""}<p class="mut" style="margin-top:10px">${esc(CONFIG.linkCreatorLab)}</p></div>
+    <div class="p-card glass"><div class="eyebrow">As IAs que a gente recomenda</div><div class="guia-cel">${GUIA_IA.map(g => `<div><b>${esc(g.nome)}</b>${g.itens.map(([r, ias]) => `<p>${r ? `<span>${esc(r)}:</span> ` : ""}${ias.map(esc).join(" ou ")}</p>`).join("")}</div>`).join("")}</div></div>`;
   if (it.cel === "fim") return `<div class="p-card glass">${ato}<h2>${FRASE_FINAL.map(esc).join(" ")}</h2></div>
     <div class="p-card glass"><div class="eyebrow">Leve com você</div><h3>Converse na IA de texto. Comande na IA de geração.</h3>${cartaoMetodo()}
     ${CONFIG.cupom ? `<p class="ok">Cupom Creator Lab: ${esc(CONFIG.cupom)}</p>` : ""}<p class="mut" style="margin-top:10px">${esc(CONFIG.linkCreatorLab)}</p></div>`;
@@ -3599,9 +3615,9 @@ const SLIDES = {
     <div class="anchor"><span class="mut">${esc(FRASE_FINAL[0])}</span><br>${esc(FRASE_FINAL[1])}<br><span class="em">${esc(FRASE_FINAL[2])}</span></div>
     <div class="t-src" style="margin-top:3vw">Obrigado · ${esc(CONFIG.apresentador)}</div>`,
   creatorlab: () => { const url = CONFIG.urlCreatorLab;
-    return `<div class="t-row" style="align-items:center;gap:5vw"><div class="t-col"><div class="t-eyebrow">Quer conhecer?</div>
-      <div class="t-h1" style="font-size:4.6vw">A ferramenta que a gente construiu para <span class="em">criar assim.</span></div>
-      <div class="c4-grid" style="grid-template-columns:repeat(2,1fr);margin-top:2.4vw">${[["Gerador de Prompts", "A conversa vira um prompt com direção de fotografia."], ["Gerar Imagem", "Frames e imagens a partir do prompt aprovado."], ["Gerar Vídeo", "A cena ganha movimento, uma ação por vez."], ["Montagem de Vídeo", "Cenas, trilha e lettering no mesmo lugar."]].map(([k, q]) => `<div class="t-card glass"><b>${k}</b><span>${q}</span></div>`).join("")}</div></div>
+    return `<div class="t-row" style="align-items:center;gap:4vw"><div class="t-col"><div class="t-eyebrow">Quer conhecer? · as IAs que a gente recomenda</div>
+      <div class="t-h1" style="font-size:3.6vw">A ferramenta que a gente construiu para <span class="em">criar assim.</span></div>
+      <div class="guia">${GUIA_IA.map((g, i) => `<div class="t-card glass g${i}"><b>${esc(g.nome)}</b>${g.itens.map(([r, ias]) => r ? `<div class="g-lin"><span>${esc(r)}</span><em>${ias.map(esc).join("<br>")}</em></div>` : `<em>${ias.map(esc).join("<br>")}</em>`).join("")}</div>`).join("")}</div></div>
       <div style="text-align:center"><div class="qr-grande">${qrSVG(url)}</div><div class="url" style="font-size:1.6vw;color:#fff">${esc(CONFIG.linkCreatorLab)}</div>${CONFIG.cupom ? `<div class="pill" style="display:inline-block;margin-top:1vw;font-size:1.2vw;border-color:var(--em);color:var(--neon)">cupom ${esc(CONFIG.cupom)}</div>` : ""}</div></div>`; }
 };
 
@@ -3613,8 +3629,8 @@ const INTER = {
     const chips = Object.entries(f).sort((a, b) => b[1] - a[1]).slice(0, 14).map(([k, n]) => `<span>${esc(k)}<b>${n}</b></span>`).join("");
     return `<div class="t-row" style="align-items:center;gap:5vw">
       <div><div class="qr-grande">${qrSVG(url)}</div><div class="url">${esc(url.replace(/^https?:\/\//, ""))}</div></div>
-      <div class="t-col"><div class="t-eyebrow">Aponte a câmera do celular</div><div class="t-h1" style="font-size:4.8vw">Seu celular é o controle desta aula.</div>
-      <div class="t-sub">Você vota, escolhe o caminho, recebe missões secretas e manda perguntas a qualquer momento.</div>
+      <div class="t-col"><div class="t-eyebrow">Aponte a câmera do celular</div><div class="t-h1" style="font-size:4.8vw">Você pode participar pelo seu celular.</div>
+      <div class="t-sub">Vote, responda junto com a sala e mande perguntas a qualquer momento.</div>
       <div style="margin-top:2.6vw;display:flex;align-items:baseline;gap:1.4vw"><span class="big-num em">${P.length}</span><span class="t-sub" style="margin:0">pessoas conectadas</span></div>
       <div class="chips">${chips}</div>${muralNomes()}</div></div>`;
   },
