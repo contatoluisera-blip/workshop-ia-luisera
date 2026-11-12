@@ -126,8 +126,8 @@ textarea{resize:vertical;min-height:92px;line-height:1.45}
 .timer{font-family:var(--mono);font-size:11vw;font-weight:500;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
 .timer.fim{color:var(--lar)}
 .slot{flex:1;border-radius:1.6vw;padding:1.6vw;display:flex;flex-direction:column;min-height:0;overflow:hidden}
-.slot .lbl{font-size:2.2vw;font-weight:600;margin-bottom:1vw;display:flex;justify-content:space-between;align-items:center;letter-spacing:-.02em}
-.slot .lbl small{font-family:var(--mono);font-size:1vw;font-weight:500;padding:.4vw 1vw;border-radius:99px;color:#04130d}
+.slot .lbl,.rv-col .lbl{font-size:2.2vw;font-weight:600;margin-bottom:1vw;display:flex;justify-content:space-between;align-items:center;letter-spacing:-.02em}
+.slot .lbl small,.rv-col .lbl small{font-family:var(--mono);font-size:1vw;font-weight:500;padding:.4vw 1vw;border-radius:99px;color:#04130d}
 .slot .conteudo{flex:1;min-height:0;overflow:auto;font-size:1.3vw;line-height:1.55;white-space:pre-wrap;color:#e4e4e7}
 .slot .conteudo img{max-width:100%;max-height:38vh;border-radius:1vw;display:block;margin:0 auto}
 .slot.vazio .conteudo{display:flex;align-items:center;justify-content:center;color:var(--mut2);text-align:center}
@@ -271,6 +271,19 @@ textarea{resize:vertical;min-height:92px;line-height:1.45}
 .pl-lado .pl-tools button{font-size:12px;padding:7px 10px}
 @media (max-width:560px){.pl-lados{grid-template-columns:1fr}}
 
+.opt-longo{font-size:13.5px;font-weight:400;line-height:1.5}
+.opt-longo b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;color:var(--mut)}
+.opt-longo.sel b{color:var(--neon)}
+.rv-col{display:flex;flex-direction:column;gap:.6vw;overflow:hidden}
+.rv-col .lbl{margin-bottom:.2vw;font-size:1.7vw}
+.rv-op.on.longo{font-size:.78vw;line-height:1.36}
+.com-midia .pc-txt.longo{font-size:.84vw;line-height:1.42}
+.rv-op{border:1px solid var(--line);border-radius:.9vw;padding:.6vw .9vw;font-size:.92vw;line-height:1.4;color:var(--mut)}
+.rv-op b{display:block;font-family:var(--mono);font-size:.72vw;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25vw}
+.rv-op.on{color:#fff;border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.04)}
+.rv-nota{font-size:1.15vw;font-weight:600;margin-top:auto}
+.rv-perg{display:flex;flex-wrap:wrap;gap:.4vw;margin-top:auto}
+.rv-perg span{font-size:.8vw;padding:.25vw .7vw;border-radius:99px;background:rgba(16,185,129,.14);color:var(--mint)}
 /* controles */
 .ctrl{position:fixed;left:50%;transform:translateX(-50%);bottom:1.2vw;display:flex;gap:4px;background:rgba(14,14,14,.9);border:1px solid var(--line);border-radius:99px;padding:5px;z-index:40;opacity:.12;transition:opacity .2s;backdrop-filter:blur(10px)}
 .ctrl:hover,.ctrl.fixo{opacity:1}
@@ -370,77 +383,76 @@ const CONFIG = {
    ============================================================ */
 const ATOS = ["Abertura", "Todo mundo pede", "A consulta", "A virada", "A prova", "Os limites", "O compromisso"];
 
-const PROMPT_SIMPLES = "Uma foto realista de um girassol, bonita e bem iluminada.";
-/* Backup: o prompt elaborado já preenchido e as imagens geradas antes da aula (pasta backup/). */
-const PROMPT_BACKUP = "Fotografia realista de um girassol.\nAssunto: um único girassol totalmente aberto, pétalas amarelas levemente curvadas, miolo marrom com a textura das sementes nítida e algumas gotas de orvalho nas pétalas.\nCenário: campo de girassóis, outros girassóis desfocados ao fundo, céu limpo.\nMomento e luz: fim de tarde, sol baixo atrás da flor, contraluz dourado suave nas bordas das pétalas, sem sombras duras no miolo.\nCâmera e lente: lente macro de 100 mm, f/2.8, câmera na altura da flor, levemente de baixo para cima, profundidade de campo curta.\nComposição: formato vertical 4:5, flor no terço superior, espaço livre de céu acima para o texto da campanha.\nCor e textura: amarelos quentes e verdes saturados, céu azul-claro levemente alaranjado no horizonte, textura natural das pétalas visível.\nSensação: recomeço, calor e leveza de primavera.\nEvitar: texto, pessoas, logotipos, flor deformada, aparência de plástico ou de ilustração.";
+/* Tema dos duelos: um personagem 3D animado. Cada time escolhe 1 de 3 prompts no celular.
+   O Time Laranja não sabe, mas as 3 opções dele são simples. As 3 do Time Verde respondem a todas as perguntas de um bom prompt. */
+const OPCOES_PROMPT = {
+  atalho: [
+    "Um homem em 3D animado, bonito e em alta qualidade.",
+    "Personagem 3D de um homem, ultra realista, 8K, obra-prima, muito detalhado, cinematográfico.",
+    "Um homem animado em 3D sorrindo, estilo desenho de cinema, cores vibrantes."
+  ],
+  ferramenta: [
+    "Personagem 3D no estilo de longa de animação, render cinematográfico. Um vendedor de mate brasileiro de uns 50 anos, pele morena queimada de sol, bigode grisalho e sorriso largo, camisa de botão aberta com estampa de folhas, bermuda e chinelo, com dois galões de mate gelado pendurados no ombro. Ele caminha pelo calçadão de pedras portuguesas em ondas pretas e brancas de uma praia do Rio de Janeiro, com mar, guarda-sóis coloridos e morros ao fundo. Fim de tarde, sol baixo e lateral, luz dourada no rosto e sombras longas no chão. Plano médio, lente 35 mm, câmera na altura dos olhos acompanhando o passo dele. Formato vertical 4:5, personagem no terço esquerdo olhando para a direita. Cores quentes, mar azul-esverdeado, textura de pele, tecido e pedra bem detalhada. Sensação: alegria simples de verão. Evitar: texto, logotipos, mãos ou rosto deformados, aparência de plástico.",
+    "Personagem 3D no estilo de longa de animação, render cinematográfico. Um pescador nordestino de uns 35 anos, pele negra, barba curta, chapéu de palha gasto, regata desbotada e calça dobrada até a canela, puxando pela corda uma jangada de vela colorida pela areia molhada. Praia do Nordeste brasileiro com coqueiros inclinados, falésias avermelhadas e mar verde-claro transparente. Começo da manhã, sol baixo vindo do mar, contraluz suave nas bordas do personagem e reflexos na areia molhada. Câmera baixa, lente 28 mm, leve contra-plongée que valoriza o esforço. Formato vertical 4:5, jangada atrás dele, céu ocupando o terço superior. Paleta de turquesa, terracota e amarelo-claro, texturas de madeira, corda e tecido bem visíveis. Sensação: orgulho e força do trabalho. Evitar: texto, logotipos, mãos deformadas, aparência de plástico.",
+    "Personagem 3D no estilo de longa de animação, render cinematográfico. Um surfista brasileiro de uns 25 anos, cabelo cacheado preso num coque, sardas, roupa de borracha aberta até a cintura, segurando debaixo do braço uma prancha antiga cheia de adesivos gastos. Ele caminha pela beira-mar de uma praia de Santa Catarina, com morros verdes cobertos de mata, pedras escuras e um pouco de névoa sobre o mar. Dia nublado, luz difusa e suave, sem sombras duras, mar cinza-esverdeado com espuma branca nos pés dele. Plano americano, lente 50 mm, câmera um pouco à frente dele, de lado. Formato vertical 4:5, horizonte no terço superior. Paleta fria de verdes e cinzas com a prancha como ponto de cor. Sensação: liberdade e calma antes da primeira onda. Evitar: texto, logotipos, mãos deformadas, aparência de plástico."
+  ]
+};
+/* Imagens de backup (Creator Lab), uma para cada opção, na mesma ordem. Vazio = sem backup para aquela opção. */
+const BACKUP_IMAGENS = { atalho: ["", "", ""], ferramenta: ["", "", ""] };
+/* As perguntas que um bom prompt responde: aparece na revelação do duelo de Prompt. */
+const PERGUNTAS_PROMPT = ["Quem é o personagem?", "Onde ele está?", "Que luz e que hora?", "Que câmera e que lente?", "Que formato e composição?", "Que cores e texturas?", "Que sensação?", "O que evitar?"];
 const DUELOS = {
   prompt: {
-    nome: "Prompt", ferramenta: "Gerador de Prompts", tipo: "texto",
-    briefing: "Precisamos de uma imagem realista de girassol para a campanha de primavera de uma marca.",
-    atalho: PROMPT_SIMPLES,
-    estrutura: [
-      ["Assunto", "um girassol", "como está a flor e qual detalhe importa"],
-      ["Cenário", "", "onde ele está e o que aparece ao redor"],
-      ["Momento e luz", "", "hora do dia, direção e qualidade da luz"],
-      ["Câmera e lente", "", "distância, ângulo, lente e profundidade de campo"],
-      ["Composição", "", "enquadramento, onde fica a flor e o formato"],
-      ["Cor e textura", "", "paleta, textura das pétalas e do miolo"],
-      ["Sensação", "", "o que a imagem precisa fazer sentir"],
-      ["Evitar", "", "o que não pode aparecer"]
-    ],
+    nome: "Prompt", ferramenta: "Gerador de Prompts", tipo: "texto", escolha: true,
+    briefing: "Uma marca brasileira precisa de um personagem 3D animado, um homem, para estrelar a campanha de verão.",
+    atalho: OPCOES_PROMPT.atalho[0],
     cs: {
-      clareza: "Para que serve essa imagem e onde ela vai aparecer?",
-      contexto: "Que marca, que público, que formato e que clima de primavera?",
+      clareza: "Para que serve esse personagem e onde ele vai aparecer?",
+      contexto: "Quem ele é, de onde vem, onde está e que clima a campanha pede?",
       conversa: "No Gerador de Prompts: responda às perguntas em vez de escrever o pedido de uma vez.",
-      criterio: "O prompt descreve luz, lente e enquadramento? Serviria para qualquer marca?",
+      criterio: "O prompt diz quem, onde, que luz, que câmera e que formato? Serviria para qualquer marca?",
       comando: "O prompt final sai da conversa e vai, inteiro, para a IA de imagem."
     },
-    backupPrompt: PROMPT_BACKUP,
     estudo: { fonte: "Noy e Zhang · MIT · Science, 2023 · 453 profissionais", titulo: "Escrita com IA, comparada a quem escreveu sem",
       linhas: [{ l: "Menos tempo para entregar", v: 40, cor: "ver" }, { l: "Qualidade avaliada", v: 18, cor: "ver" }], max: 50,
       nota: "Ninguém conferiu os fatos. Velocidade só vira resultado com revisão." },
-    licao: "Um prompt bom é a resposta de uma conversa boa."
+    licao: "Escolher entre pedidos não é dirigir. Um prompt bom responde às perguntas antes de pedir."
   },
   imagem: {
     nome: "Imagem", ferramenta: "Gerar Imagem", tipo: "imagem",
-    briefing: "Agora os dois prompts viram imagem. Mesmo gerador, mesmo girassol.",
-    atalho: PROMPT_SIMPLES,
+    briefing: "Agora os prompts escolhidos viram imagem. Mesmo gerador, mesmo formato.",
+    atalho: OPCOES_PROMPT.atalho[0],
     usaPromptDe: "prompt",
-    // Imagens de backup geradas na Creator Lab (Nano Banana 2 · 4:5 · 2K) com os dois prompts do duelo.
-    backup: {
-      atalho: "https://firebasestorage.googleapis.com/v0/b/luisera-lab.firebasestorage.app/o/gen-outputs%2Fp9UMCdWdRRTJfCjm5EfcwvCJbXq1%2F01794494673563-240c7916%2F0.png?alt=media&token=d26a4e8e-6dbe-4238-adb7-17b7d0b72d48",
-      ferramenta: "https://firebasestorage.googleapis.com/v0/b/luisera-lab.firebasestorage.app/o/gen-outputs%2Fp9UMCdWdRRTJfCjm5EfcwvCJbXq1%2F01794494736632-70b16a26%2F0.png?alt=media&token=3a8f64c1-29a1-477e-8395-25da2e4b0cec"
-    },
     cs: {
-      clareza: "A imagem precisa vender a primavera da marca, não só mostrar uma flor.",
-      contexto: "O prompt final do duelo anterior já traz luz, lente e composição.",
+      clareza: "O personagem precisa ser da campanha, não um boneco qualquer.",
+      contexto: "O prompt escolhido já traz quem ele é, onde está, luz, lente e formato.",
       conversa: "Se algo saiu estranho, pergunte à IA de texto o que ajustar no prompt antes de gerar de novo.",
-      criterio: "A flor parece real? Pétalas, miolo e luz convencem de perto?",
-      comando: "Cole o prompt final no Gerar Imagem, sem resumir."
+      criterio: "Dá para saber quem é esse homem e de onde ele é? Mãos, rosto e roupa convencem?",
+      comando: "Cole o prompt escolhido no Gerar Imagem, sem resumir."
     },
     estudo: { fonte: "Dell'Acqua e outros · Harvard, Wharton, MIT e BCG · 758 consultores · Organization Science, 2026", titulo: "A mesma IA, dentro e fora do que ela domina",
       linhas: [{ l: "Qualidade, onde a IA domina", v: 40, cor: "ver", fmt: "+40%" }, { l: "Acerto, fora do alcance dela", v: -19, cor: "lar", fmt: "−19 pts" }], min: -25, max: 45, sinal: true,
       nota: "Quem dirige com critério sabe de que lado da fronteira está." },
-    licao: "Quem tem olhar dirige a luz. Quem não tem aceita o plástico."
+    licao: "Prompt genérico entrega um boneco qualquer. Prompt com contexto entrega um personagem."
   },
   video: {
     nome: "Vídeo", ferramenta: "Gerar Vídeo", tipo: "video",
-    briefing: "A imagem ganha movimento: uma abertura de 5 a 10 segundos.",
-    atalho: "Anima esse girassol.",
+    briefing: "O personagem ganha movimento: 5 a 10 segundos dele andando pela praia.",
+    atalho: "Anima esse personagem.",
     estrutura: [
-      ["Imagem de partida", "", "a imagem aprovada no duelo anterior"],
-      ["Ação única", "", "o que se move e como se move"],
-      ["Câmera", "", "parada, aproximação lenta ou travelling"],
+      ["Imagem de partida", "", "a imagem escolhida no duelo anterior"],
+      ["Ação única", "", "o que ele faz e como se move"],
+      ["Câmera", "", "parada, acompanhando o passo ou aproximando devagar"],
       ["Ritmo e duração", "", "velocidade do movimento, de 5 a 10 segundos"],
-      ["Luz e atmosfera", "", "vento, partículas, mudança de luz"],
-      ["Continuidade", "", "o que não pode mudar: forma da flor, cores, cenário"],
+      ["Ambiente", "", "vento, ondas, pessoas ao fundo, mudança de luz"],
+      ["Continuidade", "", "o que não pode mudar: rosto, roupa, cenário"],
       ["Evitar", "", "deformações, cortes bruscos, texto na tela"]
     ],
     cs: {
       clareza: "Abrir a campanha com uma sensação, não com um efeito.",
-      contexto: "Formato vertical, 5 a 10 segundos, partindo da imagem aprovada.",
+      contexto: "Formato vertical, 5 a 10 segundos, partindo da imagem escolhida.",
       conversa: "No Claude: “Com esta imagem e este objetivo, como eu deveria pedir a cena para a IA de vídeo? O que falta definir?”",
-      criterio: "A flor se mantém igual do começo ao fim? O movimento parece natural?",
+      criterio: "O rosto e a roupa se mantêm do começo ao fim? O passo parece natural?",
       comando: "Cole o prompt final no Gerar Vídeo junto com a imagem: uma ação, um movimento de câmera."
     },
     estudo: { fonte: "BetterUp Labs e Stanford Social Media Lab · Harvard Business Review, 2025 · 1.150 profissionais", titulo: "O custo de entregar algo que só parece pronto",
@@ -526,7 +538,7 @@ const METODO = [
 const OPTS_CASE = [ { v: "atalho", l: "Atalho" }, { v: "ferramenta", l: "Ferramenta" }, { v: "depende", l: "Depende" } ];
 const FUNCOES = ["Criador de conteúdo", "Social media", "Fotógrafo ou videomaker", "Designer", "Empreendedor", "Agência ou marketing", "Estudante"];
 const COLS = ["participantes", "votos", "perguntas", "respostas", "envios", "midias"];
-const CHAVES_ESTADO = ["passo", "sub", "duelo", "rodada", "feitos", "placar", "caseIdx", "quizIdx", "votacao", "ordemA", "slotTexto", "timerFim", "timesSorteados", "cartas", "cartasDono", "viradas", "todasViradas", "destaque", "vencedor", "mostrarAncora"];
+const CHAVES_ESTADO = ["passo", "sub", "duelo", "rodada", "feitos", "placar", "caseIdx", "quizIdx", "votacao", "ordemA", "slotTexto", "timerFim", "timesSorteados", "cartas", "cartasDono", "viradas", "todasViradas", "escolha", "destaque", "vencedor", "mostrarAncora"];
 const FRASE_FINAL = ["A IA vira atalho quando você só pede.", "Vira ferramenta quando você pergunta.", "E o critério é sempre seu."];
 
 /* ============================================================
@@ -580,7 +592,7 @@ const ROTEIRO = [
   { id: "times", ato: 4, tipo: "int", titulo: "Jogo das cartas",
     nota: "Quando todos estiverem conectados, distribua as cartas: cada celular mostra o número da pessoa. Chame alguns voluntários, peça um número e clique na carta para virar. No fim, vire todas. Brinque com quem caiu no laranja." },
   { id: "duelos", ato: 4, tipo: "int", titulo: "Duelos: Prompt, Imagem e Vídeo",
-    nota: "Ordem fixa: Prompt, Imagem e Vídeo, sempre com o girassol. Mostre os dois prompts, gere ao vivo na Creator Lab, suba o resultado de cada time no telão (upload, colar link ou Ctrl+V) e abra a votação às cegas." },
+    nota: "Ordem fixa: Prompt, Imagem e Vídeo, com o personagem 3D. No Prompt, cada time escolhe 1 de 3 prompts no celular (as 3 do laranja são simples, não conte). Na Imagem, gere ao vivo na Creator Lab com os prompts escolhidos ou use o backup, que já aparece sozinho. Votação às cegas em cada duelo." },
   { id: "placar", ato: 4, tipo: "slide", titulo: "Placar", cel: "Mesmo talento, mesma ferramenta. Só mudou a pergunta.",
     nota: "Leia o placar. Se o atalho venceu algum duelo, pergunte à sala por quê." },
 
@@ -3256,15 +3268,24 @@ function plateiaDuelos(time, aberto) {
   const id = E.duelo || ORDEM_DUELOS[0]; const d = DUELOS[id]; const sub = E.sub || "briefing";
   const n = ORDEM_DUELOS.indexOf(id) + 1;
   let h = `<div class="p-card glass"><div class="eyebrow">Duelo ${n} de 3 · ${esc(d.nome)}</div><h2>${esc(d.briefing)}</h2><p class="mut">Ferramenta: ${esc(d.ferramenta)}</p></div>`;
+  if (d.escolha && (sub === "briefing" || sub === "producao")) {
+    const lado = LADO_TIME[time];
+    if (!lado) return h + `<div class="p-card glass"><p class="mut">Você ainda não tem time. Acompanhe pelo telão.</p></div>`;
+    if (sub === "producao" && E.timerFim) h += `<div class="timer-p" id="timer-p">${fmtTempo(E.timerFim - Date.now())}</div>`;
+    const q = "op_" + lado; const mine = PL.meusVotos[q];
+    if (sub === "briefing") return h + `<div class="time-card ${time}"><div class="eyebrow">${nomeTime(time)}</div><h2>Já já o seu time escolhe um prompt</h2><p>Vocês vão receber três opções. Leiam com calma e votem na que vai gerar o melhor personagem.</p></div>`;
+    return h + `<div class="time-card ${time}"><div class="eyebrow">${nomeTime(time)}</div><h2>Escolha o prompt do seu time</h2><p>A opção mais votada vai para a IA. Dá para mudar o voto até o tempo acabar.</p></div>
+      ${OPCOES_PROMPT[lado].map((txt, i) => `<button class="opt opt-longo ${mine === String(i) ? "sel" : ""}" data-vote="${q}" data-o="${i}" ${aberto ? "" : "disabled"}><b>Opção ${i + 1}</b>${esc(txt)}</button>`).join("")}`;
+  }
   if (sub === "briefing" || sub === "producao") {
     if (sub === "producao" && E.timerFim) h += `<div class="timer-p" id="timer-p">${fmtTempo(E.timerFim - Date.now())}</div>`;
-    if (time === "laranja") h += `<div class="time-card laranja"><div class="eyebrow">Missão do Time Laranja</div><h2>O seu prompt já está pronto</h2>
+    if (time === "laranja") h += `<div class="time-card laranja"><div class="eyebrow">Missão do Time Laranja</div><h2>${d.usaPromptDe ? "O prompt que o seu time escolheu" : "O seu prompt já está pronto"}</h2>
         <div class="prompt-box">“${esc(textoAtalho(id))}”</div><p>É exatamente esse que vai para a IA. Sem acrescentar nada.</p></div>`;
     else if (time === "verde") {
       const ref = d.estrutura ? d : DUELOS[d.usaPromptDe];
-      h += `<div class="time-card verde"><div class="eyebrow">Missão do Time Verde</div><h2>${d.estrutura ? "Ajude a responder as perguntas" : "O prompt de vocês nasceu da conversa"}</h2>
-        <p>${d.estrutura ? "Cada linha é uma pergunta que a IA precisa que alguém responda. Mande a sua sugestão: o " + esc(CONFIG.apresentador) + " preenche ao vivo na Creator Lab." : "O prompt final do duelo anterior vai inteiro para o " + esc(d.ferramenta) + "."}</p>
-        ${d.estrutura ? htmlEstrutura(ref) : ""}</div>`;
+      h += `<div class="time-card verde"><div class="eyebrow">Missão do Time Verde</div><h2>${d.estrutura ? "Ajude a responder as perguntas" : "O prompt que o seu time escolheu"}</h2>
+        <p>${d.estrutura ? "Cada linha é uma pergunta que a IA precisa que alguém responda. Mande a sua sugestão: o " + esc(CONFIG.apresentador) + " preenche ao vivo na Creator Lab." : "Ele vai inteiro para o " + esc(d.ferramenta) + ", sem resumir."}</p>
+        ${d.estrutura ? htmlEstrutura(ref) : `<div class="prompt-box">${esc(textoFerramenta(id))}</div>`}</div>`;
       if (d.estrutura) {
         const k = "env_" + id;
         h += `<div class="p-card glass"><h3>Sua sugestão</h3>${PL.enviados[k] ? `<p class="ok">Recebido. Pode mandar outra.</p>` : ""}${campo(k, "Ex.: luz de fim de tarde vindo de trás da flor", true)}
@@ -3279,7 +3300,7 @@ function plateiaDuelos(time, aberto) {
   } else if (sub === "revelacao") {
     const g = E.vencedor;
     h += `<div class="p-card glass"><div class="eyebrow">Revelação</div>
-      <p><b class="lar">Laranja</b> usou o prompt simples: o atalho.<br><b class="ver">Verde</b> respondeu às perguntas antes: a ferramenta.</p>
+      <p>${d.escolha ? `<b class="lar">Laranja</b>: as três opções eram pedidos simples. Não havia prompt bom para escolher.<br><b class="ver">Verde</b>: as três respondiam a todas as perguntas de um bom prompt.` : `<b class="lar">Laranja</b> usou o pedido simples: o atalho.<br><b class="ver">Verde</b> usou o prompt com contexto: a ferramenta.`}</p>
       ${g ? `<h3 style="margin-top:12px">${g === "ferramenta" ? "A ferramenta venceu." : g === "atalho" ? "Dessa vez o atalho venceu. Por quê?" : "Deu empate."}</h3>` : ""}
       <p class="ok">${esc(d.licao)}</p></div>`;
   }
@@ -3512,7 +3533,7 @@ const SLIDES = {
     <div class="t-sub" style="max-width:none">Vistas de fora, as duas tarefas pareciam igualmente difíceis. Quem mais confiou, mais errou. Por isso existe o Critério.</div>
     <div class="t-src">Dell'Acqua e outros · Harvard, Wharton, MIT e BCG · 758 consultores · Organization Science, 2026</div>`,
   a4: () => `${atoSlide(4, "A prova.", "Mesmo talento, mesmas ferramentas, mesmo tempo. Só muda o prompt.")}
-    <div class="t-row" style="margin-top:3vw;gap:1.4vw">${["Cada pessoa vira uma carta. Voluntários escolhem os números.", "Laranja usa o prompt simples. Verde responde às perguntas antes.", "Prompt, imagem e vídeo de um girassol. A sala vota às cegas."].map((t, i) => `<div class="t-card glass t-col"><div class="ato-num" style="margin-bottom:.8vw">0${i + 1}</div><div class="stat-l" style="margin:0">${t}</div></div>`).join("")}</div>`,
+    <div class="t-row" style="margin-top:3vw;gap:1.4vw">${["Cada pessoa vira uma carta. Voluntários escolhem os números.", "Cada time escolhe, no celular, 1 de 3 prompts.", "Prompt, imagem e vídeo de um personagem 3D. A sala vota às cegas."].map((t, i) => `<div class="t-card glass t-col"><div class="ato-num" style="margin-bottom:.8vw">0${i + 1}</div><div class="stat-l" style="margin:0">${t}</div></div>`).join("")}</div>`,
   placar: () => {
     const pl = E.placar || {}; const feitos = ORDEM_DUELOS.filter(id => pl[id]);
     const f = feitos.filter(id => pl[id] === "ferramenta").length, a = feitos.filter(id => pl[id] === "atalho").length;
@@ -3654,8 +3675,25 @@ function vencedorDuelo(id) {
 }
 
 /* ---------- duelos: prompts, resultados e mídia ---------- */
-function textoAtalho(id) { return (E.promptAtalho || {})[id] || DUELOS[id].atalho; }
-function textoFerramenta(id) { const d = DUELOS[id]; const pf = E.promptFinal || {}; return pf[id] || (d.usaPromptDe ? pf[d.usaPromptDe] : "") || ""; }
+const LADO_TIME = { laranja: "atalho", verde: "ferramenta" };
+function idxEscolha(lado) { const e = E.escolha || {}; return e[lado] != null ? +e[lado] : 0; }
+function promptEscolhido(lado) { return OPCOES_PROMPT[lado][idxEscolha(lado)]; }
+function textoAtalho(id) {
+  const o = (E.promptAtalho || {})[id]; if (o) return o;
+  return id === "prompt" || id === "imagem" ? promptEscolhido("atalho") : DUELOS[id].atalho;
+}
+function textoFerramenta(id) {
+  const pf = E.promptFinal || {}; if (pf[id]) return pf[id];
+  if (id === "imagem") return pf.prompt || promptEscolhido("ferramenta");
+  if (id === "prompt") return promptEscolhido("ferramenta");
+  return "";
+}
+function backupDe(id, lado) { return id === "imagem" ? (BACKUP_IMAGENS[lado] || [])[idxEscolha(lado)] || "" : ""; }
+function escolhaPorVoto(lado) {
+  const t = tally("op_" + lado); let best = 0, n = -1;
+  OPCOES_PROMPT[lado].forEach((_, i) => { const c = t[String(i)] || 0; if (c > n) { n = c; best = i; } });
+  return best;
+}
 function estruturaDe(id) { const d = DUELOS[id]; return d.estrutura ? d : DUELOS[d.usaPromptDe]; }
 function htmlEstruturaT(d) {
   return `<div class="estr t">${d.estrutura.map(([k, fixo, q]) => `<div class="er"><b>${esc(k)}</b><span>${fixo ? esc(fixo) + " " : ""}<i>${esc(q)}</i></span></div>`).join("")}</div>`;
@@ -3673,12 +3711,12 @@ function midiaDe(id, lado) {
   const lk = ((E.midia || {})[id] || {})[lado]; if (lk && lk.url) { const p = lerLink(lk.url, DUELOS[id].tipo === "video"); if (p) cand.push({ ...p, t: lk.t || 0 }); }
   const m = cand.filter(c => c.src).sort((a, b) => b.t - a.t)[0];
   if (m) return m;
-  const bk = DUELOS[id].backup && DUELOS[id].backup[lado];
+  const bk = backupDe(id, lado);
   return bk ? { tipo: "img", src: bk, url: bk, t: 0, backup: true } : null;
 }
 function slotMidia(id, lado, letra) {
   const m = midiaDe(id, lado); const alvo = id + "|" + lado;
-  const bk = DUELOS[id].backup && DUELOS[id].backup[lado];
+  const bk = backupDe(id, lado);
   const tools = `<div class="ms-tools"><button data-act="upload" data-alvo="${alvo}">Upload</button><button data-act="colar-link" data-alvo="${alvo}">Colar link</button>${bk && m && !m.backup ? `<button data-act="tirar-midia" data-alvo="${alvo}">Voltar ao backup</button>` : ""}${!bk && m ? `<button data-act="tirar-midia" data-alvo="${alvo}">Remover</button>` : ""}</div>`;
   let corpo;
   if (!m) corpo = `<div class="ms-vz"><b>${letra ? "Resultado " + letra : "Resultado do " + nomeTime(timeDeLado(lado))}</b><span>Arraste o arquivo aqui, cole com Ctrl+V ou use os botões abaixo.</span></div>`;
@@ -3693,6 +3731,8 @@ function telaoDuelos() {
   const temMidia = d.tipo !== "texto";
   const head = `<div class="duel-head"><div class="t-eyebrow" style="margin:0">Duelo ${ORDEM_DUELOS.indexOf(id) + 1} de 3 · ${esc(d.nome)} · ${esc(d.ferramenta)}</div>
     <div class="duel-steps">${ORDEM_DUELOS.map((x, i) => `<span class="${x === id ? "atual" : (E.feitos || []).includes(x) ? "feito" : ""}">${i + 1} · ${esc(DUELOS[x].nome)}</span>`).join("")}</div></div>`;
+  if (d.escolha && (sub === "briefing" || sub === "producao")) return head + telaoEscolha(id, sub);
+  if (d.escolha && sub === "revelacao") return head + telaoRevelaPrompt(id);
   if (sub === "briefing" || sub === "producao") {
     const prod = sub === "producao";
     const sug = S.filter(x => x.duelo === id && x.time === "verde").sort((a, b) => b.t - a.t);
@@ -3719,6 +3759,32 @@ function telaoDuelos() {
     rodape = `<div class="licao"><div class="t-card glass"><div class="t-eyebrow">${v === "ferramenta" ? "A ferramenta venceu" : v === "atalho" ? "Dessa vez o atalho venceu. Por quê?" : "Empate"}</div><p style="font-size:1.8vw;font-weight:600;letter-spacing:-.02em">${esc(d.licao)}</p></div>
       <div class="t-card glass"><div class="t-eyebrow">O que a pesquisa diz · ${esc(d.estudo.titulo)}</div>${grafico(d.estudo, true)}<div class="t-src" style="margin-top:.6vw">${esc(d.estudo.fonte)}${d.estudo.nota ? " · " + esc(d.estudo.nota) : ""}</div></div></div>`; }
   return `${head}<div class="t-row" style="flex:1;min-height:0;margin-top:1.2vw;height:${revel ? "40vh" : "62vh"}">${slots}</div>${rodape}`;
+}
+
+function telaoEscolha(id, sub) {
+  const d = DUELOS[id]; const prod = sub === "producao";
+  const col = (lado, nome, cls, cor) => `<div class="t-col t-card glass" style="border-color:${cor}55"><h3><span class="${cls}">${nome}</span> · 3 prompts no celular</h3>
+    ${prod ? barras("op_" + lado, OPCOES_PROMPT[lado].map((_, i) => ({ v: String(i), l: "Opção " + (i + 1) })), [cor, cor, cor])
+      : `<div class="t-sub" style="font-size:1.3vw;margin-top:.6vw">O time lê as três opções e vota na que acha melhor. A mais votada vai para a IA.</div>`}</div>`;
+  return `<div class="t-row" style="align-items:flex-end;gap:2vw;margin:1.2vw 0 1.6vw"><div class="t-col"><div class="t-h2" style="font-size:2.6vw">${esc(d.briefing)}</div>
+      <div class="t-sub" style="font-size:1.3vw;margin-top:.8vw">${prod ? "Cada time está escolhendo o seu prompt. Os textos ficam só no celular de cada time." : "Cada time recebe três prompts no celular e escolhe um. Mesma tarefa, mesma ferramenta."}</div></div>
+      ${prod ? `<div class="timer js-timer" style="font-size:4.6vw">${E.timerFim ? fmtTempo(E.timerFim - Date.now()) : fmtTempo(CONFIG.minutosProducao * 60000)}</div>` : ""}</div>
+    <div class="t-row" style="gap:2vw">${col("atalho", "Time Laranja", "lar", "#fb923c")}${col("ferramenta", "Time Verde", "em", "#34d399")}</div>`;
+}
+function telaoRevelaPrompt(id) {
+  const d = DUELOS[id]; const t = tally("duelo_" + id); const tot = (t.A || 0) + (t.B || 0);
+  const letra = lado => (E.ordemA === lado ? "A" : "B"); const pct = lado => tot ? Math.round((t[letra(lado)] || 0) * 100 / tot) : 0;
+  const lista = lado => OPCOES_PROMPT[lado].map((txt, i) => { const on = i === idxEscolha(lado);
+    const curto = lado === "ferramenta" && !on;
+    return `<div class="rv-op ${on ? "on" : ""} ${lado === "ferramenta" && on ? "longo" : ""}"><b>Opção ${i + 1}${on ? " · escolhida" : ""}</b><span>${esc(curto ? txt.slice(txt.indexOf(". ") + 2, txt.indexOf(". ") + 2 + 95) + "…" : txt)}</span></div>`; }).join("");
+  const v = E.vencedor;
+  return `<div class="t-row" style="gap:2vw;margin-top:1.2vw;height:52vh">
+      <div class="t-col t-card glass rv-col" style="border-color:#fb923c66;flex:.8"><div class="lbl"><span>${letra("atalho")} · <span class="lar">Time Laranja</span></span><small style="background:var(--lar)">${pct("atalho")}% · ${t[letra("atalho")] || 0}</small></div>
+        ${lista("atalho")}<div class="rv-nota lar">As três opções do laranja eram pedidos simples. Não havia prompt bom para escolher.</div></div>
+      <div class="t-col t-card glass rv-col" style="border-color:#34d39966;flex:1.2"><div class="lbl"><span>${letra("ferramenta")} · <span class="em">Time Verde</span></span><small style="background:var(--neon)">${pct("ferramenta")}% · ${t[letra("ferramenta")] || 0}</small></div>
+        ${lista("ferramenta")}<div class="rv-perg">${PERGUNTAS_PROMPT.map(q => `<span>✓ ${esc(q)}</span>`).join("")}</div></div></div>
+    <div class="licao"><div class="t-card glass"><div class="t-eyebrow">${v === "ferramenta" ? "A ferramenta venceu" : v === "atalho" ? "Dessa vez o atalho venceu. Por quê?" : "Empate"}</div><p style="font-size:1.6vw;font-weight:600;letter-spacing:-.02em">${esc(d.licao)}</p></div>
+      <div class="t-card glass"><div class="t-eyebrow">O que a pesquisa diz · ${esc(d.estudo.titulo)}</div>${grafico(d.estudo, true)}<div class="t-src" style="margin-top:.6vw">${esc(d.estudo.fonte)}</div></div></div>`;
 }
 
 /* ---------- editor rápido (colar link ou prompt) ---------- */
@@ -3907,8 +3973,8 @@ async function proximo() {
     case "times": if (!E.cartas) return distribuirCartas(); if (!E.todasViradas) return ir({ todasViradas: true }); break;
     case "duelos":
       if (!E.duelo) return abrirDuelo(ORDEM_DUELOS[0]);
-      if (sub === "briefing") return ir({ sub: "producao", timerFim: Date.now() + CONFIG.minutosProducao * 60000 });
-      if (sub === "producao") return ir({ sub: "votacao", votacao: true, timerFim: null });
+      if (sub === "briefing") return ir({ sub: "producao", timerFim: Date.now() + CONFIG.minutosProducao * 60000, votacao: !!DUELOS[E.duelo].escolha });
+      if (sub === "producao") return ir({ sub: "votacao", votacao: true, timerFim: null, ...(DUELOS[E.duelo].escolha ? { escolha: { atalho: escolhaPorVoto("atalho"), ferramenta: escolhaPorVoto("ferramenta") } } : {}) });
       if (sub === "votacao") {
         const f = (E.feitos || []).filter(x => x !== E.duelo); f.push(E.duelo);
         const v = vencedorDuelo(E.duelo);
@@ -4024,12 +4090,14 @@ function palcoExtra(it) {
   }
   if (it.id === "duelos") {
     const id = E.duelo || ORDEM_DUELOS[0]; const d = DUELOS[id];
+    if (d.escolha) { const linha = lado => { const t = tally("op_" + lado); return OPCOES_PROMPT[lado].map((txt, i) => `<div class="d-item"><b>Opção ${i + 1}</b> · ${t[String(i)] || 0} votos<div class="mut" style="font-size:12.5px;margin-top:3px">${esc(txt.slice(0, 110))}${txt.length > 110 ? "…" : ""}</div></div>`).join(""); };
+      return `<div class="pl-now glass"><div class="eyebrow">Time Laranja · votos nas opções</div>${linha("atalho")}</div><div class="pl-now glass"><div class="eyebrow">Time Verde · votos nas opções</div>${linha("ferramenta")}</div>`; }
     const lado = l => { const m = midiaDe(id, l); const a = id + "|" + l;
       return `<div class="pl-lado ${l === "atalho" ? "lar-b" : "ver-b"}"><b class="${l === "atalho" ? "lar" : "ver"}">${nomeTime(timeDeLado(l))}</b>
         <div class="mut" style="font-size:12.5px;margin:4px 0 8px">${m ? (m.backup ? "Imagem de backup (gerada antes)" : m.local ? "Vídeo carregado no telão" : m.url ? "Link no telão" : "Imagem no telão") : "Sem resultado ainda"}</div>
         ${m && m.tipo === "img" ? `<img src="${esc(m.src)}" alt="">` : ""}
         <div class="pl-tools" style="margin:8px 0 0">${d.tipo !== "texto" ? `<button data-act="upload" data-alvo="${a}">Enviar imagem</button><button data-act="colar-link" data-alvo="${a}">Colar link</button>${m && !m.backup ? `<button data-act="tirar-midia" data-alvo="${a}">${d.backup && d.backup[l] ? "Voltar ao backup" : "Remover"}</button>` : ""}` : ""}
-        <button data-act="editar-prompt" data-duelo="${id}" data-lado="${l}">${l === "atalho" ? "Editar prompt" : "Colar prompt final"}</button>${l === "ferramenta" && d.backupPrompt ? `<button data-act="prompt-backup" data-duelo="${id}">Prompt de backup</button>` : ""}</div></div>`; };
+        <button data-act="editar-prompt" data-duelo="${id}" data-lado="${l}">${l === "atalho" ? "Editar prompt" : "Colar prompt final"}</button></div></div>`; };
     const sug = S.filter(x => x.duelo === id && x.time === "verde").sort((a, b) => b.t - a.t);
     return `<div class="pl-now glass"><div class="eyebrow">Duelo ${ORDEM_DUELOS.indexOf(id) + 1} de 3 · ${esc(d.nome)} · resultados</div><div class="pl-lados">${lado("atalho")}${lado("ferramenta")}</div></div>
       ${d.estrutura ? `<div class="pl-now glass"><div class="eyebrow">Sugestões do Time Verde · ${sug.length}</div>${sug.length ? sug.map(x => `<div class="d-item">${esc(x.texto)}<div class="mut" style="font-size:12px;margin-top:3px">${esc(x.nome || "")}</div></div>`).join("") : `<p class="mut" style="font-size:14px">Ainda nenhuma.</p>`}</div>` : ""}`;
@@ -4058,7 +4126,8 @@ async function simular() {
     case "quiz": if (E.sub === "votacao") { const qz = QUIZ[E.quizIdx || 0]; return votar(qz.id, () => Math.random() < .55 ? "c" : pick(["a", "b"])); } break;
     case "duelos": {
       if (!E.duelo) break;
-      if (E.sub === "producao" || E.sub === "briefing") { const vs = fakes.filter(p => p.time === "verde"); const f = pick(vs.length ? vs : fakes);
+      if (DUELOS[E.duelo].escolha) { if (E.sub === "producao") return store.setMany("votos", fakes.filter(p => p.time).map(p => { const q = "op_" + LADO_TIME[p.time]; return [q + "__" + p.id, { q, o: String(Math.floor(Math.random() * 3)), pid: p.id, t: Date.now() }]; })); if (E.sub === "briefing") break; }
+      else if (E.sub === "producao" || E.sub === "briefing") { const vs = fakes.filter(p => p.time === "verde"); const f = pick(vs.length ? vs : fakes);
         return store.add("envios", { duelo: E.duelo, pid: f.id, nome: f.nome, time: "verde", texto: pick(["Luz de fim de tarde vindo de trás da flor", "Lente macro, bem perto do miolo, fundo desfocado", "Campo de girassóis ao fundo, céu limpo", "Gotas de orvalho nas pétalas", "Vento leve balançando as pétalas", "Formato vertical para o Reels"]), t: Date.now() }); }
       if (E.sub === "votacao") { const bom = E.ordemA === "ferramenta" ? "A" : "B", ruim = bom === "A" ? "B" : "A"; return votar("duelo_" + E.duelo, () => Math.random() < 0.72 ? bom : ruim); }
       break;
