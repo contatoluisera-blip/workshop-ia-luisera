@@ -188,8 +188,85 @@ textarea{resize:vertical;min-height:92px;line-height:1.45}
 .video-slot{aspect-ratio:16/9;width:100%;border-radius:1.4vw;overflow:hidden;position:relative}
 .video-slot.sobre{border-color:var(--em)}
 .vazio-v{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3vw}
-#media-layer{position:fixed;z-index:30;border-radius:1.4vw;overflow:hidden;background:#000;display:none}
+
+/* gráficos dos estudos */
+.gf{display:flex;flex-direction:column;gap:.85vw}
+.gf-g{font-family:var(--mono);font-size:.82vw;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:.6vw}
+.gf-g:first-child{margin-top:0}
+.gf-r{display:grid;grid-template-columns:minmax(0,15vw) 1fr 6.4vw;align-items:center;gap:1.1vw}
+.gf-l{font-size:1.2vw;line-height:1.25;color:#e4e4e7}
+.gf-t{position:relative;height:1.7vw;background:rgba(255,255,255,.04);border-radius:.4vw}
+.gf-b{position:absolute;top:0;bottom:0;border-radius:0 .4vw .4vw 0;min-width:2px}
+.gf-b.neg{border-radius:.4vw 0 0 .4vw}
+.gf-z{position:absolute;top:-.4vw;bottom:-.4vw;width:2px;background:rgba(255,255,255,.35);margin-left:-1px}
+.gf-v{font-family:var(--mono);font-size:1.45vw;font-weight:500;font-variant-numeric:tabular-nums;color:var(--txt)}
+.gf-eixo{font-family:var(--mono);font-size:.78vw;color:var(--mut2);margin-top:.2vw}
+.gf.gf-mini{gap:.5vw}.gf.gf-mini .gf-r{grid-template-columns:minmax(0,18vw) 1fr 5vw}.gf.gf-mini .gf-l{font-size:1vw}.gf.gf-mini .gf-t{height:1.1vw}.gf.gf-mini .gf-v{font-size:1.1vw}
+/* estrutura de prompt */
+.estr{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.estr .er{display:flex;flex-direction:column;gap:2px;font-size:14px;line-height:1.4}
+.estr .er b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--neon);font-weight:500}
+.estr .er i{font-style:normal;color:var(--mut);border-bottom:1px dashed rgba(52,211,153,.5);padding-bottom:1px}
+.estr.t{margin-top:.4vw;gap:.55vw}
+.estr.t .er{flex-direction:row;gap:1vw;font-size:1.15vw;align-items:baseline}
+.estr.t .er b{font-size:.78vw;min-width:10.5vw;flex:none}
+/* duelos */
+.duel-head{display:flex;justify-content:space-between;align-items:center;gap:2vw}
+.duel-steps{display:flex;gap:.5vw;align-items:center}
+.duel-steps span{white-space:nowrap;line-height:1.3;font-family:var(--mono);font-size:.85vw;padding:.35vw .9vw;border-radius:99px;border:1px solid var(--line);color:var(--mut2)}
+.duel-steps span.atual{border-color:var(--em);color:#fff;background:rgba(16,185,129,.14)}
+.duel-steps span.feito{color:var(--neon)}
+.duel-cols{display:flex;gap:2vw;align-items:stretch}
+.duel-cols.com-midia{height:58vh}
+.duel-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:1vw;min-height:0}
+.pcard{border-radius:1.4vw;padding:1.4vw 1.6vw;min-height:0;overflow:hidden}
+.com-midia .pcard{max-height:30vh;overflow:auto;flex:none;padding:1.1vw 1.4vw}
+.com-midia .estr.t{gap:.25vw}.com-midia .estr.t .er{font-size:.95vw}.com-midia .estr.t .er b{font-size:.7vw;min-width:9vw}
+.pcard.lar-b{border-color:rgba(251,146,60,.4)} .pcard.ver-b{border-color:rgba(52,211,153,.4)}
+.pc-h{display:flex;justify-content:space-between;align-items:center;gap:1vw;font-family:var(--mono);font-size:.85vw;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7vw}
+.pc-txt{font-size:1.5vw;line-height:1.45;font-weight:500;white-space:pre-wrap;letter-spacing:-.01em}
+.com-midia .pc-txt{font-size:1.02vw;line-height:1.4}
+.mini-t{font-family:Geist,sans-serif;text-transform:none;letter-spacing:0;font-size:.8vw;padding:.3vw .8vw;border-radius:99px;border:1px solid var(--line);color:var(--mut);opacity:.25;transition:.2s}
+.pcard:hover .mini-t,.slot:hover .mini-t{opacity:1}
+.sug{border-radius:1.2vw;padding:1.1vw 1.3vw}
+.sug .sg{font-size:1.05vw;line-height:1.4;padding:.45vw 0;border-top:1px solid var(--line)}
+.sug .sg small{display:block;font-family:var(--mono);font-size:.75vw;color:var(--mut2);margin-top:.2vw}
+.ms{position:relative;flex:1;min-height:0;border-radius:1.2vw;border:1px solid var(--line);background:rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden}
+.ms.vazio{border-style:dashed;border-color:var(--line2)}
+.ms>img{flex:1;min-height:0;width:100%;object-fit:contain;display:block}
+.ms-area{flex:1;min-height:0}
+.ms-vz{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.5vw;padding:1.4vw;color:var(--mut)}
+.ms-vz b{font-size:1.4vw;color:#d4d4d8;font-weight:600}
+.ms-vz span{font-size:1vw;max-width:28vw}
+.ms-erro{display:none;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:1vw;color:var(--mut);font-size:1.1vw}
+.ms.erro>img{display:none} .ms.erro .ms-erro{display:flex}
+.ms-tools{display:flex;gap:.4vw;justify-content:center;padding:.5vw;opacity:.18;transition:.2s;flex:none}
+.ms:hover .ms-tools,.ms.vazio .ms-tools{opacity:1}
+.ms-tools button{font-size:.8vw;padding:.35vw .9vw;border-radius:99px;border:1px solid var(--line);color:#d4d4d8;background:rgba(10,10,10,.8)}
+.ms-tools button:hover{border-color:var(--em)}
+.slot .ms{margin-top:.2vw}
+.slot-txt{flex:1;min-height:0;overflow:auto;font-size:1.35vw;line-height:1.5;white-space:pre-wrap;color:#e4e4e7}
+.slot-prompt{font-size:.9vw;line-height:1.4;color:var(--mut);margin-top:.7vw;max-height:4.2em;overflow:hidden;flex:none}
+/* camadas de vídeo */
+#media-layer{position:fixed;inset:0;pointer-events:none;z-index:30;background:none;border-radius:0;overflow:visible}
+#media-layer .camada{position:fixed;pointer-events:auto;border-radius:1.1vw;overflow:hidden;background:#000}
 #media-layer video,#media-layer iframe{width:100%;height:100%;border:0;display:block;object-fit:contain;background:#000}
+/* cases: link de fora */
+.fora-link{display:flex;align-items:center;gap:1.2vw;margin-top:1.1vw}
+.qr-link svg{width:4.6vw;height:4.6vw}
+.btn-yt{display:inline-block;font-weight:600;font-size:1.05vw;padding:.6vw 1.3vw;border-radius:99px;background:#fff;color:#000;text-decoration:none}
+.carta.clicavel{cursor:pointer}
+.carta.clicavel:hover{border-color:var(--em);background:rgba(16,185,129,.12)}
+/* palco: cartas e resultados */
+.pl-cartas{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:7px}
+.pl-carta{padding:13px 0;border-radius:12px;border:1px solid var(--line);font-family:var(--mono);font-size:16px;background:rgba(255,255,255,.03)}
+.pl-carta.c-laranja{background:rgba(251,146,60,.8);color:#000;border-color:var(--lar)} .pl-carta.c-verde{background:rgba(52,211,153,.8);color:#000;border-color:var(--neon)}
+.pl-lados{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pl-lado{border:1px solid var(--line);border-radius:16px;padding:12px}
+.pl-lado.lar-b{border-color:rgba(251,146,60,.4)} .pl-lado.ver-b{border-color:rgba(52,211,153,.4)}
+.pl-lado img{width:100%;border-radius:10px;display:block}
+.pl-lado .pl-tools button{font-size:12px;padding:7px 10px}
+@media (max-width:560px){.pl-lados{grid-template-columns:1fr}}
 
 /* controles */
 .ctrl{position:fixed;left:50%;transform:translateX(-50%);bottom:1.2vw;display:flex;gap:4px;background:rgba(14,14,14,.9);border:1px solid var(--line);border-radius:99px;padding:5px;z-index:40;opacity:.12;transition:opacity .2s;backdrop-filter:blur(10px)}
@@ -276,12 +353,12 @@ const CONFIG = {
   cupom: "",                      // ex.: "WORKSHOP30" — aparece no fechamento
   linkCreatorLab: "mobilelab.com.br",
   urlCreatorLab: "https://mobilelab.com.br",
-  // Vídeos dos cases: cole o link do YouTube de cada um. Sem internet? No telão, arraste o arquivo de vídeo para cima do case.
+  // Vídeos dos cases. Vazio = usa o link do próprio case (YouTube). Sem internet? No telão, arraste o arquivo de vídeo para cima do case.
   videos: {
     cadbury: "",
     heinz: "",
     coca: "",
-    elis: "https://www.youtube.com/watch?v=aMl54-kqphE"
+    elis: ""
   }
 };
 
@@ -290,66 +367,119 @@ const CONFIG = {
    ============================================================ */
 const ATOS = ["Abertura", "Todo mundo pede", "A consulta", "A virada", "A prova", "Os limites", "O compromisso"];
 
+const PROMPT_SIMPLES = "Uma foto realista de um girassol, bonita e bem iluminada.";
 const DUELOS = {
   prompt: {
     nome: "Prompt", ferramenta: "Gerador de Prompts", tipo: "texto",
-    briefing: "Uma cafeteria de bairro precisa de uma imagem de capa para divulgar o café da manhã.",
-    atalho: "Faz um prompt de imagem de café da manhã.",
+    briefing: "Precisamos de uma imagem realista de girassol para a campanha de primavera de uma marca.",
+    atalho: PROMPT_SIMPLES,
+    estrutura: [
+      ["Assunto", "um girassol", "como está a flor e qual detalhe importa"],
+      ["Cenário", "", "onde ele está e o que aparece ao redor"],
+      ["Momento e luz", "", "hora do dia, direção e qualidade da luz"],
+      ["Câmera e lente", "", "distância, ângulo, lente e profundidade de campo"],
+      ["Composição", "", "enquadramento, onde fica a flor e o formato"],
+      ["Cor e textura", "", "paleta, textura das pétalas e do miolo"],
+      ["Sensação", "", "o que a imagem precisa fazer sentir"],
+      ["Evitar", "", "o que não pode aparecer"]
+    ],
     cs: {
-      clareza: "Uma capa de Reels que faça quem passa com pressa parar e entrar.",
-      contexto: "Cafeteria de bairro, público de trabalhadores, manhã cedo, formato vertical.",
-      conversa: "No Claude: “Preciso de um prompt de imagem para a capa de um Reels de uma cafeteria de bairro que quer vender café da manhã para quem passa com pressa. Que perguntas você precisa me fazer antes de escrever?”",
-      criterio: "O prompt descreve luz, lente e enquadramento? Serviria para qualquer cafeteria?",
-      comando: "Leve as respostas para o Gerador de Prompts. Deixe em “Decidir por mim” só o que você ainda não sabe."
+      clareza: "Para que serve essa imagem e onde ela vai aparecer?",
+      contexto: "Que marca, que público, que formato e que clima de primavera?",
+      conversa: "No Gerador de Prompts: responda às perguntas em vez de escrever o pedido de uma vez.",
+      criterio: "O prompt descreve luz, lente e enquadramento? Serviria para qualquer marca?",
+      comando: "O prompt final sai da conversa e vai, inteiro, para a IA de imagem."
     },
-    estudo: { fonte: "Noy e Zhang · MIT · Science, 2023", dado: "Com IA, a escrita ficou 40% mais rápida e 18% melhor. Mas ninguém conferiu os fatos: velocidade só vira resultado com revisão." },
+    estudo: { fonte: "Noy e Zhang · MIT · Science, 2023 · 453 profissionais", titulo: "Escrita com IA, comparada a quem escreveu sem",
+      linhas: [{ l: "Menos tempo para entregar", v: 40, cor: "ver" }, { l: "Qualidade avaliada", v: 18, cor: "ver" }], max: 50,
+      nota: "Ninguém conferiu os fatos. Velocidade só vira resultado com revisão." },
     licao: "Um prompt bom é a resposta de uma conversa boa."
   },
   imagem: {
     nome: "Imagem", ferramenta: "Gerar Imagem", tipo: "imagem",
-    briefing: "Uma marca local vai lançar um tênis de corrida e precisa de uma imagem para o feed.",
-    atalho: "Faz uma imagem bonita de um tênis.",
+    briefing: "Agora os dois prompts viram imagem. Mesmo gerador, mesmo girassol.",
+    atalho: PROMPT_SIMPLES,
+    usaPromptDe: "prompt",
     cs: {
-      clareza: "Gerar desejo pelo lançamento no feed.",
-      contexto: "Corredor de rua, marca local, estética urbana de manhã cedo, formato 4:5.",
-      conversa: "No Claude: “Quero uma imagem de lançamento para o tênis de corrida de uma marca local, para o feed. Que perguntas você precisa me fazer para escrever o prompt de imagem ideal?”",
-      criterio: "O tênis parece um produto real? A imagem poderia ser de qualquer marca?",
-      comando: "Leve o prompt final para o Gerar Imagem: luz, lente, fundo e enquadramento definidos."
+      clareza: "A imagem precisa vender a primavera da marca, não só mostrar uma flor.",
+      contexto: "O prompt final do duelo anterior já traz luz, lente e composição.",
+      conversa: "Se algo saiu estranho, pergunte à IA de texto o que ajustar no prompt antes de gerar de novo.",
+      criterio: "A flor parece real? Pétalas, miolo e luz convencem de perto?",
+      comando: "Cole o prompt final no Gerar Imagem, sem resumir."
     },
-    estudo: { fonte: "Dell'Acqua e outros · Harvard, Wharton, MIT e BCG · 2026", dado: "Nas tarefas que a IA domina, a qualidade subiu mais de 40%. Fora delas, o acerto caiu 19 pontos." },
+    estudo: { fonte: "Dell'Acqua e outros · Harvard, Wharton, MIT e BCG · 758 consultores · Organization Science, 2026", titulo: "A mesma IA, dentro e fora do que ela domina",
+      linhas: [{ l: "Qualidade, onde a IA domina", v: 40, cor: "ver", fmt: "+40%" }, { l: "Acerto, fora do alcance dela", v: -19, cor: "lar", fmt: "−19 pts" }], min: -25, max: 45, sinal: true,
+      nota: "Quem dirige com critério sabe de que lado da fronteira está." },
     licao: "Quem tem olhar dirige a luz. Quem não tem aceita o plástico."
   },
   video: {
-    nome: "Vídeo", ferramenta: "Gerar Vídeo", tipo: "imagem",
-    briefing: "Uma abertura de 10 segundos para uma campanha sobre cuidado.",
-    atalho: "Faz um vídeo bonito de uma família no parque.",
+    nome: "Vídeo", ferramenta: "Gerar Vídeo", tipo: "video",
+    briefing: "A imagem ganha movimento: uma abertura de 5 a 10 segundos.",
+    atalho: "Anima esse girassol.",
+    estrutura: [
+      ["Imagem de partida", "", "a imagem aprovada no duelo anterior"],
+      ["Ação única", "", "o que se move e como se move"],
+      ["Câmera", "", "parada, aproximação lenta ou travelling"],
+      ["Ritmo e duração", "", "velocidade do movimento, de 5 a 10 segundos"],
+      ["Luz e atmosfera", "", "vento, partículas, mudança de luz"],
+      ["Continuidade", "", "o que não pode mudar: forma da flor, cores, cenário"],
+      ["Evitar", "", "deformações, cortes bruscos, texto na tela"]
+    ],
     cs: {
-      clareza: "Abrir a campanha com emoção de cuidado em 10 segundos.",
-      contexto: "Vertical 9:16, gente comum, luz de fim de tarde.",
-      conversa: "No Claude: “Tenho este frame e quero uma abertura de 10 segundos que transmita cuidado. Como eu deveria pedir esta cena para a IA de vídeo? O que ainda falta definir?”",
-      criterio: "Rostos e mãos se mantêm? Existe continuidade entre as cenas?",
-      comando: "Cole o prompt final no Gerar Vídeo junto com o frame aprovado: uma ação, um movimento de câmera."
+      clareza: "Abrir a campanha com uma sensação, não com um efeito.",
+      contexto: "Formato vertical, 5 a 10 segundos, partindo da imagem aprovada.",
+      conversa: "No Claude: “Com esta imagem e este objetivo, como eu deveria pedir a cena para a IA de vídeo? O que falta definir?”",
+      criterio: "A flor se mantém igual do começo ao fim? O movimento parece natural?",
+      comando: "Cole o prompt final no Gerar Vídeo junto com a imagem: uma ação, um movimento de câmera."
     },
-    estudo: { fonte: "BetterUp Labs e Stanford · HBR, 2025", dado: "40% receberam no último mês trabalho feito com IA que parecia pronto, mas era vazio." },
+    estudo: { fonte: "BetterUp Labs e Stanford Social Media Lab · Harvard Business Review, 2025 · 1.150 profissionais", titulo: "O custo de entregar algo que só parece pronto",
+      linhas: [{ l: "Receberam trabalho vazio feito com IA no último mês", v: 40, cor: "lar" }, { l: "Passaram a ver quem enviou como menos capaz", v: 50, cor: "lar" }, { l: "Não querem mais trabalhar com quem enviou", v: 32, cor: "lar" }], max: 100,
+      nota: "Bonito não é pronto." },
     licao: "Bonito não é pronto. Continuidade é o que separa um clipe de uma peça."
   }
 };
 const ORDEM_DUELOS = ["prompt", "imagem", "video"];
 
+/* Estudos em gráfico: números das publicações originais (veja as Notas do apresentador no doc). */
+const ESTUDOS = {
+  doshi: { fonte: "Doshi e Hauser · Science Advances, 2024 · 293 escritores, 600 avaliadores",
+    linhas: [
+      { grupo: "Cada conto, com 5 ideias da IA" },
+      { l: "Novidade", v: 8.1, cor: "ver" }, { l: "Utilidade para o público", v: 9.0, cor: "ver" },
+      { grupo: "O conjunto dos contos, com 1 ideia da IA" },
+      { l: "Semelhança entre eles", v: 10.7, cor: "lar" } ], max: 12, sinal: true, eixo: "comparado a quem escreveu sem IA" },
+  metr: { fonte: "METR · 16 programadores experientes, 246 tarefas reais · ferramentas do início de 2025",
+    linhas: [
+      { grupo: "Previsão antes do estudo" },
+      { l: "Economistas", v: 39, cor: "cinza" }, { l: "Especialistas em IA", v: 38, cor: "cinza" }, { l: "Os próprios programadores", v: 24, cor: "cinza" },
+      { grupo: "Depois das tarefas" },
+      { l: "O que eles sentiram", v: 20, cor: "mint" }, { l: "O que foi medido", v: -19, cor: "lar" } ], min: -25, max: 45, sinal: true, eixo: "velocidade com IA · positivo = mais rápido" },
+  workslop: { fonte: "BetterUp Labs e Stanford Social Media Lab · Harvard Business Review, 2025 · 1.150 profissionais nos EUA",
+    linhas: [
+      { grupo: "Quem recebeu passou a ver quem enviou como" },
+      { l: "Menos criativo", v: 54, cor: "lar" }, { l: "Menos capaz", v: 50, cor: "lar" }, { l: "Menos confiável", v: 49, cor: "lar" },
+      { l: "Menos digno de confiança", v: 42, cor: "lar" }, { l: "Menos inteligente", v: 37, cor: "lar" },
+      { grupo: "E depois" },
+      { l: "Não quer mais trabalhar junto", v: 32, cor: "lar" } ], max: 100 },
+  dentro: { linhas: [ { l: "Só com IA", v: 38, cor: "ver" }, { l: "IA e um guia de prompts", v: 42.5, cor: "ver" } ], max: 50, sinal: true, eixo: "qualidade comparada a quem não usou IA" },
+  fora: { linhas: [ { l: "Sem IA", v: 84, cor: "cinza" }, { l: "Só com IA", v: 70, cor: "lar" }, { l: "IA e um guia de prompts", v: 60, cor: "lar" } ], max: 100, eixo: "respostas certas" },
+  mit: { linhas: [ { l: "Com ChatGPT", v: 83, cor: "lar" }, { l: "Com buscador", v: 11, cor: "cinza" }, { l: "Só a própria cabeça", v: 11, cor: "cinza" } ], max: 100, eixo: "não conseguiram citar uma frase do próprio texto" }
+};
+
 const CASES = [
-  { id: "cadbury", nome: "Cadbury · “Not just a Cadbury ad”", ano: "2021 · Ogilvy, Índia", certo: "ferramenta",
+  { id: "cadbury", nome: "Cadbury · “Not just a Cadbury ad”", ano: "2021 · Ogilvy, Índia", certo: "ferramenta", link: "https://www.youtube.com/watch?v=iB4taFufKxM", plataforma: "YouTube",
     contexto: "Na pandemia, a Cadbury usou IA para recriar o rosto e a voz de Shah Rukh Khan, com autorização, e deixar pequenos lojistas criarem um anúncio com ele citando a própria loja.",
     revela: "A IA recriou rosto e voz de Shah Rukh Khan, com autorização, para citar o nome de lojas de bairro. 130 mil anúncios para cerca de 2 mil lojas. Grand Prix de Efetividade em Cannes.",
     licao: "A ideia generosa veio antes. A IA só escalou." },
-  { id: "heinz", nome: "Heinz · A.I. Ketchup", ano: "2022 · Rethink, Canadá", certo: "ferramenta",
+  { id: "heinz", nome: "Heinz · A.I. Ketchup", ano: "2022 · Rethink, Canadá", certo: "ferramenta", link: "https://www.youtube.com/watch?v=LFmpVy6eGXs", plataforma: "YouTube",
     contexto: "A Heinz pediu a um gerador de imagens para desenhar “ketchup”, com estilos diferentes, e mostrou o que saiu.",
     revela: "Pediram ao DALL-E 2 para desenhar “ketchup” e o resultado parecia Heinz. Mais de 1 bilhão de impressões espontâneas.",
     licao: "A IA virou prova de uma verdade da marca, não substituta da criação." },
-  { id: "coca", nome: "Coca-Cola · Holidays Are Coming", ano: "2024 e 2025", certo: "atalho",
+  { id: "coca", nome: "Coca-Cola · Holidays Are Coming", ano: "2024 e 2025", certo: "atalho", link: "https://www.youtube.com/watch?v=Yy6fByUmPuE", plataforma: "YouTube",
     contexto: "A Coca-Cola refez com IA generativa o seu comercial de Natal mais famoso, de 1995: os caminhões iluminados na neve.",
     revela: "Refação de um clássico de 1995 com imagens geradas. O público achou artificial e sem alma, e a crítica se repetiu no ano seguinte.",
     licao: "Velocidade e custo não compensam quando falta emoção humana." },
-  { id: "elis", nome: "Volkswagen · Elis Regina", ano: "2023 · AlmapBBDO, Brasil", certo: "depende",
+  { id: "elis", nome: "Volkswagen · Elis Regina", ano: "2023 · AlmapBBDO, Brasil", certo: "depende", link: "https://www.youtube.com/watch?v=aMl54-kqphE", plataforma: "YouTube",
     contexto: "Nos 70 anos da marca no Brasil, a Volkswagen recriou Elis Regina com IA para cantar “Como nossos pais” ao lado da filha, Maria Rita.",
     revela: "Elis recriada por IA em dueto com Maria Rita. Houve consentimento dos herdeiros e o Conar arquivou o caso por 13 a 7. Emocionou e dividiu o país.",
     licao: "Quando a técnica é impecável, a pergunta passa a ser ética: consentimento e transparência." }
@@ -364,8 +494,6 @@ const Q_CONF_DEPOIS = { id: "p_conf_depois", titulo: "E agora: quanto você conf
 const ESCALA = [1, 2, 3, 4, 5].map(n => ({ v: String(n), l: String(n) }));
 const Q_MEDICO1 = { id: "m_medico", titulo: "Você chega no consultório e diz: “Doutor, me passa um antibiótico.” O que um bom médico faz?", opts: [
   { v: "receita", l: "Receita na hora" }, { v: "pergunta", l: "Faz perguntas antes de receitar" }, { v: "google", l: "Manda você pesquisar no Google" } ] };
-const Q_MEDICO2 = { id: "m_voce", titulo: "E com a IA, o que você costuma fazer?", opts: [
-  { v: "remedio", l: "Peço o remédio direto" }, { v: "sintomas", l: "Explico o que preciso e deixo a IA perguntar" }, { v: "depende", l: "Depende do dia" } ] };
 const QUIZ = [
   { id: "quiz_texto", titulo: "Qual destas abre uma conversa de verdade?", cena: "Você quer vender mais café da manhã numa cafeteria de bairro.", certo: "c",
     opts: [ { v: "a", l: "“Me dá ideias de post para uma cafeteria.”" },
@@ -386,8 +514,8 @@ const METODO = [
 ];
 const OPTS_CASE = [ { v: "atalho", l: "Atalho" }, { v: "ferramenta", l: "Ferramenta" }, { v: "depende", l: "Depende" } ];
 const FUNCOES = ["Criador de conteúdo", "Social media", "Fotógrafo ou videomaker", "Designer", "Empreendedor", "Agência ou marketing", "Estudante"];
-const COLS = ["participantes", "votos", "perguntas", "respostas", "envios"];
-const CHAVES_ESTADO = ["passo", "sub", "duelo", "rodada", "feitos", "placar", "caseIdx", "quizIdx", "votacao", "ordemA", "slotTexto", "timerFim", "timesSorteados", "cartasN", "cartas", "destaque", "vencedor", "mostrarAncora"];
+const COLS = ["participantes", "votos", "perguntas", "respostas", "envios", "midias"];
+const CHAVES_ESTADO = ["passo", "sub", "duelo", "rodada", "feitos", "placar", "caseIdx", "quizIdx", "votacao", "ordemA", "slotTexto", "timerFim", "timesSorteados", "cartas", "cartasDono", "viradas", "todasViradas", "destaque", "vencedor", "mostrarAncora"];
 const FRASE_FINAL = ["A IA vira atalho quando você só pede.", "Vira ferramenta quando você pergunta.", "E o critério é sempre seu."];
 
 /* ============================================================
@@ -410,14 +538,14 @@ const ROTEIRO = [
   { id: "balcao", ato: 1, tipo: "slide", titulo: "O pedido no balcão", cel: "A gente usa IA como quem faz pedido no balcão.",
     nota: "Faça ao vivo no Claude: “faz um post sobre café”. Mostre o resultado genérico e pergunte quem já recebeu algo igual." },
   { id: "media", ato: 1, tipo: "slide", titulo: "Resposta média", cel: "Pedido genérico gera resposta média.",
-    nota: "Doshi e Hauser: cada pessoa melhora, todo mundo fica parecido. Detalhes nas notas do doc." },
+    nota: "Doshi e Hauser: cada conto melhora, mas os contos ficam parecidos entre si. Aponte a barra laranja." },
 
   { id: "a2", ato: 2, tipo: "slide", titulo: "Ato 2 · A consulta", cel: "Ato 2 · A consulta",
     nota: "Conte a cena do consultório antes de abrir a enquete." },
   { id: "medico", ato: 2, tipo: "int", titulo: "Analogia do médico",
     nota: "Abra a votação. Depois avance para a lição: o bom médico investiga antes de receitar." },
   { id: "sentir", ato: 2, tipo: "slide", titulo: "Sentir x medir", cel: "Sensação de produtividade não é produtividade.",
-    nota: "METR, início de 2025. O ponto é a diferença entre sentir e medir. Diga que as ferramentas já evoluíram." },
+    nota: "METR, início de 2025. Leia as barras de cima para baixo: todo mundo previu ganho, e o medido foi perda. Diga que as ferramentas já evoluíram." },
   { id: "reputacao", ato: 2, tipo: "slide", titulo: "O custo de reputação", cel: "Trabalho vazio feito com IA custa reputação.",
     nota: "Workslop: use o 40% e o custo de reputação, não o valor em dólares." },
 
@@ -434,21 +562,21 @@ const ROTEIRO = [
   { id: "quiz", ato: 3, tipo: "int", titulo: "Quiz: pedido ou pergunta",
     nota: "Abra a votação, revele e comente o porquê. São duas rodadas." },
   { id: "fronteira", ato: 3, tipo: "slide", titulo: "A fronteira irregular", cel: "A mesma ferramenta ajuda ou atrapalha conforme quem dirige.",
-    nota: "Slide central da tese. A fronteira é invisível, por isso existe o Critério." },
+    nota: "Slide central da tese. Os mesmos grupos: dentro da fronteira, quem usou IA foi melhor; fora dela, errou mais. Quem tinha o guia de prompts confiou mais e errou mais. Por isso existe o Critério." },
 
   { id: "a4", ato: 4, tipo: "slide", titulo: "Ato 4 · A prova", cel: "Ato 4 · A prova",
-    nota: "Explique o jogo em tom leve: é sorte, não talento. Quem cair no laranja faz pedidos; quem cair no verde conversa com a IA." },
+    nota: "Explique o jogo em tom leve: é sorte, não talento. Cada carta esconde uma pessoa e uma cor. Laranja faz pedidos, verde conversa com a IA." },
   { id: "times", ato: 4, tipo: "int", titulo: "Jogo das cartas",
-    nota: "Cada um escolhe um número no celular. Quando a maioria tiver escolhido, avance para virar as cartas. Brinque com quem caiu no laranja." },
+    nota: "Quando todos estiverem conectados, distribua as cartas: cada celular mostra o número da pessoa. Chame alguns voluntários, peça um número e clique na carta para virar. No fim, vire todas. Brinque com quem caiu no laranja." },
   { id: "duelos", ato: 4, tipo: "int", titulo: "Duelos: Prompt, Imagem e Vídeo",
-    nota: "A sala escolhe a ordem. Em cada duelo: briefing, produção, Montar A/B, votação às cegas, revelação." },
+    nota: "Ordem fixa: Prompt, Imagem e Vídeo, sempre com o girassol. Mostre os dois prompts, gere ao vivo na Creator Lab, suba o resultado de cada time no telão (upload, colar link ou Ctrl+V) e abra a votação às cegas." },
   { id: "placar", ato: 4, tipo: "slide", titulo: "Placar", cel: "Mesmo talento, mesma ferramenta. Só mudou a pergunta.",
     nota: "Leia o placar. Se o atalho venceu algum duelo, pergunte à sala por quê." },
 
   { id: "a5", ato: 5, tipo: "slide", titulo: "Ato 5 · Os limites", cel: "Ato 5 · Os limites",
     nota: "Mude o tom: agora os limites." },
   { id: "cases", ato: 5, tipo: "int", titulo: "Cases de publicidade",
-    nota: "Em cada case: explique o contexto, passe o vídeo, deixe a sala votar e revele." },
+    nota: "Em cada case: explique o contexto, passe o vídeo, deixe a sala votar e revele. Se o vídeo não rodar, use o botão do YouTube ou peça para a sala abrir pelo QR Code." },
   { id: "etica", ato: 5, tipo: "int", titulo: "Onde você não usaria IA?",
     nota: "Leia algumas respostas do mural e comente." },
   { id: "criterio", ato: 5, tipo: "slide", titulo: "Critério vem de repertório", cel: "Pense primeiro. Use a IA depois.",
@@ -467,7 +595,6 @@ const ROTEIRO = [
   { id: "creatorlab", ato: 6, tipo: "slide", titulo: "Creator Lab", cel: "creatorlab",
     nota: "Pergunte se a sala quer ver a Creator Lab. Mostre ao vivo: Gerador de Prompts, Gerar Imagem, Gerar Vídeo e Montagem de Vídeo." }
 ];
-
 </script>
 <script src="config.js"></script>
 <script>
@@ -2806,15 +2933,47 @@ function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { co
 const timeDeLado = lado => lado === "atalho" ? "laranja" : "verde";
 const nomeTime = t => t === "laranja" ? "Time Laranja" : "Time Verde";
 
+/* Interpreta um link colado: YouTube, Vimeo, Google Drive, vídeo direto ou imagem. */
+function lerLink(url, preferirVideo) {
+  url = String(url || "").trim(); if (!url) return null;
+  const yt = url.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);
+  if (/youtu/.test(url) && yt) return { tipo: "frame", src: "https://www.youtube.com/embed/" + yt[1] + "?rel=0&modestbranding=1", url };
+  const vm = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vm) return { tipo: "frame", src: "https://player.vimeo.com/video/" + vm[1], url };
+  const dr = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]+)/);
+  if (dr) return preferirVideo ? { tipo: "frame", src: "https://drive.google.com/file/d/" + dr[1] + "/preview", url } : { tipo: "img", src: "https://drive.google.com/thumbnail?id=" + dr[1] + "&sz=w2000", url };
+  if (/\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(url)) return { tipo: "video", src: url, url };
+  if (/^data:image\//.test(url) || /\.(png|jpe?g|webp|gif|avif)(\?|#|$)/i.test(url)) return { tipo: "img", src: url, url };
+  if (/instagram\.com|tiktok\.com|facebook\.com|x\.com|twitter\.com/.test(url)) return { tipo: "link", src: url, url };
+  return { tipo: preferirVideo ? "link" : "img", src: url, url };
+}
+/* Reduz a imagem para caber no banco (até ~900 KB) e devolve um data URL JPEG. */
+function reduzirImagem(file, lado = 1600) {
+  return new Promise((ok, err) => {
+    const r = new FileReader();
+    r.onerror = err;
+    r.onload = () => { const img = new Image(); img.onerror = err; img.onload = () => {
+      let q = .86, L = lado, out = "";
+      for (let i = 0; i < 6; i++) {
+        const k = Math.min(1, L / Math.max(img.width, img.height));
+        const c = document.createElement("canvas"); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        out = c.toDataURL("image/jpeg", q); if (out.length < 900000) break; q -= .1; L = Math.round(L * .8);
+      }
+      ok(out); }; img.src = r.result; };
+    r.readAsDataURL(file);
+  });
+}
+
 /* ============================================================
    ARMAZENAMENTO — modo ensaio (local) e modo ao vivo (Firebase)
    ============================================================ */
 function LocalStore() {
   const KEY = "ws-ia-ensaio-" + CONFIG.sessao;
-  const vazio = () => ({ estado: {}, participantes: {}, votos: {}, perguntas: {}, respostas: {}, envios: {} });
+  const vazio = () => ({ estado: {}, participantes: {}, votos: {}, perguntas: {}, respostas: {}, envios: {}, midias: {} });
   let db = carregar();
-  function carregar() { try { const r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch (e) {} return vazio(); }
-  const subs = { estado: [], participantes: [], votos: [], perguntas: [], respostas: [], envios: [] };
+  function carregar() { try { const r = localStorage.getItem(KEY); if (r) return { ...vazio(), ...JSON.parse(r) }; } catch (e) {} return vazio(); }
+  const subs = { estado: [], participantes: [], votos: [], perguntas: [], respostas: [], envios: [], midias: [] };
   const docSubs = [];
   let bc = null;
   try { bc = new BroadcastChannel(KEY); bc.onmessage = () => { db = carregar(); emitirTudo(); }; } catch (e) {}
@@ -2836,6 +2995,7 @@ function LocalStore() {
     listenDoc(col, id, cb) { docSubs.push({ col, id, cb }); setTimeout(() => cb(db[col][id] ? { id, ...db[col][id] } : null), 0); },
     async setEstado(p) { fresco(); db.estado = { ...db.estado, ...p }; salvar(); emitir("estado"); },
     async set(col, id, data) { fresco(); db[col][id] = { ...(db[col][id] || {}), ...data }; salvar(); emitir(col); },
+    async del(col, id) { fresco(); delete db[col][id]; salvar(); emitir(col); },
     async add(col, data) { fresco(); const id = uid(); db[col][id] = data; salvar(); emitir(col); return id; },
     async setMany(col, entries) { fresco(); entries.forEach(([id, d]) => db[col][id] = { ...(db[col][id] || {}), ...d }); salvar(); emitir(col); },
     async toggleMais(id, pid) { fresco();
@@ -2863,6 +3023,7 @@ async function FirebaseStore() {
     listenDoc(col, id, cb) { base.collection(col).doc(id).onSnapshot(s => cb(s.exists ? { id: s.id, ...s.data() } : null), erro); },
     setEstado(p) { return estadoRef.set(p, { merge: true }); },
     set(col, id, data) { return base.collection(col).doc(id).set(data, { merge: true }); },
+    del(col, id) { return base.collection(col).doc(id).delete(); },
     async add(col, data) { const r = await base.collection(col).add(data); return r.id; },
     async setMany(col, entries) {
       for (let i = 0; i < entries.length; i += 400) {
@@ -2889,12 +3050,11 @@ function avisoErro(msg) {
   el.textContent = msg;
 }
 
-
 /* ============================================================
    ESTADO GLOBAL
    ============================================================ */
 let store = null;
-let E = {}, P = [], V = [], Q = [], R = [], S = [];
+let E = {}, P = [], V = [], Q = [], R = [], S = [], M = [];
 const VISAO = () => location.hash === "#telao" ? "telao" : location.hash === "#palco" ? "palco" : "plateia";
 
 const passoAtual = () => Math.min(Math.max(E.passo || 0, 0), ROTEIRO.length - 1);
@@ -2918,7 +3078,7 @@ function iniciarPlateia() {
   try { PL.enviados = JSON.parse(LS.get("ws-env-" + CONFIG.sessao) || "{}"); } catch (e) {}
   store.listen("estado", e => { E = e || {}; renderPlateia(); });
   store.listen("perguntas", q => { Q = q; if (PL.sheet) renderSheet(); });
-  store.listen("participantes", p => { P = p; if (itemAtual().id === "times" && PL.pid) renderPlateia(); });
+  store.listen("participantes", p => { P = p; });
   if (PL.pid) ouvirEu(PL.pid);
   document.addEventListener("input", ev => { const k = ev.target.dataset && ev.target.dataset.k; if (k) PL.drafts[k] = ev.target.value; });
   document.addEventListener("click", cliquePlateia);
@@ -3028,8 +3188,7 @@ function plateiaInterativo(it) {
         <div class="p-card glass"><div class="eyebrow">Pergunta 2</div><h3>${Q_CONFERIU.titulo}</h3>${htmlOpcoes(Q_CONFERIU.id, Q_CONFERIU.opts, aberto)}</div>
         <div class="p-card glass"><div class="eyebrow">Pergunta 3</div><h3>${Q_CONF_ANTES.titulo}</h3>${htmlEscala(Q_CONF_ANTES.id, aberto)}</div>`;
     case "medico":
-      h = `<div class="p-card glass"><div class="eyebrow">Consultório</div><h3>${esc(Q_MEDICO1.titulo)}</h3>${htmlOpcoes(Q_MEDICO1.id, Q_MEDICO1.opts, aberto)}</div>
-        <div class="p-card glass"><h3>${esc(Q_MEDICO2.titulo)}</h3>${htmlOpcoes(Q_MEDICO2.id, Q_MEDICO2.opts, aberto)}</div>`;
+      h = `<div class="p-card glass"><div class="eyebrow">Consultório</div><h3>${esc(Q_MEDICO1.titulo)}</h3>${htmlOpcoes(Q_MEDICO1.id, Q_MEDICO1.opts, aberto)}</div>`;
       if (E.sub === "licao") h = `<div class="p-card glass"><div class="eyebrow">A lição</div><h2>O bom médico não atende pedido. Ele investiga.</h2><p class="mut" style="margin-top:8px">Use a IA de texto como uma consulta: deixe ela perguntar antes de responder. O critério final é seu.</p></div>` + h;
       return h;
     case "quiz": {
@@ -3040,18 +3199,16 @@ function plateiaInterativo(it) {
       return h + `</div>`;
     }
     case "times": {
-      if (E.cartas && time) {
-        const n = PL.eu && PL.eu.numero;
-        return `<div class="time-card ${time}"><div class="eyebrow">${n ? "Sua carta, a " + n + ", virou" : "A sorte escolheu"}</div><h2>${time === "laranja" ? "Time Laranja" : "Time Verde"}</h2>
+      const minha = PL.eu && PL.eu.carta;
+      const virou = minha && (E.todasViradas || (E.viradas || []).includes(minha));
+      if (time && E.cartas && (virou || !minha)) {
+        return `<div class="time-card ${time}"><div class="eyebrow">${minha ? "Sua carta, a " + minha + ", virou" : "A sorte escolheu"}</div><h2>${nomeTime(time)}</h2>
           <p>${time === "laranja" ? "Hoje você faz pedidos. Direto, sem rodeio. Vamos ver no que dá." : "Hoje você conversa com a IA antes de pedir. Os 4 Cs estão do seu lado."}</p></div>`;
       }
-      const N = numCartas(); const meu = PL.eu && PL.eu.numero;
-      const donos = {}; P.forEach(p => { if (p.numero) donos[p.numero] = p.id; });
-      let grid = "";
-      for (let k = 1; k <= N; k++) { const dono = donos[k]; const mine = meu === k; const ocup = dono && dono !== PL.pid;
-        grid += `<button class="opt carta-p ${mine ? "sel" : ""}" data-act="carta" data-n="${k}" ${ocup || E.cartas ? "disabled" : ""}>${k}</button>`; }
-      return `<div class="p-card glass"><div class="eyebrow">Jogo das cartas</div><h2>Escolha um número.</h2><p class="mut">Cada número esconde uma cor: laranja ou verde. É sorte, não talento.</p>
-        <div class="cartas-p">${grid}</div>${meu ? `<p class="ok">Você escolheu a carta ${meu}. Agora é esperar a virada.</p>` : ""}</div>`;
+      if (minha) return `<div class="p-card glass" style="text-align:center"><div class="eyebrow">Jogo das cartas</div><p class="mut">Sua carta é a</p>
+        <div style="font-family:var(--mono);font-size:84px;font-weight:500;line-height:1.1;margin:6px 0">${minha}</div>
+        <p class="mut">Ela esconde uma cor: laranja ou verde. Se alguém chamar o seu número, ela vira no telão.</p></div>`;
+      return `<div class="p-card glass"><div class="eyebrow">Jogo das cartas</div><h2>Cada pessoa vai virar uma carta.</h2><p class="mut">Já já o ${esc(CONFIG.apresentador)} distribui as cartas e o seu número aparece aqui. É sorte, não talento.</p></div>`;
     }
     case "duelos":
       return plateiaDuelos(time, aberto);
@@ -3068,7 +3225,6 @@ function plateiaInterativo(it) {
         ${PL.enviados[k] ? `<p class="ok">Enviado. Pode mandar outra.</p>` : ""}${campo(k, "Ex.: na voz de alguém que não autorizou", true)}
         <button class="btn" data-act="responder" data-q="etica">Enviar</button></div>`;
     }
-    case "revanche": return plateiaRevanche(time);
     case "compromisso":
     case "final": {
       const k = "resp_compromisso"; const minha = LS.get("ws-ancora-" + CONFIG.sessao);
@@ -3082,50 +3238,40 @@ function plateiaInterativo(it) {
   return "";
 }
 
+function htmlEstrutura(d, comBlank = true) {
+  return `<div class="estr">${(d.estrutura || []).map(([k, fixo, q]) => `<div class="er"><b>${esc(k)}</b><span>${fixo ? esc(fixo) + " " : ""}${comBlank ? `<i>${esc(q)}</i>` : ""}</span></div>`).join("")}</div>`;
+}
 function plateiaDuelos(time, aberto) {
-  if (E.sub === "escolha" || !E.duelo) {
-    const rest = restantes();
-    return `<div class="p-card glass"><div class="eyebrow">Rodada ${E.rodada || 1} · Você decide</div><h2>Qual duelo vem agora?</h2>
-      ${htmlOpcoes("esc_" + (E.rodada || 1), rest.map(id => ({ v: id, l: DUELOS[id].nome + " · " + DUELOS[id].ferramenta })), aberto)}</div>`;
-  }
-  const d = DUELOS[E.duelo]; const sub = E.sub || "briefing";
-  let h = `<div class="p-card glass"><div class="eyebrow">Duelo · ${esc(d.nome)}</div><h2>${esc(d.briefing)}</h2><p class="mut">Ferramenta: ${esc(d.ferramenta)}</p></div>`;
+  const id = E.duelo || ORDEM_DUELOS[0]; const d = DUELOS[id]; const sub = E.sub || "briefing";
+  const n = ORDEM_DUELOS.indexOf(id) + 1;
+  let h = `<div class="p-card glass"><div class="eyebrow">Duelo ${n} de 3 · ${esc(d.nome)}</div><h2>${esc(d.briefing)}</h2><p class="mut">Ferramenta: ${esc(d.ferramenta)}</p></div>`;
   if (sub === "briefing" || sub === "producao") {
     if (sub === "producao" && E.timerFim) h += `<div class="timer-p" id="timer-p">${fmtTempo(E.timerFim - Date.now())}</div>`;
-    if (time === "laranja") h += `<div class="time-card laranja"><div class="eyebrow">Missão do Time Laranja</div><h2>Use exatamente este pedido</h2>
-        <div class="prompt-box">“${esc(d.atalho)}”</div><p>Não acrescente nada. Use a primeira resposta que vier.</p></div>`;
-    else if (time === "verde") h += `<div class="time-card verde"><div class="eyebrow">Missão do Time Verde</div><h2>Converse antes de pedir</h2>
-        <p>Use o roteiro abaixo como ponto de partida e revise o resultado antes de mandar.</p></div>${cartao4Cs(d)}`;
-    else h += `<div class="p-card glass"><p class="mut">Você ainda não tem time. Fale com o apresentador.</p></div>`;
-    if (sub === "producao" && d.tipo === "texto" && time) {
-      const k = "env_" + E.duelo;
-      h += `<div class="p-card glass"><h3>Cole aqui o seu resultado</h3>${PL.enviados[k] ? `<p class="ok">Enviado. Pode reenviar se melhorar.</p>` : ""}${campo(k, "Cole o prompt que você chegou", true)}
-        <button class="btn" data-act="enviar" data-duelo="${E.duelo}">Enviar resultado</button></div>`;
+    if (time === "laranja") h += `<div class="time-card laranja"><div class="eyebrow">Missão do Time Laranja</div><h2>O seu prompt já está pronto</h2>
+        <div class="prompt-box">“${esc(textoAtalho(id))}”</div><p>É exatamente esse que vai para a IA. Sem acrescentar nada.</p></div>`;
+    else if (time === "verde") {
+      const ref = d.estrutura ? d : DUELOS[d.usaPromptDe];
+      h += `<div class="time-card verde"><div class="eyebrow">Missão do Time Verde</div><h2>${d.estrutura ? "Ajude a responder as perguntas" : "O prompt de vocês nasceu da conversa"}</h2>
+        <p>${d.estrutura ? "Cada linha é uma pergunta que a IA precisa que alguém responda. Mande a sua sugestão: o " + esc(CONFIG.apresentador) + " preenche ao vivo na Creator Lab." : "O prompt final do duelo anterior vai inteiro para o " + esc(d.ferramenta) + "."}</p>
+        ${d.estrutura ? htmlEstrutura(ref) : ""}</div>`;
+      if (d.estrutura) {
+        const k = "env_" + id;
+        h += `<div class="p-card glass"><h3>Sua sugestão</h3>${PL.enviados[k] ? `<p class="ok">Recebido. Pode mandar outra.</p>` : ""}${campo(k, "Ex.: luz de fim de tarde vindo de trás da flor", true)}
+          <button class="btn" data-act="enviar" data-duelo="${id}">Enviar sugestão</button></div>`;
+      }
+      h += cartao4Cs(d);
     }
-    if (sub === "producao" && d.tipo === "imagem") h += `<div class="p-card glass"><p class="mut">Gere no seu app. Quando o apresentador pedir, mostre o resultado para ele.</p></div>`;
+    else h += `<div class="p-card glass"><p class="mut">Você ainda não tem time. Acompanhe pelo telão.</p></div>`;
   } else if (sub === "votacao") {
-    h += `<div class="p-card glass"><div class="eyebrow">Votação às cegas</div><h2>Qual resultado você usaria?</h2>
-      ${htmlOpcoes("duelo_" + E.duelo, [{ v: "A", l: "Resultado A" }, { v: "B", l: "Resultado B" }], aberto)}</div>`;
+    h += `<div class="p-card glass"><div class="eyebrow">Votação às cegas</div><h2>Qual resultado você usaria?</h2><p class="mut">Olhe para o telão e vote.</p>
+      ${htmlOpcoes("duelo_" + id, [{ v: "A", l: "Resultado A" }, { v: "B", l: "Resultado B" }], aberto)}</div>`;
   } else if (sub === "revelacao") {
     const g = E.vencedor;
     h += `<div class="p-card glass"><div class="eyebrow">Revelação</div>
-      <p><b class="lar">Laranja</b> fez o pedido seco: o atalho.<br><b class="ver">Verde</b> conversou antes, com os 4 Cs: a ferramenta.</p>
+      <p><b class="lar">Laranja</b> usou o prompt simples: o atalho.<br><b class="ver">Verde</b> respondeu às perguntas antes: a ferramenta.</p>
       ${g ? `<h3 style="margin-top:12px">${g === "ferramenta" ? "A ferramenta venceu." : g === "atalho" ? "Dessa vez o atalho venceu. Por quê?" : "Deu empate."}</h3>` : ""}
       <p class="ok">${esc(d.licao)}</p></div>`;
   }
-  return h;
-}
-
-function plateiaRevanche(time) {
-  const ultimo = (E.feitos || [])[(E.feitos || []).length - 1] || "prompt";
-  const d = DUELOS[ultimo];
-  let h = `<div class="p-card glass"><div class="eyebrow">Revanche</div><h2>${esc(d.briefing)}</h2></div>`;
-  if (E.timerFim) h += `<div class="timer-p" id="timer-p">${fmtTempo(E.timerFim - Date.now())}</div>`;
-  if (time === "laranja") h += `<div class="time-card laranja"><div class="eyebrow">Time Laranja</div><h2>Agora é a sua vez com os 4 Cs</h2><p>Mesma tarefa, outro método. Compare com o que você fez antes.</p></div>${cartao4Cs(d)}`;
-  else h += `<div class="time-card verde"><div class="eyebrow">Time Verde</div><h2>Vire mentor</h2><p>Ajude quem está do seu lado a conversar com a IA usando os 4 Cs.</p></div>`;
-  const k = "env_revanche";
-  h += `<div class="p-card glass"><h3>Mande o resultado da revanche</h3>${PL.enviados[k] ? `<p class="ok">Enviado.</p>` : ""}${campo(k, "Cole aqui o novo resultado", true)}
-    <button class="btn" data-act="enviar" data-duelo="revanche">Enviar</button></div>`;
   return h;
 }
 
@@ -3165,7 +3311,7 @@ async function cliquePlateia(ev) {
     b.disabled = true;
     const pid = uid();
     let time = null;
-    if (E.timesSorteados) time = Math.random() < 0.5 ? "laranja" : "verde";
+    if (E.timesSorteados) { const l = P.filter(p => p.time === "laranja").length, v = P.filter(p => p.time === "verde").length; time = l === v ? (Math.random() < 0.5 ? "laranja" : "verde") : l < v ? "laranja" : "verde"; }
     try {
       await store.set("participantes", pid, { nome: nome.slice(0, 40), funcao: funcao.slice(0, 50), t: Date.now(), ...(time ? { time } : {}) });
       PL.pid = pid; LS.set("ws-pid-" + CONFIG.sessao, pid); ouvirEu(pid);
@@ -3173,11 +3319,11 @@ async function cliquePlateia(ev) {
     return;
   }
   if (act === "enviar") {
-    const duelo = b.dataset.duelo, k = duelo === "revanche" ? "env_revanche" : "env_" + duelo;
+    const duelo = b.dataset.duelo, k = "env_" + duelo;
     const texto = (PL.drafts[k] || "").trim(); if (!texto) return;
     b.disabled = true;
-    await store.set("envios", duelo + "__" + PL.pid, { duelo, pid: PL.pid, nome: PL.eu ? PL.eu.nome : "", time: PL.eu ? PL.eu.time : null, texto: texto.slice(0, 4000), t: Date.now() });
-    PL.enviados[k] = true; salvarLocal(); renderPlateia(); return;
+    await store.add("envios", { duelo, pid: PL.pid, nome: PL.eu ? PL.eu.nome : "", time: PL.eu ? PL.eu.time : null, texto: texto.slice(0, 600), t: Date.now() });
+    PL.enviados[k] = true; PL.drafts[k] = ""; salvarLocal(); renderPlateia(); return;
   }
   if (act === "responder") {
     const q = b.dataset.q, k = "resp_" + q;
@@ -3186,12 +3332,6 @@ async function cliquePlateia(ev) {
     await store.add("respostas", { q, pid: PL.pid, nome: PL.eu ? PL.eu.nome : "", texto: texto.slice(0, 280), t: Date.now() });
     if (q === "ancora") LS.set("ws-ancora-" + CONFIG.sessao, texto.slice(0, 280));
     PL.enviados[k] = true; PL.drafts[k] = ""; salvarLocal(); renderPlateia(); return;
-  }
-  if (act === "carta") {
-    const n = +b.dataset.n; if (E.cartas) return;
-    if (P.some(p => p.numero === n && p.id !== PL.pid)) return;
-    try { await store.set("participantes", PL.pid, { numero: n }); } catch (e) { avisoErro("Não foi possível escolher a carta."); }
-    return;
   }
   if (act === "abrir-sheet") { PL.sheet = true; PL.flash = ""; renderSheet(); return; }
   if (act === "fechar-sheet") { PL.sheet = false; renderSheet(); return; }
@@ -3211,7 +3351,7 @@ async function cliquePlateia(ev) {
 /* ============================================================
    TELÃO
    ============================================================ */
-const TL = { hist: [], drawer: null, modal: false, imgs: {}, videos: {}, qrGrande: false, ctrlFixo: false, confirmaLimpar: false, cartasAnimadas: false };
+const TL = { hist: [], drawer: null, modal: false, videos: {}, videosLocal: {}, camadas: [], cartasVistas: new Set(), alvo: null, editor: null, qrGrande: false, ctrlFixo: false, confirmaLimpar: false };
 
 function ouvirTudo(render) {
   store.listen("estado", e => { E = e || {}; render(); });
@@ -3220,10 +3360,12 @@ function ouvirTudo(render) {
   store.listen("perguntas", q => { Q = q; render(); });
   store.listen("respostas", r => { R = r; render(); });
   store.listen("envios", s => { S = s; render(); });
+  store.listen("midias", m => { M = m; render(); });
 }
 
 function iniciarTelao() {
   ouvirTudo(renderTelao);
+  ligarArrastarColar();
   document.addEventListener("click", cliqueComando);
   document.addEventListener("keydown", teclaTelao);
   setInterval(() => {
@@ -3255,41 +3397,58 @@ function renderTelao() {
   if (TL.modal) return;
   const app = document.getElementById("app");
   const it = itemAtual();
+  TL.camadas = [];
   const corpo = it.tipo === "slide" ? (SLIDES[it.id] ? SLIDES[it.id]() : "") : (INTER[it.id] ? INTER[it.id]() : "");
   const scrollDrawer = document.querySelector(".drawer") ? document.querySelector(".drawer").scrollTop : 0;
   const prog = ((passoAtual() + 1) / ROTEIRO.length) * 100;
   app.innerHTML = `<div id="telao">${topoTelao()}<div class="t-stage">${corpo}</div></div><div class="progress"><i style="width:${prog}%"></i></div>
     ${controles()}${drawerHTML()}${destaqueHTML()}${E.mostrarAncora ? ancoraOverlay() : ""}${TL.qrGrande ? qrOverlay() : ""}`;
   const dr = document.querySelector(".drawer"); if (dr) dr.scrollTop = scrollDrawer;
-  atualizarMidia();
+  sincronizarCamadas();
 }
 
-/* ---------- vídeo dos cases (camada fixa, para não reiniciar a cada voto) ---------- */
-function atualizarMidia() {
-  let layer = document.getElementById("media-layer");
-  if (!layer) { layer = document.createElement("div"); layer.id = "media-layer"; document.body.appendChild(layer); }
-  const slot = document.getElementById("video-slot");
-  if (slot) {
-    slot.ondragover = ev => { ev.preventDefault(); slot.classList.add("sobre"); };
-    slot.ondragleave = () => slot.classList.remove("sobre");
-    slot.ondrop = ev => { ev.preventDefault(); const f = ev.dataTransfer.files[0]; if (f) carregarVideo(f, slot.dataset.case); };
-  }
-  const key = slot ? slot.dataset.key : "";
-  if (!slot || key.endsWith(":vazio")) { layer.style.display = "none"; if (layer.dataset.key) { layer.innerHTML = ""; layer.dataset.key = ""; } return; }
-  if (layer.dataset.key !== key) {
-    const id = slot.dataset.case; const v = TL.videos[id];
-    layer.innerHTML = v ? `<video src="${v}" controls playsinline></video>` : `<iframe src="https://www.youtube.com/embed/${ytId(CONFIG.videos[id])}?rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
-    layer.dataset.key = key;
-  }
-  const r = slot.getBoundingClientRect();
-  Object.assign(layer.style, { display: "block", top: r.top + "px", left: r.left + "px", width: r.width + "px", height: r.height + "px" });
+/* ---------- camadas de vídeo (fixas por cima da página, para não reiniciar a cada voto) ---------- */
+function camada(key, html, alvo, classe) {
+  TL.camadas.push({ key, html, alvo });
+  return `<div class="${classe || ""} layer-ph" data-lk="${esc(key)}" ${alvo ? `data-alvo="${esc(alvo)}"` : ""}></div>`;
+}
+function sincronizarCamadas() {
+  let root = document.getElementById("media-layer");
+  if (!root) { root = document.createElement("div"); root.id = "media-layer"; document.body.appendChild(root); }
+  const vivas = new Set();
+  TL.camadas.forEach(c => {
+    const ph = document.querySelector(`.layer-ph[data-lk="${CSS.escape(c.key)}"]`); if (!ph) return;
+    vivas.add(c.key);
+    let el = [...root.children].find(x => x.dataset.key === c.key);
+    if (!el) { el = document.createElement("div"); el.className = "camada"; el.dataset.key = c.key; if (c.alvo) el.dataset.alvo = c.alvo; el.innerHTML = c.html; root.appendChild(el); }
+    const r = ph.getBoundingClientRect();
+    Object.assign(el.style, { display: r.width ? "block" : "none", top: r.top + "px", left: r.left + "px", width: r.width + "px", height: r.height + "px" });
+  });
+  [...root.children].forEach(el => { if (!vivas.has(el.dataset.key)) el.remove(); });
+  root.style.display = TL.modal || E.destaque || E.mostrarAncora || TL.qrGrande ? "none" : "block";
 }
 function carregarVideo(f, id) {
   if (!f || !f.type.startsWith("video/")) return;
   if (TL.videos[id]) { try { URL.revokeObjectURL(TL.videos[id]); } catch (e) {} }
   TL.videos[id] = URL.createObjectURL(f); renderTelao();
 }
-window.addEventListener("resize", () => { if (VISAO() === "telao") atualizarMidia(); });
+window.addEventListener("resize", () => { if (VISAO() === "telao") sincronizarCamadas(); });
+
+/* ---------- gráficos dos estudos (barras horizontais, rótulo direto em cada barra) ---------- */
+const COR_GF = { ver: "var(--neon)", lar: "var(--lar)", mint: "var(--mint)", cinza: "#52525b" };
+function fmtNum(v) { return (Math.round(v * 10) / 10).toString().replace(".", ","); }
+function grafico(cfg, mini) {
+  const vals = cfg.linhas.filter(r => !r.grupo).map(r => r.v);
+  const min = cfg.min != null ? cfg.min : Math.min(0, ...vals), max = cfg.max != null ? cfg.max : Math.max(...vals);
+  const span = max - min, zero = (0 - min) / span * 100;
+  const linhas = cfg.linhas.map(r => {
+    if (r.grupo) return `<div class="gf-g">${esc(r.grupo)}</div>`;
+    const txt = r.fmt || ((cfg.sinal && r.v > 0 ? "+" : r.v < 0 ? "−" : "") + fmtNum(Math.abs(r.v)) + (cfg.sufixo != null ? cfg.sufixo : "%"));
+    const w = Math.abs(r.v) / span * 100, left = r.v < 0 ? zero - w : zero;
+    return `<div class="gf-r" title="${esc(r.l)}: ${esc(txt)}"><div class="gf-l">${esc(r.l)}</div><div class="gf-t">${min < 0 ? `<i class="gf-z" style="left:${zero}%"></i>` : ""}<div class="gf-b ${r.v < 0 ? "neg" : ""}" style="left:${left}%;width:${w}%;background:${COR_GF[r.cor] || COR_GF.ver}"></div></div><div class="gf-v">${esc(txt)}</div></div>`;
+  }).join("");
+  return `<div class="gf ${mini ? "gf-mini" : ""}">${linhas}${cfg.eixo ? `<div class="gf-eixo">${esc(cfg.eixo)}</div>` : ""}</div>`;
+}
 
 /* ---------- slides de história ---------- */
 const atoSlide = (n, titulo, sub) => `<div class="ato-num">ATO ${String(n).padStart(2, "0")}</div><div class="ato-big">${titulo}</div><div class="t-sub" style="font-size:2vw;margin-top:2vw">${sub}</div>`;
@@ -3301,25 +3460,22 @@ const SLIDES = {
   balcao: () => `<div class="t-eyebrow">O jeito mais comum de usar IA</div>
     <div class="t-h1">A gente usa IA como quem faz <span class="em">pedido no balcão.</span></div>
     <div class="t-sub">Pede, recebe, leva. E estranha quando vem igual ao de todo mundo.</div>`,
-  media: () => `<div class="t-eyebrow">O que a pesquisa diz</div>
-    <div class="t-h2">Pedido genérico gera resposta média.<br><span class="mut">E a média é de todo mundo.</span></div>
-    <div class="t-row" style="margin-top:3vw;max-width:70vw">
-      <div class="t-col"><div class="stat em">Melhor</div><div class="stat-l">Com ideias da IA, cada conto foi avaliado como mais criativo e mais bem escrito.</div></div>
-      <div class="t-col"><div class="stat lar">Igual</div><div class="stat-l">Mas os contos com IA ficaram mais parecidos entre si.</div></div></div>
-    <div class="t-src">Doshi e Hauser · Science Advances, 2024 · 293 contos, cerca de 600 avaliadores</div>`,
+  media: () => `<div class="t-row" style="align-items:center;gap:4vw"><div class="t-col" style="flex:.9"><div class="t-eyebrow">O que a pesquisa diz</div>
+    <div class="t-h2">Pedido genérico gera resposta média.</div><div class="t-sub">Com ideias da IA, cada conto ficou melhor. Mas os contos ficaram mais parecidos entre si.</div></div>
+    <div class="t-col t-card glass">${grafico(ESTUDOS.doshi)}</div></div>
+    <div class="t-src">${esc(ESTUDOS.doshi.fonte)}</div>`,
   a2: () => atoSlide(2, "A consulta.", "O que um bom médico sabe e a gente esquece quando abre a IA."),
-  sentir: () => `<div class="t-eyebrow">Sentir não é medir</div>
-    <div class="t-row" style="max-width:76vw">
-      <div class="t-col"><div class="stat">+20%</div><div class="stat-l">O quanto programadores experientes <b>achavam</b> que a IA tinha acelerado o trabalho.</div></div>
-      <div class="t-col"><div class="stat lar">−19%</div><div class="stat-l">O que foi <b>medido</b>: com IA, as tarefas levaram 19% mais tempo.</div></div></div>
-    <div class="t-h3" style="margin-top:3vw">Sensação de produtividade não é produtividade.</div>
-    <div class="t-src">METR · 16 programadores experientes, 246 tarefas reais · ferramentas do início de 2025</div>`,
+  sentir: () => `<div class="t-row" style="align-items:center;gap:4vw"><div class="t-col" style="flex:.8"><div class="t-eyebrow">Sentir não é medir</div>
+    <div class="t-h2">Todo mundo previu ganho.</div><div class="t-h2 lar" style="margin-top:.4vw">O medido foi perda.</div>
+    <div class="t-sub">Programadores experientes acharam que a IA os deixou 20% mais rápidos. Com IA, as tarefas levaram 19% mais tempo.</div></div>
+    <div class="t-col t-card glass">${grafico(ESTUDOS.metr)}</div></div>
+    <div class="t-src">${esc(ESTUDOS.metr.fonte)}</div>`,
   reputacao: () => `<div class="t-eyebrow">O custo que ninguém vê</div>
-    <div class="t-row" style="align-items:flex-end;max-width:80vw">
-      <div><div class="stat lar" style="font-size:12vw">40%</div></div>
-      <div class="t-col" style="padding-bottom:1.6vw"><div class="t-h3">receberam no último mês trabalho feito com IA que parecia pronto, mas era vazio.</div>
-      <div class="t-sub">Metade passou a ver quem enviou como menos capaz e menos confiável.</div></div></div>
-    <div class="t-src">BetterUp Labs e Stanford Social Media Lab · Harvard Business Review, 2025 · 1.150 profissionais nos EUA</div>`,
+    <div class="t-row" style="align-items:center;gap:4vw">
+      <div class="t-col" style="flex:.75"><div class="stat lar" style="font-size:11vw">40%</div>
+      <div class="t-h3" style="margin-top:1vw">receberam no último mês trabalho feito com IA que parecia pronto, mas era vazio.</div></div>
+      <div class="t-col t-card glass">${grafico(ESTUDOS.workslop)}</div></div>
+    <div class="t-src">${esc(ESTUDOS.workslop.fonte)}</div>`,
   a3: () => atoSlide(3, "A virada.", "Pedir é diferente de perguntar."),
   pedir: () => `<div class="t-eyebrow">A mesma tarefa, duas posturas</div><div class="t-h2">Pedir é diferente de perguntar.</div>
     <div class="duo">
@@ -3339,13 +3495,13 @@ const SLIDES = {
     <div class="t-h1" style="font-size:4.4vw">“Antes de responder, me faça as perguntas que você precisa para <span class="em">fazer isso bem.</span>”</div>
     <div class="t-sub">A frase mais útil desta aula. Ela transforma um pedido numa consulta.</div>`,
   fronteira: () => `<div class="t-eyebrow">O estudo central</div><div class="t-h2">A mesma ferramenta ajuda ou atrapalha.</div>
-    <div class="t-row" style="margin-top:2.6vw;max-width:80vw">
-      <div class="t-col"><div class="stat em">+40%</div><div class="stat-l">de qualidade nas tarefas que a IA domina.</div></div>
-      <div class="t-col"><div class="stat lar">−19 pts</div><div class="stat-l">de acerto nas tarefas fora do alcance dela.</div></div></div>
-    <div class="t-sub">E, vistas de fora, as duas tarefas pareciam igualmente difíceis. Por isso existe o Critério.</div>
+    <div class="t-row" style="margin-top:2.2vw;gap:2.2vw">
+      <div class="t-col t-card glass"><h3><span class="em">Dentro</span> da fronteira · tarefas que a IA domina</h3>${grafico(ESTUDOS.dentro)}</div>
+      <div class="t-col t-card glass"><h3><span class="lar">Fora</span> da fronteira · uma tarefa fora do alcance dela</h3>${grafico(ESTUDOS.fora)}</div></div>
+    <div class="t-sub" style="max-width:none">Vistas de fora, as duas tarefas pareciam igualmente difíceis. Quem mais confiou, mais errou. Por isso existe o Critério.</div>
     <div class="t-src">Dell'Acqua e outros · Harvard, Wharton, MIT e BCG · 758 consultores · Organization Science, 2026</div>`,
-  a4: () => `${atoSlide(4, "A prova.", "Mesmo talento, mesmas ferramentas, mesmo tempo. Só muda o método.")}
-    <div class="t-row" style="margin-top:3vw;gap:1.4vw">${["Escolha um número no celular. Cada número esconde uma cor.", "Laranja faz pedidos. Verde conversa com a IA antes de pedir.", "Os resultados vão para o telão, e a sala vota às cegas."].map((t, i) => `<div class="t-card glass t-col"><div class="ato-num" style="margin-bottom:.8vw">0${i + 1}</div><div class="stat-l" style="margin:0">${t}</div></div>`).join("")}</div>`,
+  a4: () => `${atoSlide(4, "A prova.", "Mesmo talento, mesmas ferramentas, mesmo tempo. Só muda o prompt.")}
+    <div class="t-row" style="margin-top:3vw;gap:1.4vw">${["Cada pessoa vira uma carta. Voluntários escolhem os números.", "Laranja usa o prompt simples. Verde responde às perguntas antes.", "Prompt, imagem e vídeo de um girassol. A sala vota às cegas."].map((t, i) => `<div class="t-card glass t-col"><div class="ato-num" style="margin-bottom:.8vw">0${i + 1}</div><div class="stat-l" style="margin:0">${t}</div></div>`).join("")}</div>`,
   placar: () => {
     const pl = E.placar || {}; const feitos = ORDEM_DUELOS.filter(id => pl[id]);
     const f = feitos.filter(id => pl[id] === "ferramenta").length, a = feitos.filter(id => pl[id] === "atalho").length;
@@ -3354,16 +3510,14 @@ const SLIDES = {
       <div class="placar">${ORDEM_DUELOS.map(id => { const v = pl[id]; return `<div class="r glass"><span>${esc(DUELOS[id].nome)} · <span class="mut">${esc(DUELOS[id].ferramenta)}</span></span>${v ? `<b style="background:${v === "empate" ? "var(--ama)" : corLado(v)}">${v === "empate" ? "Empate" : nomeLado(v)}</b>` : `<span class="mut mono" style="font-size:1vw">não jogado</span>`}</div>`; }).join("")}</div>
       <div class="t-h3" style="margin-top:2.4vw">Mesmo talento, mesma ferramenta. Só mudou a pergunta.</div>`;
   },
-  montagem: () => `<div class="t-eyebrow">Bônus · Montagem de Vídeo</div>
-    <div class="t-h1">Do duelo à <span class="em">peça pronta.</span></div>
-    <div class="t-sub">As cenas geradas viram vídeo: corte, trilha e lettering no mesmo lugar, direto da Creator Lab. Já dá para testar.</div>
-    <div class="t-src">${esc(CONFIG.linkCreatorLab)}</div>`,
   a5: () => atoSlide(5, "Os limites.", "Saber quando não usar também é critério."),
-  criterio: () => `<div class="t-eyebrow">Critério vem de repertório</div>
-    <div class="duo">
-      <div class="t-card glass"><div class="tag lar">Quem confia mais na IA</div><div class="q">pensa menos sobre a resposta. Quem confia em si revisa mais.</div><div class="t-src">Microsoft Research e Carnegie Mellon · 319 profissionais · 2025</div></div>
-      <div class="t-card glass" style="border-color:rgba(52,211,153,.45)"><div class="tag em">Quem pensa primeiro</div><div class="q">e usa a IA depois lembra mais do que fez e se sente autor.</div><div class="t-src">MIT Media Lab · 54 participantes · estudo preliminar, 2025</div></div></div>
-    <div class="t-h3" style="margin-top:2.6vw">Pense primeiro. Use a IA depois.</div>`,
+  criterio: () => `<div class="t-eyebrow">Critério vem de repertório</div><div class="t-h2">Pense primeiro. Use a IA depois.</div>
+    <div class="t-row" style="margin-top:2.2vw;gap:2.2vw">
+      <div class="t-col t-card glass" style="flex:1.3"><h3>Logo depois de escrever um texto, quantos não conseguiam citar uma frase dele?</h3>${grafico(ESTUDOS.mit)}
+        <div class="t-src" style="margin-top:1.2vw">MIT Media Lab · 54 participantes · estudo preliminar, 2025</div></div>
+      <div class="t-col t-card glass"><div class="stat lar" style="font-size:6vw">1 em 4</div>
+        <div class="stat-l" style="max-width:none">disse que confiar na IA desestimulou a reflexão crítica. Quanto mais confiança na IA, menos pensamento crítico. Quanto mais confiança em si, mais revisão.</div>
+        <div class="t-src" style="margin-top:1.2vw">Microsoft Research e Carnegie Mellon · 83 de 319 profissionais · CHI 2025</div></div></div>`,
   a6: () => atoSlide(6, "O compromisso.", "O que muda a partir de amanhã."),
   volta: () => `<div class="t-eyebrow">Lembra do começo?</div><div class="t-h2">${esc(CONFIG.perguntaAncora)}</div>${mural("ancora")}`,
   fim: () => `<div class="t-eyebrow">IA como ferramenta, não como atalho</div>
@@ -3405,7 +3559,6 @@ const INTER = {
     return `<div class="t-eyebrow">Uma consulta médica</div><div class="t-h2" style="margin-bottom:2vw">“Doutor, me passa um antibiótico.”</div>
       <div class="t-row">
         <div class="t-col t-card glass"><h3>O que um bom médico faz?</h3>${barras(Q_MEDICO1.id, Q_MEDICO1.opts, ["var(--lar)", "var(--neon)", "var(--ama)"])}</div>
-        <div class="t-col t-card glass"><h3>E você, com a IA?</h3>${barras(Q_MEDICO2.id, Q_MEDICO2.opts, ["var(--lar)", "var(--neon)", "var(--ama)"])}</div>
         ${lic ? `<div class="t-col t-card glass" style="border-color:rgba(52,211,153,.5)"><h3 style="font-size:2vw;letter-spacing:-.02em">O bom médico não atende pedido. <span class="em">Ele investiga.</span></h3>
           <p style="font-size:1.3vw;line-height:1.55;color:#c9c9cf">Você chega achando que sabe o que tem. Ele pergunta, examina e só então receita.<br><br>Use a IA de texto como uma consulta: deixe ela perguntar antes de responder. <b style="color:#fff">O critério final é seu.</b></p></div>` : ""}</div>`;
   },
@@ -3422,51 +3575,48 @@ const INTER = {
       ${rev ? `<div class="t-h3" style="margin-top:1.4vw;font-size:1.9vw">${esc(qz.revela)}</div>` : ""}`;
   },
   times: () => {
-    const virou = !!E.cartas; const N = virou ? Math.max(numCartas(), Object.keys(E.cartas).length) : numCartas();
-    const donos = {}; P.forEach(p => { if (p.numero) donos[p.numero] = p; });
-    const escolheram = Object.keys(donos).length;
-    const anim = virou && !TL.cartasAnimadas;
-    let cartas = "";
-    for (let k = 1; k <= N; k++) { const d = donos[k]; const cor = virou ? E.cartas[k] : null;
-      cartas += `<div class="carta ${cor ? "cor-" + cor : ""} ${d && !cor ? "tomada" : ""} ${anim && cor ? "vira" : ""}" style="${anim ? `animation-delay:${(k % 12) * 60}ms` : ""}"><b>${k}</b><span>${d ? esc(d.nome) : ""}</span></div>`; }
-    if (anim) setTimeout(() => { TL.cartasAnimadas = true; }, 1500);
+    const dist = !!E.cartas;
+    const N = dist ? Object.keys(E.cartas).length : P.length;
+    const viradas = new Set(E.todasViradas ? Object.keys(E.cartas || {}).map(Number) : (E.viradas || []));
+    const porId = {}; P.forEach(p => porId[p.id] = p);
+    let cartas = "", novas = 0;
+    for (let k = 1; k <= N; k++) {
+      const vir = dist && viradas.has(k); const cor = vir ? E.cartas[k] : null; const dono = dist ? porId[(E.cartasDono || {})[k]] : null;
+      const nova = vir && !TL.cartasVistas.has(k); if (nova) { TL.cartasVistas.add(k); novas++; }
+      cartas += `<div class="carta ${cor ? "cor-" + cor : ""} ${dist && !vir ? "clicavel" : ""} ${nova ? "vira" : ""}" ${dist && !vir ? `data-act="virar-carta" data-n="${k}"` : ""} style="${nova ? `animation-delay:${Math.min(novas, 30) * 45}ms` : ""}"><b>${k}</b><span>${vir && dono ? esc(dono.nome) : ""}</span></div>`;
+    }
+    if (!dist) TL.cartasVistas.clear();
     const lar = P.filter(p => p.time === "laranja").length, ver = P.filter(p => p.time === "verde").length;
-    return `<div class="t-row" style="align-items:flex-end;margin-bottom:1.8vw"><div class="t-col"><div class="t-eyebrow">Jogo das cartas · ${virou ? "cartas viradas" : escolheram + " de " + P.length + " escolheram"}</div>
-      <div class="t-h2">${virou ? `<span class="lar">Laranja</span> pede. <span class="em">Verde</span> conversa.` : "Escolha um número no celular."}</div>
-      <div class="t-sub" style="margin-top:1vw">${virou ? `Time Laranja: ${lar} · Time Verde: ${ver}. Foi sorte, não talento.` : "Cada número esconde uma cor. É sorte, não talento."}</div></div></div>
-      <div class="cartas" style="grid-template-columns:repeat(${Math.min(14, Math.max(5, Math.ceil(N / (N > 42 ? 4 : 3))))},1fr)">${cartas}</div>`;
+    const nv = viradas.size;
+    const titulo = !dist ? "Cada pessoa vai virar uma carta." : E.todasViradas ? `<span class="lar">Laranja</span> pede. <span class="em">Verde</span> conversa.` : "Escolha um número.";
+    const sub = !dist ? `${P.length} conectados, ${P.length} cartas. Quando todo mundo tiver entrado, as cartas são distribuídas.`
+      : E.todasViradas ? `Time Laranja: ${lar} · Time Verde: ${ver}. Foi sorte, não talento.` : "Cada carta esconde uma pessoa e uma cor. Olhe o seu número no celular.";
+    const cols = Math.min(16, Math.max(5, Math.ceil(Math.sqrt(Math.max(N, 1) * 2.2))));
+    return `<div class="t-row" style="align-items:flex-end;margin-bottom:1.6vw"><div class="t-col"><div class="t-eyebrow">Jogo das cartas · ${!dist ? "aguardando" : E.todasViradas ? "todas viradas" : nv + " de " + N + " viradas"}</div>
+      <div class="t-h2">${titulo}</div><div class="t-sub" style="margin-top:1vw">${sub}</div></div></div>
+      ${N ? `<div class="cartas" style="grid-template-columns:repeat(${cols},1fr)">${cartas}</div>` : `<div class="t-sub">Ninguém conectado ainda.</div>`}`;
   },
   duelos: () => telaoDuelos(),
   cases: () => {
     const i = E.caseIdx || 0; const c = CASES[i]; const revel = E.sub === "revelacao";
-    if (!revel) {
-      const temLocal = !!TL.videos[c.id]; const yt = ytId(CONFIG.videos && CONFIG.videos[c.id]);
-      const key = c.id + (temLocal ? ":local" : yt ? ":yt" : ":vazio");
-      return `<div class="t-row" style="align-items:stretch;gap:2.4vw">
-        <div style="flex:1.75;min-width:0;display:flex;flex-direction:column;justify-content:center">
-          <div id="video-slot" data-key="${key}" data-case="${c.id}" class="video-slot glass">${temLocal || yt ? "" : `<div class="vazio-v"><div class="t-h3">Vídeo do case</div><div class="t-sub" style="font-size:1.2vw;margin-top:.8vw">Arraste o arquivo de vídeo para cá ou use “Carregar vídeo” na barra de baixo. Também dá para colar o link do YouTube no CONFIG.</div></div>`}</div></div>
-        <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center">
-          <div class="case-num">Case ${i + 1} de ${CASES.length}</div><div class="t-h2" style="font-size:2.8vw;margin-top:.6vw">${esc(c.nome)}</div><div class="t-src" style="margin-top:.8vw">${esc(c.ano)}</div>
-          <div class="t-sub" style="font-size:1.35vw;max-width:none">${esc(c.contexto)}</div>
-          <div class="t-card glass" style="margin-top:1.6vw;padding:1.5vw"><h3>Atalho ou ferramenta?</h3>${barras("case_" + c.id, OPTS_CASE, ["var(--lar)", "var(--neon)", "var(--ama)"])}</div></div></div>`;
-    }
+    const link = (CONFIG.videos && CONFIG.videos[c.id]) || c.link;
     const cores = { atalho: "var(--lar)", ferramenta: "var(--neon)", depende: "var(--ama)" };
     const nomes = { atalho: "Atalho percebido", ferramenta: "Ferramenta", depende: "Depende: debate ético" };
-    return `<div class="case-num">Case ${i + 1} de ${CASES.length} · assista e vote</div>
-      <div class="t-row" style="align-items:flex-start;margin-top:1.2vw">
-        <div class="t-col"><div class="t-h1" style="font-size:4vw">${esc(c.nome)}</div><div class="t-src" style="margin-top:1vw">${esc(c.ano)}</div>
-        ${revel ? `<div class="resp-certa" style="background:${cores[c.certo]}">${nomes[c.certo]}</div><div class="t-sub">${esc(c.revela)}</div><div class="t-sub" style="color:#fff;font-weight:500">${esc(c.licao)}</div>` : ""}</div>
-        <div class="t-col t-card glass" style="max-width:32vw"><h3>Atalho ou ferramenta?</h3>${barras("case_" + c.id, OPTS_CASE, ["var(--lar)", "var(--neon)", "var(--ama)"])}</div></div>`;
+    const temLocal = !!TL.videos[c.id]; const yt = ytId(link);
+    const fora = `<div class="fora-link"><div class="qr-mini qr-link">${qrSVG(link)}</div><div><a class="btn-yt" href="${esc(link)}" target="_blank" rel="noopener">Assistir no ${esc(c.plataforma || "site original")} ↗</a><div class="total" style="margin-top:.4vw">Não rodou aqui? Abra no ${esc(c.plataforma || "site")} ou aponte o celular para o QR.</div></div></div>`;
+    let midia;
+    if (temLocal) midia = camada("case:" + c.id + ":local", `<video src="${TL.videos[c.id]}" controls playsinline></video>`, null, "video-slot");
+    else if (yt) midia = camada("case:" + c.id + ":yt", `<iframe src="https://www.youtube.com/embed/${yt}?rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`, null, "video-slot");
+    else midia = `<div class="video-slot glass" data-case="${c.id}"><div class="vazio-v"><div class="qr-grande" style="padding:1vw"><div style="width:12vw;height:12vw">${qrSVG(link)}</div></div><a class="btn-yt" style="margin-top:1.4vw" href="${esc(link)}" target="_blank" rel="noopener">Abrir no ${esc(c.plataforma || "site original")} ↗</a></div></div>`;
+    return `<div class="t-row" style="align-items:stretch;gap:2.4vw">
+      <div style="flex:1.75;min-width:0;display:flex;flex-direction:column;justify-content:center">${midia}${fora}</div>
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center">
+        <div class="case-num">Case ${i + 1} de ${CASES.length}</div><div class="t-h2" style="font-size:2.8vw;margin-top:.6vw">${esc(c.nome)}</div><div class="t-src" style="margin-top:.8vw">${esc(c.ano)}</div>
+        ${revel ? `<div class="resp-certa" style="background:${cores[c.certo]}">${nomes[c.certo]}</div><div class="t-sub" style="font-size:1.3vw;max-width:none">${esc(c.revela)}</div><div class="t-sub" style="font-size:1.35vw;max-width:none;color:#fff;font-weight:500">${esc(c.licao)}</div>`
+          : `<div class="t-sub" style="font-size:1.35vw;max-width:none">${esc(c.contexto)}</div>`}
+        <div class="t-card glass" style="margin-top:1.4vw;padding:1.5vw"><h3>Atalho ou ferramenta?</h3>${barras("case_" + c.id, OPTS_CASE, ["var(--lar)", "var(--neon)", "var(--ama)"])}</div></div></div>`;
   },
   etica: () => `<div class="t-eyebrow">Responda no celular</div><div class="t-h2">Onde você não usaria IA?</div>${mural("etica")}`,
-  revanche: () => {
-    const env = S.filter(x => x.duelo === "revanche").sort((a, b) => b.t - a.t).slice(0, 8);
-    return `<div class="t-row" style="align-items:center"><div class="t-col"><div class="t-eyebrow">Revanche</div>
-      <div class="t-h1" style="font-size:4.2vw"><span class="lar">Time Laranja</span>, agora é com vocês.</div>
-      <div class="t-sub">O cartão dos 4 Cs acabou de chegar no seu celular. Mesma tarefa, outro método. O Time Verde vira mentor.</div></div>
-      <div><div class="timer js-timer">${E.timerFim ? fmtTempo(E.timerFim - Date.now()) : ""}</div></div></div>
-      ${env.length ? `<div class="mural">${env.map(e => `<div class="m glass">${esc(e.texto.slice(0, 220))}${e.texto.length > 220 ? "…" : ""}<small>${esc(e.nome)}</small></div>`).join("")}</div>` : ""}`;
-  },
   compromisso: () => `<div class="t-eyebrow">Seu compromisso · responda no celular</div><div class="t-h2">Qual pergunta você vai fazer à IA amanhã para começar?</div>${mural("compromisso")}`,
   final: () => {
     const ta = tally(Q_CONF_ANTES.id), td = tally(Q_CONF_DEPOIS.id);
@@ -3483,7 +3633,6 @@ const INTER = {
   }
 };
 
-function numCartas() { return Math.max(4, Math.ceil(P.length / 2) * 2); }
 function ytId(u) { const m = String(u || "").match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : null; }
 
 function vencedorDuelo(id) {
@@ -3493,44 +3642,127 @@ function vencedorDuelo(id) {
   return a > b ? ladoA : (ladoA === "atalho" ? "ferramenta" : "atalho");
 }
 
+/* ---------- duelos: prompts, resultados e mídia ---------- */
+function textoAtalho(id) { return (E.promptAtalho || {})[id] || DUELOS[id].atalho; }
+function textoFerramenta(id) { const d = DUELOS[id]; const pf = E.promptFinal || {}; return pf[id] || (d.usaPromptDe ? pf[d.usaPromptDe] : "") || ""; }
+function estruturaDe(id) { const d = DUELOS[id]; return d.estrutura ? d : DUELOS[d.usaPromptDe]; }
+function htmlEstruturaT(d) {
+  return `<div class="estr t">${d.estrutura.map(([k, fixo, q]) => `<div class="er"><b>${esc(k)}</b><span>${fixo ? esc(fixo) + " " : ""}<i>${esc(q)}</i></span></div>`).join("")}</div>`;
+}
+function cardPrompt(id, lado) {
+  const lar = lado === "atalho"; const fin = textoFerramenta(id);
+  const corpo = lar ? `<div class="pc-txt">“${esc(textoAtalho(id))}”</div>` : fin ? `<div class="pc-txt">${esc(fin)}</div>` : htmlEstruturaT(estruturaDe(id));
+  return `<div class="pcard glass ${lar ? "lar-b" : "ver-b"}"><div class="pc-h"><span class="${lar ? "lar" : "em"}">${lar ? "Time Laranja · o pedido" : fin ? "Time Verde · o prompt final" : "Time Verde · a estrutura"}</span>
+    <button class="mini-t" data-act="editar-prompt" data-duelo="${id}" data-lado="${lado}">${lar ? "Editar" : fin ? "Editar prompt" : "Colar prompt final"}</button></div>${corpo}</div>`;
+}
+function midiaDe(id, lado) {
+  const key = id + "__" + lado; const cand = [];
+  const vl = TL.videosLocal[key]; if (vl) cand.push({ tipo: "video", src: vl.src, t: vl.t, local: true });
+  const md = M.find(x => x.id === key); if (md && md.src) cand.push({ tipo: "img", src: md.src, t: md.t || 0 });
+  const lk = ((E.midia || {})[id] || {})[lado]; if (lk && lk.url) { const p = lerLink(lk.url, DUELOS[id].tipo === "video"); if (p) cand.push({ ...p, t: lk.t || 0 }); }
+  return cand.sort((a, b) => b.t - a.t)[0] || null;
+}
+function slotMidia(id, lado, letra) {
+  const m = midiaDe(id, lado); const alvo = id + "|" + lado;
+  const tools = `<div class="ms-tools"><button data-act="upload" data-alvo="${alvo}">Upload</button><button data-act="colar-link" data-alvo="${alvo}">Colar link</button>${m ? `<button data-act="tirar-midia" data-alvo="${alvo}">Remover</button>` : ""}</div>`;
+  let corpo;
+  if (!m) corpo = `<div class="ms-vz"><b>${letra ? "Resultado " + letra : "Resultado do " + nomeTime(timeDeLado(lado))}</b><span>Arraste o arquivo aqui, cole com Ctrl+V ou use os botões abaixo.</span></div>`;
+  else if (m.tipo === "img") corpo = `<img src="${esc(m.src)}" alt="" onerror="this.parentElement.classList.add('erro')"><div class="ms-erro"><span>Não consegui exibir este link.</span><a href="${esc(m.url || m.src)}" target="_blank" rel="noopener" class="btn-yt">Abrir em outra aba ↗</a></div>`;
+  else if (m.tipo === "video") corpo = camada("d:" + alvo + ":" + m.t, `<video src="${esc(m.src)}" controls playsinline autoplay muted loop></video>`, alvo, "ms-area");
+  else if (m.tipo === "frame") corpo = camada("d:" + alvo + ":" + m.t, `<iframe src="${esc(m.src)}" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>`, alvo, "ms-area");
+  else corpo = `<div class="ms-vz"><div class="qr-mini" style="padding:.4vw"><div style="width:9vw;height:9vw">${qrSVG(m.url)}</div></div><a href="${esc(m.url)}" target="_blank" rel="noopener" class="btn-yt" style="margin-top:1vw">Abrir o resultado ↗</a></div>`;
+  return `<div class="ms ${m ? "" : "vazio"}" data-alvo="${alvo}">${corpo}${tools}</div>`;
+}
 function telaoDuelos() {
-  if (E.sub === "escolha" || !E.duelo) {
-    const rest = restantes(); const q = "esc_" + (E.rodada || 1); const t = tally(q); const total = totalDe(t);
-    const lider = rest.slice().sort((a, b) => (t[b] || 0) - (t[a] || 0))[0];
-    const feitos = (E.feitos || []).length;
-    return `<div class="t-eyebrow">Rodada ${E.rodada || 1} · ${feitos ? feitos + " de 3 duelos feitos" : "a sala decide a ordem"}</div>
-      <div class="t-h2" style="margin-bottom:2.2vw">Qual duelo vem agora?</div>
-      <div style="display:grid;grid-template-columns:repeat(${Math.max(rest.length, 1)},1fr);gap:1.4vw">${rest.map(id => { const d = DUELOS[id]; const pct = total ? Math.round((t[id] || 0) * 100 / total) : 0;
-        return `<div class="duel-card glass ${total && id === lider ? "lider" : ""}"><div class="pct">${pct}%</div><div class="ic">Duelo</div><h3>${esc(d.nome)}</h3><div class="ferr">${esc(d.ferramenta)}</div>
-          <div class="trilho"><div class="fill" style="width:${pct}%;background:var(--neon)"></div></div></div>`; }).join("")}</div>
-      <div class="total" style="margin-top:1.4vw;font-size:1.1vw">${total} votos · ${E.votacao ? "votação aberta" : "votação fechada"}</div>`;
-  }
-  const d = DUELOS[E.duelo]; const sub = E.sub || "briefing";
-  const head = `<div class="t-eyebrow">Duelo · ${esc(d.nome)} · ${esc(d.ferramenta)}</div>`;
-  if (sub === "briefing") return `${head}<div class="t-h1" style="font-size:4.8vw">${esc(d.briefing)}</div>
-    <div class="t-sub">Abram o celular. Cada time recebeu uma missão. Vocês terão ${CONFIG.minutosProducao} minutos.</div>`;
-  if (sub === "producao") {
-    const nl = S.filter(x => x.duelo === E.duelo && x.time === "laranja").length, nv = S.filter(x => x.duelo === E.duelo && x.time === "verde").length;
-    return `${head}<div class="t-row" style="align-items:center"><div class="t-col"><div class="t-h2">${esc(d.briefing)}</div>
-      <div class="t-sub">${d.tipo === "texto" ? "Quando terminar, cole o resultado no celular." : "Gere no seu app. Vou escolher um resultado de cada time."}</div>
-      ${d.tipo === "texto" ? `<div class="t-row" style="margin-top:2vw;gap:1.2vw;max-width:40vw"><div class="t-card glass t-col"><div class="lar mono" style="font-size:1vw">LARANJA</div><div class="big-num" style="font-size:4.6vw">${nl}</div><div class="total">enviaram</div></div>
-      <div class="t-card glass t-col"><div class="ver mono" style="font-size:1vw">VERDE</div><div class="big-num" style="font-size:4.6vw">${nv}</div><div class="total">enviaram</div></div></div>` : ""}</div>
-      <div><div class="timer js-timer">${E.timerFim ? fmtTempo(E.timerFim - Date.now()) : fmtTempo(CONFIG.minutosProducao * 60000)}</div></div></div>`;
+  const id = E.duelo || ORDEM_DUELOS[0]; const d = DUELOS[id]; const sub = E.sub || "briefing";
+  const temMidia = d.tipo !== "texto";
+  const head = `<div class="duel-head"><div class="t-eyebrow" style="margin:0">Duelo ${ORDEM_DUELOS.indexOf(id) + 1} de 3 · ${esc(d.nome)} · ${esc(d.ferramenta)}</div>
+    <div class="duel-steps">${ORDEM_DUELOS.map((x, i) => `<span class="${x === id ? "atual" : (E.feitos || []).includes(x) ? "feito" : ""}">${i + 1} · ${esc(DUELOS[x].nome)}</span>`).join("")}</div></div>`;
+  if (sub === "briefing" || sub === "producao") {
+    const prod = sub === "producao";
+    const sug = S.filter(x => x.duelo === id && x.time === "verde").sort((a, b) => b.t - a.t);
+    const listaSug = sug.length ? `<div class="sug glass"><div class="t-eyebrow" style="font-size:.8vw;margin-bottom:.6vw">${sug.length} sugest${sug.length === 1 ? "ão" : "ões"} do Time Verde</div>${sug.slice(0, temMidia ? 2 : 4).map(x => `<div class="sg">${esc(x.texto)}<small>${esc(x.nome || "")}</small></div>`).join("")}</div>` : "";
+    const cols = ["atalho", "ferramenta"].map(l => `<div class="duel-col">${cardPrompt(id, l)}${prod && temMidia ? slotMidia(id, l) : ""}${l === "ferramenta" && d.estrutura && !(prod && temMidia) ? listaSug : ""}</div>`).join("");
+    return `${head}<div class="t-row" style="align-items:flex-end;gap:2vw;margin:1.2vw 0 1.4vw"><div class="t-col"><div class="t-h2" style="font-size:2.6vw">${esc(d.briefing)}</div>
+      ${!prod ? `<div class="t-sub" style="font-size:1.25vw;margin-top:.7vw">Mesma ferramenta, mesmo assunto. Só muda o prompt.${d.estrutura ? " O Time Verde manda sugestões pelo celular." : ""}</div>` : ""}</div>
+      ${prod ? `<div class="timer js-timer" style="font-size:4.6vw">${E.timerFim ? fmtTempo(E.timerFim - Date.now()) : fmtTempo(CONFIG.minutosProducao * 60000)}</div>` : ""}</div>
+      <div class="duel-cols ${prod && temMidia ? "com-midia" : ""}">${cols}</div>`;
   }
   const ordem = E.ordemA === "ferramenta" ? ["ferramenta", "atalho"] : ["atalho", "ferramenta"];
-  const t = tally("duelo_" + E.duelo); const tot = (t.A || 0) + (t.B || 0); const revel = sub === "revelacao";
+  const t = tally("duelo_" + id); const tot = (t.A || 0) + (t.B || 0); const revel = sub === "revelacao";
   const slots = ordem.map((lado, i) => {
-    const letra = i === 0 ? "A" : "B"; const img = (TL.imgs[E.duelo] || {})[lado]; const txt = (E.slotTexto || {})[lado];
-    const pct = tot ? Math.round((t[letra] || 0) * 100 / tot) : 0;
-    return `<div class="slot glass ${!img && !txt ? "vazio" : ""} ${revel ? "revel-" + lado : ""}">
+    const letra = i === 0 ? "A" : "B"; const pct = tot ? Math.round((t[letra] || 0) * 100 / tot) : 0;
+    const fin = textoFerramenta(id);
+    const corpo = temMidia ? slotMidia(id, lado, letra)
+      : `<div class="slot-txt">${lado === "atalho" ? "“" + esc(textoAtalho(id)) + "”" : fin ? esc(fin) : htmlEstruturaT(estruturaDe(id))}</div>`;
+    return `<div class="slot glass ${revel ? "revel-" + lado : ""}">
       <div class="lbl"><span>${letra}${revel ? ` · <span style="color:${corLado(lado)}">${nomeLado(lado)}</span>` : ""}</span>${revel ? `<small style="background:${corLado(lado)}">${pct}% · ${t[letra] || 0}</small>` : ""}</div>
-      <div class="conteudo">${img ? `<img src="${img}" alt="">` : txt ? esc(txt) : "Use “Montar A/B” na barra de baixo para escolher este resultado."}</div></div>`;
+      ${corpo}${revel && temMidia ? `<div class="slot-prompt">${esc(lado === "atalho" ? "“" + textoAtalho(id) + "”" : fin || "Prompt construído com as perguntas da estrutura")}</div>` : ""}</div>`;
   }).join("");
   let rodape = `<div class="total" style="font-size:1.1vw;margin-top:1vw">Votação às cegas · ${tot} votos · ${E.votacao ? "vote no celular" : "votação fechada"}</div>`;
   if (revel) { const v = E.vencedor;
-    rodape = `<div class="licao"><div class="t-card glass"><div class="t-eyebrow">${v === "ferramenta" ? "A ferramenta venceu" : v === "atalho" ? "Dessa vez o atalho venceu. Por quê?" : "Empate"}</div><p style="font-size:1.9vw;font-weight:600;letter-spacing:-.02em">${esc(d.licao)}</p></div>
-      <div class="t-card glass"><div class="t-eyebrow">O que a pesquisa diz</div><p>${esc(d.estudo.dado)}</p><div class="t-src" style="margin-top:.8vw">${esc(d.estudo.fonte)}</div></div></div>`; }
-  return `${head}<div class="t-row" style="flex:1;min-height:0;max-height:${revel ? "42vh" : "60vh"}">${slots}</div>${rodape}`;
+    rodape = `<div class="licao"><div class="t-card glass"><div class="t-eyebrow">${v === "ferramenta" ? "A ferramenta venceu" : v === "atalho" ? "Dessa vez o atalho venceu. Por quê?" : "Empate"}</div><p style="font-size:1.8vw;font-weight:600;letter-spacing:-.02em">${esc(d.licao)}</p></div>
+      <div class="t-card glass"><div class="t-eyebrow">O que a pesquisa diz · ${esc(d.estudo.titulo)}</div>${grafico(d.estudo, true)}<div class="t-src" style="margin-top:.6vw">${esc(d.estudo.fonte)}${d.estudo.nota ? " · " + esc(d.estudo.nota) : ""}</div></div></div>`; }
+  return `${head}<div class="t-row" style="flex:1;min-height:0;margin-top:1.2vw;height:${revel ? "40vh" : "62vh"}">${slots}</div>${rodape}`;
+}
+
+/* ---------- editor rápido (colar link ou prompt) ---------- */
+function abrirEditor(o) {
+  TL.modal = true; TL.editor = o; sincronizarCamadas();
+  const bg = document.createElement("div"); bg.className = "modal-bg"; bg.id = "modal";
+  bg.innerHTML = `<div class="modal" style="width:min(760px,96vw)"><h3>${esc(o.titulo)}</h3>${o.dica ? `<div class="mut" style="font-size:13px;line-height:1.5">${esc(o.dica)}</div>` : ""}
+    ${o.multi ? `<textarea id="ed-txt" style="margin-top:12px;min-height:260px">${esc(o.valor || "")}</textarea>` : `<input id="ed-txt" style="margin-top:12px" value="${esc(o.valor || "")}" placeholder="https://">`}
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px"><button class="btn sec" style="width:auto;padding:12px 22px;margin:0" data-act="fechar-modal">Cancelar</button><button class="btn" style="width:auto;padding:12px 22px;margin:0" data-act="salvar-editor">${esc(o.botao || "Mostrar no telão")}</button></div></div>`;
+  document.body.appendChild(bg);
+  const inp = document.getElementById("ed-txt"); inp.focus(); try { inp.select(); } catch (e) {}
+  inp.addEventListener("keydown", ev => { if (ev.key === "Enter" && !o.multi) { ev.preventDefault(); salvarEditor(); } if (ev.key === "Escape") fecharModal(); });
+}
+async function salvarEditor() { const o = TL.editor; const v = (document.getElementById("ed-txt") || {}).value || ""; fecharModal(true); if (o) await o.onSalvar(v.trim()); render(); }
+function parseAlvo(a) { const [duelo, lado] = String(a || "").split("|"); return DUELOS[duelo] && (lado === "atalho" || lado === "ferramenta") ? { duelo, lado, key: duelo + "__" + lado } : null; }
+async function definirLink(alvo, url) {
+  const m = E.midia || {}; const dm = m[alvo.duelo] || {};
+  await store.setEstado({ midia: { ...m, [alvo.duelo]: { ...dm, [alvo.lado]: { url, t: url ? Date.now() : 0 } } } });
+}
+async function tirarMidia(alvo) {
+  const vl = TL.videosLocal[alvo.key]; if (vl) { try { URL.revokeObjectURL(vl.src); } catch (e) {} delete TL.videosLocal[alvo.key]; }
+  if (M.some(x => x.id === alvo.key)) { try { await store.del("midias", alvo.key); } catch (e) {} }
+  await definirLink(alvo, ""); render();
+}
+async function receberArquivo(f, alvo) {
+  if (!f || !alvo) return;
+  if (f.type.startsWith("image/")) {
+    try { const src = await reduzirImagem(f); await store.set("midias", alvo.key, { src, t: Date.now() }); }
+    catch (e) { avisoErro("Não consegui carregar a imagem. Tente outro arquivo ou cole um link."); }
+    return;
+  }
+  if (f.type.startsWith("video/")) {
+    if (VISAO() === "palco") { avisoErro("Vídeo em arquivo só pelo telão. No celular, cole um link."); return; }
+    const vl = TL.videosLocal[alvo.key]; if (vl) { try { URL.revokeObjectURL(vl.src); } catch (e) {} }
+    TL.videosLocal[alvo.key] = { src: URL.createObjectURL(f), t: Date.now() }; render(); return;
+  }
+  avisoErro("Formato não reconhecido. Use imagem, vídeo ou um link.");
+}
+function escolherArquivo(alvo) {
+  const inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*,video/*";
+  inp.onchange = () => receberArquivo(inp.files[0], alvo); inp.click();
+}
+function ligarArrastarColar() {
+  document.addEventListener("mouseover", ev => { const el = ev.target.closest && ev.target.closest("[data-alvo]"); if (el) TL.alvo = parseAlvo(el.dataset.alvo); });
+  document.addEventListener("dragover", ev => { if (ev.target.closest && ev.target.closest("[data-alvo],[data-case],.camada")) { ev.preventDefault(); } });
+  document.addEventListener("drop", ev => {
+    const el = ev.target.closest && ev.target.closest("[data-alvo],[data-case],.camada"); if (!el) return;
+    ev.preventDefault(); const f = ev.dataTransfer && ev.dataTransfer.files[0];
+    if (el.dataset.alvo) { const a = parseAlvo(el.dataset.alvo); if (f) receberArquivo(f, a); else { const u = ev.dataTransfer.getData("text/uri-list") || ev.dataTransfer.getData("text/plain"); if (u) definirLink(a, u.trim()); } return; }
+    const caseId = el.dataset.case || (itemAtual().id === "cases" ? CASES[E.caseIdx || 0].id : null);
+    if (f && caseId) carregarVideo(f, caseId);
+  });
+  document.addEventListener("paste", ev => {
+    if (TL.modal || /INPUT|TEXTAREA/.test(document.activeElement.tagName) || itemAtual().id !== "duelos") return;
+    const id = E.duelo || ORDEM_DUELOS[0];
+    const alvo = TL.alvo && TL.alvo.duelo === id ? TL.alvo : null; if (!alvo) { avisoErro("Passe o mouse sobre o quadro do resultado antes de colar."); return; }
+    const f = [...(ev.clipboardData.files || [])][0]; if (f) { ev.preventDefault(); receberArquivo(f, alvo); return; }
+    const txt = (ev.clipboardData.getData("text") || "").trim(); if (/^(https?:|data:image)/.test(txt)) { ev.preventDefault(); definirLink(alvo, txt); }
+  });
 }
 
 /* ---------- controles, painéis e sobreposições ---------- */
@@ -3541,21 +3773,23 @@ function rotuloProximo() {
   switch (it.id) {
     case "medico": if (sub !== "licao") return "Lição"; break;
     case "quiz": if (sub === "votacao") return "Revelar"; if ((E.quizIdx || 0) < QUIZ.length - 1) return "Próximo quiz"; break;
-    case "times": if (!E.cartas) return "Virar as cartas"; break;
-    case "duelos":
-      if (sub === "escolha" || !E.duelo) { if (restantes().length) return "Abrir duelo"; break; }
+    case "times": if (!E.cartas) return "Distribuir cartas"; if (!E.todasViradas) return "Virar todas"; break;
+    case "duelos": {
+      if (!E.duelo) return "Abrir duelo de Prompt";
       if (sub === "briefing") return "Iniciar produção";
       if (sub === "producao") return "Votação";
       if (sub === "votacao") return "Revelar";
-      if (sub === "revelacao" && restantes().length) return "Próximo duelo";
+      const nx = proximoDuelo(); if (sub === "revelacao" && nx) return "Duelo de " + DUELOS[nx].nome;
       break;
+    }
     case "cases": if (sub !== "revelacao") return "Revelar"; if ((E.caseIdx || 0) < CASES.length - 1) return "Próximo case"; break;
   }
   return seguir;
 }
 function estadoLegivel() {
   const it = itemAtual(); const sub = E.sub;
-  if (it.id === "duelos") { if (sub === "escolha" || !E.duelo) return "escolha do duelo · rodada " + (E.rodada || 1); return "duelo " + DUELOS[E.duelo].nome + " · " + ({ briefing: "briefing", producao: "produção", votacao: "votação", revelacao: "revelação" })[sub || "briefing"]; }
+  if (it.id === "duelos") { if (!E.duelo) return "duelos"; return "duelo " + DUELOS[E.duelo].nome + " · " + ({ briefing: "briefing", producao: "produção", votacao: "votação", revelacao: "revelação" })[sub || "briefing"]; }
+  if (it.id === "times") return !E.cartas ? "aguardando cartas" : E.todasViradas ? "times revelados" : (E.viradas || []).length + " cartas viradas";
   if (it.id === "quiz") return "quiz " + ((E.quizIdx || 0) + 1) + " · " + (sub === "revelacao" ? "revelação" : "votação");
   if (it.id === "cases") return "case " + ((E.caseIdx || 0) + 1) + " · " + (sub === "revelacao" ? "revelação" : "votação");
   if (it.id === "medico") return sub === "licao" ? "lição" : "votação";
@@ -3564,12 +3798,10 @@ function estadoLegivel() {
 function controles() {
   const pend = Q.filter(q => !q.feita).length; const it = itemAtual();
   const temVoto = ["provocacao", "medico", "quiz", "duelos", "cases", "compromisso", "final"].includes(it.id);
-  const ab = it.id === "duelos" && ["producao", "votacao", "revelacao"].includes(E.sub);
   const temTimer = it.id === "duelos" && E.sub === "producao";
   return `<div class="ctrl ${TL.ctrlFixo ? "fixo" : ""}">
     <button data-act="prev" title="Voltar (←)">◀</button><button class="main" data-act="next" title="Avançar (→ ou espaço)">${esc(rotuloProximo())} ▶</button><span class="sep"></span>
     ${temVoto ? `<button data-act="votacao" class="${E.votacao ? "on" : ""}" title="V">${E.votacao ? "Votação aberta" : "Votação fechada"}</button>` : ""}
-    ${ab ? `<button data-act="montar">Montar A/B</button>` : ""}
     ${temTimer ? `<button data-act="timer">+1 min</button>` : ""}
     ${it.id === "cases" && E.sub !== "revelacao" ? `<button data-act="carregar-video">Carregar vídeo</button>` : ""}
     <button data-act="ancora" class="${E.mostrarAncora ? "on" : ""}" title="A">Âncora</button>
@@ -3596,7 +3828,8 @@ function listaRoteiro() {
 function drawerHTML() {
   if (TL.drawer === "perguntas") return `<div class="drawer"><h3>Perguntas e comentários <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaPerguntas()}</div>`;
   if (TL.drawer === "roteiro") return `<div class="drawer"><h3>Roteiro <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaRoteiro()}
-    <div class="d-ato">Ir direto para um duelo</div><div class="d-item"><div class="acts">${ORDEM_DUELOS.map(id => `<button data-act="ir-duelo" data-id="${id}">${DUELOS[id].nome}${(E.feitos || []).includes(id) ? " ✓" : ""}</button>`).join("")}</div></div>
+    <div class="d-ato">Ir direto para um duelo (a ordem é Prompt, Imagem, Vídeo)</div><div class="d-item"><div class="acts">${ORDEM_DUELOS.map(id => `<button data-act="ir-duelo" data-id="${id}">${DUELOS[id].nome}${(E.feitos || []).includes(id) ? " ✓" : ""}</button>`).join("")}</div></div>
+    ${E.cartas ? `<div class="d-ato">Jogo das cartas</div><div class="d-item"><div class="mut" style="margin-bottom:8px">Entrou muita gente depois? Distribua de novo: os times mudam.</div><button class="mini" data-act="redistribuir">${TL.confirmaRedist ? "Clique de novo para redistribuir" : "Distribuir as cartas de novo"}</button></div>` : ""}
     <div class="d-ato">Sessão</div><div class="d-item"><div class="mut" style="margin-bottom:8px">“${esc(CONFIG.sessao)}” · ${store.modo}</div><button class="mini" data-act="limpar" style="border-color:var(--lar);color:var(--lar)">${TL.confirmaLimpar ? "Clique de novo para apagar tudo" : "Zerar sessão"}</button></div></div>`;
   return "";
 }
@@ -3624,35 +3857,29 @@ function entrarPatch(it) {
     case "provocacao": return { ...base, votacao: true };
     case "medico": return { ...base, sub: "votacao", votacao: true };
     case "quiz": return { ...base, sub: "votacao", quizIdx: 0, votacao: true };
-    case "duelos": return { ...base, sub: "escolha", rodada: (E.rodada || 0) + 1, votacao: true };
+    case "duelos": { const id = ORDEM_DUELOS.find(x => !(E.feitos || []).includes(x)) || ORDEM_DUELOS[0]; return { ...base, ...patchDuelo(id) }; }
     case "cases": return { ...base, sub: "votacao", caseIdx: 0, votacao: true };
-    case "revanche": return { ...base, timerFim: Date.now() + CONFIG.minutosProducao * 60000 };
     case "compromisso": case "final": return { ...base, votacao: true };
   }
   return base;
 }
 const irPasso = i => { i = Math.max(0, Math.min(ROTEIRO.length - 1, i)); return ir({ passo: i, ...entrarPatch(ROTEIRO[i]) }); };
-async function virarCartas() {
-  const N = numCartas();
-  const comCarta = shuffle(P.filter(p => p.numero)); const semCarta = shuffle(P.filter(p => !p.numero));
-  const cartas = {}; const times = [];
-  let l = 0, v = 0;
-  comCarta.forEach(p => { const cor = l <= v ? "laranja" : "verde"; cor === "laranja" ? l++ : v++; cartas[p.numero] = cor; times.push([p.id, { time: cor }]); });
-  semCarta.forEach(p => { const cor = l <= v ? "laranja" : "verde"; cor === "laranja" ? l++ : v++; times.push([p.id, { time: cor }]); });
-  const livres = []; for (let k = 1; k <= N; k++) if (!cartas[k]) livres.push(k);
-  shuffle(livres).forEach(k => { const cor = l <= v ? "laranja" : "verde"; cor === "laranja" ? l++ : v++; cartas[k] = cor; });
-  TL.cartasAnimadas = false;
-  if (times.length) await store.setMany("participantes", times);
-  await ir({ cartas, timesSorteados: true });
+async function distribuirCartas() {
+  if (!P.length) { avisoErro("Ninguém conectado ainda."); return; }
+  const ordem = shuffle(P); const N = ordem.length;
+  const cores = shuffle(ordem.map((_, i) => i % 2 === 0 ? "laranja" : "verde"));
+  const cartas = {}, dono = {}, upd = [];
+  ordem.forEach((p, i) => { const k = i + 1; cartas[k] = cores[i]; dono[k] = p.id; upd.push([p.id, { carta: k, time: cores[i] }]); });
+  TL.cartasVistas.clear();
+  await store.setMany("participantes", upd);
+  await ir({ cartas, cartasDono: dono, viradas: [], todasViradas: false, timesSorteados: true });
 }
-async function sortearTimes() {
-  const ordem = shuffle(P);
-  await store.setMany("participantes", ordem.map((p, i) => [p.id, { time: i % 2 === 0 ? "laranja" : "verde" }]));
-  await ir({ timesSorteados: true });
-}
+function virarCarta(n) { if (!E.cartas || (E.viradas || []).includes(n)) return; return ir({ viradas: [...(E.viradas || []), n] }); }
+function patchDuelo(id) { return { duelo: id, sub: "briefing", votacao: false, ordemA: Math.random() < 0.5 ? "atalho" : "ferramenta", timerFim: null, vencedor: null }; }
+function proximoDuelo() { const i = ORDEM_DUELOS.indexOf(E.duelo); return i >= 0 && i < ORDEM_DUELOS.length - 1 ? ORDEM_DUELOS[i + 1] : null; }
 function abrirDuelo(id) {
   const passoDuelos = ROTEIRO.findIndex(x => x.id === "duelos");
-  return ir({ passo: passoDuelos, duelo: id, sub: "briefing", votacao: false, ordemA: Math.random() < 0.5 ? "atalho" : "ferramenta", slotTexto: { atalho: "", ferramenta: "" }, timerFim: null, vencedor: null });
+  return ir({ passo: passoDuelos, ...patchDuelo(id) });
 }
 async function proximo() {
   const it = itemAtual(); const sub = E.sub;
@@ -3662,13 +3889,9 @@ async function proximo() {
       if (sub === "votacao") return ir({ sub: "revelacao", votacao: false });
       if ((E.quizIdx || 0) < QUIZ.length - 1) return ir({ sub: "votacao", quizIdx: (E.quizIdx || 0) + 1, votacao: true });
       break;
-    case "times": if (!E.cartas) return virarCartas(); break;
+    case "times": if (!E.cartas) return distribuirCartas(); if (!E.todasViradas) return ir({ todasViradas: true }); break;
     case "duelos":
-      if (sub === "escolha" || !E.duelo) {
-        const rest = restantes(); if (!rest.length) break;
-        const t = tally("esc_" + (E.rodada || 1));
-        return abrirDuelo(rest.slice().sort((a, b) => (t[b] || 0) - (t[a] || 0))[0]);
-      }
+      if (!E.duelo) return abrirDuelo(ORDEM_DUELOS[0]);
       if (sub === "briefing") return ir({ sub: "producao", timerFim: Date.now() + CONFIG.minutosProducao * 60000 });
       if (sub === "producao") return ir({ sub: "votacao", votacao: true, timerFim: null });
       if (sub === "votacao") {
@@ -3676,7 +3899,7 @@ async function proximo() {
         const v = vencedorDuelo(E.duelo);
         return ir({ sub: "revelacao", votacao: false, feitos: f, vencedor: v, placar: { ...(E.placar || {}), [E.duelo]: v || "empate" } });
       }
-      if (sub === "revelacao" && restantes().length) return ir({ sub: "escolha", duelo: null, rodada: (E.rodada || 0) + 1, votacao: true });
+      if (sub === "revelacao" && proximoDuelo()) return ir(patchDuelo(proximoDuelo()));
       break;
     case "cases":
       if (sub !== "revelacao") return ir({ sub: "revelacao", votacao: false });
@@ -3687,42 +3910,7 @@ async function proximo() {
 }
 async function anterior() { const s = TL.hist.pop(); if (s) await store.setEstado(s); else if (passoAtual() > 0) await store.setEstado({ passo: passoAtual() - 1, ...entrarPatch(ROTEIRO[passoAtual() - 1]) }); }
 
-/* ---------- montagem A/B ---------- */
-function abrirModal() {
-  TL.modal = true;
-  const d = DUELOS[E.duelo];
-  const bg = document.createElement("div"); bg.className = "modal-bg"; bg.id = "modal";
-  const lado = l => {
-    const time = l === "atalho" ? "laranja" : "verde";
-    const env = S.filter(x => x.duelo === E.duelo && x.time === time).sort((a, b) => b.t - a.t);
-    const img = (TL.imgs[E.duelo] || {})[l];
-    return `<div><h3 style="color:${corLado(l)}">${l === "atalho" ? "Atalho · Time Laranja" : "Ferramenta · Time Verde"}</h3>
-      <div class="mut" style="font-size:13px">Escolha um envio, cole um texto ou solte uma imagem.</div>
-      <textarea id="txt-${l}" style="margin-top:10px;min-height:110px" placeholder="Texto que vai para o telão">${esc((E.slotTexto || {})[l] || "")}</textarea>
-      <label class="drop" id="drop-${l}">${img ? `<img src="${img}"><br>Trocar imagem` : "Soltar ou escolher imagem"}<input type="file" accept="image/*" data-lado="${l}" style="display:none"></label>
-      ${img ? `<button class="mini" data-act="tirar-img" data-lado="${l}" style="margin-top:6px">Remover imagem</button>` : ""}
-      <div style="margin-top:12px;font-size:13px" class="mut">${env.length} envio${env.length === 1 ? "" : "s"} do time</div>
-      ${env.map(e => `<div class="envio" data-act="usar-envio" data-lado="${l}" data-id="${e.id}"><b>${esc(e.nome)}</b> · ${esc(e.texto)}</div>`).join("")}</div>`;
-  };
-  bg.innerHTML = `<div class="modal"><h3>Montar a comparação · ${esc(d.nome)}</h3><div class="mut" style="font-size:13px">No telão, a ordem A/B é sorteada e os times ficam escondidos até a revelação.</div>
-    <div class="cols">${lado("atalho")}${lado("ferramenta")}</div>
-    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn sec" style="width:auto;padding:12px 22px;margin:0" data-act="fechar-modal">Cancelar</button><button class="btn" style="width:auto;padding:12px 22px;margin:0" data-act="salvar-modal">Mandar para o telão</button></div></div>`;
-  document.body.appendChild(bg);
-  bg.querySelectorAll("input[type=file]").forEach(inp => inp.addEventListener("change", ev => lerImagem(ev.target.files[0], ev.target.dataset.lado)));
-  ["atalho", "ferramenta"].forEach(l => { const dz = bg.querySelector("#drop-" + l);
-    dz.addEventListener("dragover", ev => { ev.preventDefault(); dz.style.borderColor = "var(--em)"; });
-    dz.addEventListener("drop", ev => { ev.preventDefault(); const f = ev.dataTransfer.files[0]; if (f) lerImagem(f, l); }); });
-}
-function lerImagem(f, l) {
-  if (!f || !f.type.startsWith("image/")) return;
-  const r = new FileReader(); r.onload = () => { TL.imgs[E.duelo] = TL.imgs[E.duelo] || {}; TL.imgs[E.duelo][l] = r.result; recarregarModal(); }; r.readAsDataURL(f);
-}
-function recarregarModal() {
-  const txt = { atalho: (document.getElementById("txt-atalho") || {}).value, ferramenta: (document.getElementById("txt-ferramenta") || {}).value };
-  fecharModal(true); abrirModal();
-  ["atalho", "ferramenta"].forEach(l => { if (txt[l] != null) document.getElementById("txt-" + l).value = txt[l]; });
-}
-function fecharModal(silencioso) { const m = document.getElementById("modal"); m && m.remove(); TL.modal = false; if (!silencioso) render(); }
+function fecharModal(silencioso) { const m = document.getElementById("modal"); m && m.remove(); TL.modal = false; TL.editor = null; if (!silencioso) render(); }
 const render = () => VISAO() === "palco" ? renderPalco() : renderTelao();
 
 /* ---------- cliques do telão e do palco ---------- */
@@ -3730,6 +3918,7 @@ async function cliqueComando(ev) {
   const b = ev.target.closest("[data-act]"); if (!b) return;
   const act = b.dataset.act;
   if (act !== "limpar") TL.confirmaLimpar = false;
+  if (act !== "redistribuir") TL.confirmaRedist = false;
   if (act === "next") return proximo();
   if (act === "prev") return anterior();
   if (act === "votacao") return store.setEstado({ votacao: !E.votacao });
@@ -3740,7 +3929,7 @@ async function cliqueComando(ev) {
   if (act === "feita") { const q = Q.find(x => x.id === b.dataset.id); return store.set("perguntas", b.dataset.id, { feita: !(q && q.feita) }); }
   if (act === "ir-passo") { TL.drawer = null; return irPasso(+b.dataset.i); }
   if (act === "ir-duelo") { TL.drawer = null; return abrirDuelo(b.dataset.id); }
-  if (act === "limpar") { if (!TL.confirmaLimpar) { TL.confirmaLimpar = true; return render(); } TL.confirmaLimpar = false; TL.hist = []; TL.imgs = {}; TL.cartasAnimadas = false; return store.limpar(); }
+  if (act === "limpar") { if (!TL.confirmaLimpar) { TL.confirmaLimpar = true; return render(); } TL.confirmaLimpar = false; TL.hist = []; TL.videosLocal = {}; TL.cartasVistas.clear(); return store.limpar(); }
   if (act === "qr") { TL.qrGrande = !TL.qrGrande; return render(); }
   if (act === "fixar") { TL.ctrlFixo = !TL.ctrlFixo; return render(); }
   if (act === "fullscreen") { try { if (!document.fullscreenElement) await document.documentElement.requestFullscreen(); else await document.exitFullscreen(); } catch (e) {} return; }
@@ -3749,17 +3938,21 @@ async function cliqueComando(ev) {
   if (act === "ir-telao") { location.hash = "telao"; return; }
   if (act === "simular") return simular();
   if (act === "carregar-video") { const c = CASES[E.caseIdx || 0]; const inp = document.createElement("input"); inp.type = "file"; inp.accept = "video/*"; inp.onchange = () => carregarVideo(inp.files[0], c.id); inp.click(); return; }
-  if (act === "montar") return abrirModal();
   if (act === "fechar-modal") return fecharModal();
-  if (act === "usar-envio") { const e = S.find(x => x.id === b.dataset.id); if (e) { document.getElementById("txt-" + b.dataset.lado).value = e.texto; b.parentElement.querySelectorAll(".envio").forEach(x => x.classList.remove("sel")); b.classList.add("sel"); } return; }
-  if (act === "tirar-img") { if (TL.imgs[E.duelo]) delete TL.imgs[E.duelo][b.dataset.lado]; return recarregarModal(); }
-  if (act === "salvar-modal") {
-    const st = { atalho: document.getElementById("txt-atalho").value, ferramenta: document.getElementById("txt-ferramenta").value };
-    fecharModal(true); await store.setEstado({ slotTexto: st }); render(); return;
-  }
+  if (act === "salvar-editor") return salvarEditor();
+  if (act === "virar-carta") return virarCarta(+b.dataset.n);
+  if (act === "redistribuir") { if (!TL.confirmaRedist) { TL.confirmaRedist = true; return render(); } TL.confirmaRedist = false; await store.setEstado({ cartas: null, cartasDono: null, viradas: [], todasViradas: false }); return distribuirCartas(); }
+  if (act === "upload") return escolherArquivo(parseAlvo(b.dataset.alvo));
+  if (act === "tirar-midia") return tirarMidia(parseAlvo(b.dataset.alvo));
+  if (act === "colar-link") { const a = parseAlvo(b.dataset.alvo); const atual = (((E.midia || {})[a.duelo] || {})[a.lado] || {}).url || "";
+    return abrirEditor({ titulo: "Colar link do resultado", valor: atual, dica: "Funciona com YouTube, Vimeo, Google Drive (compartilhado como “qualquer pessoa com o link”), link direto de imagem ou de vídeo. Instagram e TikTok abrem como botão com QR Code.", onSalvar: url => definirLink(a, url) }); }
+  if (act === "editar-prompt") { const id = b.dataset.duelo, lado = b.dataset.lado;
+    if (lado === "atalho") return abrirEditor({ titulo: "Prompt do Time Laranja", multi: true, valor: textoAtalho(id), botao: "Salvar", onSalvar: v => store.setEstado({ promptAtalho: { ...(E.promptAtalho || {}), [id]: v } }) });
+    return abrirEditor({ titulo: "Prompt final do Time Verde", multi: true, valor: (E.promptFinal || {})[id] || "", botao: "Mostrar no telão", dica: "Cole aqui o prompt que saiu do Gerador de Prompts da Creator Lab. Vazio volta a mostrar a estrutura com as perguntas.", onSalvar: v => store.setEstado({ promptFinal: { ...(E.promptFinal || {}), [id]: v } }) }); }
 }
 function teclaTelao(ev) {
   if (TL.modal || /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
   const k = ev.key.toLowerCase();
   if (ev.key === "ArrowRight" || ev.key === " " || ev.key === "PageDown") { ev.preventDefault(); proximo(); }
   else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); anterior(); }
@@ -3775,6 +3968,7 @@ function teclaTelao(ev) {
    ============================================================ */
 function iniciarPalco() {
   ouvirTudo(renderPalco);
+  ligarArrastarColar();
   document.addEventListener("click", cliqueComando);
   document.addEventListener("keydown", teclaTelao);
   setInterval(() => { document.querySelectorAll(".js-timer").forEach(el => { if (E.timerFim) el.textContent = fmtTempo(E.timerFim - Date.now()); }); }, 500);
@@ -3782,7 +3976,7 @@ function iniciarPalco() {
 function renderPalco() {
   const it = itemAtual(); const i = passoAtual(); const prox = ROTEIRO[i + 1];
   const scroll = window.scrollY;
-  const qAtual = it.id === "duelos" ? (E.duelo && E.sub === "votacao" ? "duelo_" + E.duelo : "esc_" + (E.rodada || 1)) : it.id === "quiz" ? QUIZ[E.quizIdx || 0].id : it.id === "cases" ? "case_" + CASES[E.caseIdx || 0].id : it.id === "provocacao" ? Q_USOU.id : it.id === "medico" ? Q_MEDICO1.id : it.id === "final" || it.id === "compromisso" ? Q_CONF_DEPOIS.id : null;
+  const qAtual = it.id === "duelos" ? "duelo_" + (E.duelo || ORDEM_DUELOS[0]) : it.id === "quiz" ? QUIZ[E.quizIdx || 0].id : it.id === "cases" ? "case_" + CASES[E.caseIdx || 0].id : it.id === "provocacao" ? Q_USOU.id : it.id === "medico" ? Q_MEDICO1.id : it.id === "final" || it.id === "compromisso" ? Q_CONF_DEPOIS.id : null;
   const nVotos = qAtual ? totalDe(tally(qAtual)) : null;
   const pend = Q.filter(q => !q.feita).length;
   const temTimer = it.id === "duelos" && E.sub === "producao";
@@ -3797,11 +3991,34 @@ function renderPalco() {
       <button data-act="drawer" data-d="roteiro" class="${TL.drawer === "roteiro" ? "on" : ""}">Roteiro</button>
       ${store.modo === "ensaio" ? `<button data-act="simular">Simular plateia</button>` : ""}</div>
     <div class="pl-stats"><div class="glass"><b>${P.length}</b><span>conectados</span></div><div class="glass"><b>${nVotos == null ? "–" : nVotos}</b><span>votos agora</span></div><div class="glass"><b>${pend}</b><span>perguntas</span></div></div>
+    ${palcoExtra(it)}
     ${TL.drawer === "roteiro" ? `<div class="pl-now glass">${listaRoteiro()}</div>` : ""}
     <div class="pl-now glass"><div class="eyebrow">Perguntas e comentários</div>${listaPerguntas()}</div></div>${destaquePalco()}`;
   window.scrollTo(0, scroll);
 }
 function destaquePalco() { return ""; }
+function palcoExtra(it) {
+  if (it.id === "times") {
+    if (!E.cartas) return `<div class="pl-now glass"><div class="eyebrow">Jogo das cartas</div><p class="mut" style="font-size:14px">${P.length} conectados. Quando todos tiverem entrado, toque em “Distribuir cartas”.</p></div>`;
+    const N = Object.keys(E.cartas).length; const vir = new Set(E.todasViradas ? Object.keys(E.cartas).map(Number) : (E.viradas || []));
+    let g = ""; for (let k = 1; k <= N; k++) { const c = vir.has(k) ? E.cartas[k] : null;
+      g += `<button class="pl-carta ${c ? "c-" + c : ""}" ${c ? "disabled" : `data-act="virar-carta" data-n="${k}"`}>${k}</button>`; }
+    return `<div class="pl-now glass"><div class="eyebrow">Toque no número que o voluntário escolher</div><div class="pl-cartas">${g}</div></div>`;
+  }
+  if (it.id === "duelos") {
+    const id = E.duelo || ORDEM_DUELOS[0]; const d = DUELOS[id];
+    const lado = l => { const m = midiaDe(id, l); const a = id + "|" + l;
+      return `<div class="pl-lado ${l === "atalho" ? "lar-b" : "ver-b"}"><b class="${l === "atalho" ? "lar" : "ver"}">${nomeTime(timeDeLado(l))}</b>
+        <div class="mut" style="font-size:12.5px;margin:4px 0 8px">${m ? (m.local ? "Vídeo carregado no telão" : m.url ? "Link no telão" : "Imagem no telão") : "Sem resultado ainda"}</div>
+        ${m && m.tipo === "img" ? `<img src="${esc(m.src)}" alt="">` : ""}
+        <div class="pl-tools" style="margin:8px 0 0">${d.tipo !== "texto" ? `<button data-act="upload" data-alvo="${a}">Enviar imagem</button><button data-act="colar-link" data-alvo="${a}">Colar link</button>${m ? `<button data-act="tirar-midia" data-alvo="${a}">Remover</button>` : ""}` : ""}
+        <button data-act="editar-prompt" data-duelo="${id}" data-lado="${l}">${l === "atalho" ? "Editar prompt" : "Colar prompt final"}</button></div></div>`; };
+    const sug = S.filter(x => x.duelo === id && x.time === "verde").sort((a, b) => b.t - a.t);
+    return `<div class="pl-now glass"><div class="eyebrow">Duelo ${ORDEM_DUELOS.indexOf(id) + 1} de 3 · ${esc(d.nome)} · resultados</div><div class="pl-lados">${lado("atalho")}${lado("ferramenta")}</div></div>
+      ${d.estrutura ? `<div class="pl-now glass"><div class="eyebrow">Sugestões do Time Verde · ${sug.length}</div>${sug.length ? sug.map(x => `<div class="d-item">${esc(x.texto)}<div class="mut" style="font-size:12px;margin-top:3px">${esc(x.nome || "")}</div></div>`).join("") : `<p class="mut" style="font-size:14px">Ainda nenhuma.</p>`}</div>` : ""}`;
+  }
+  return "";
+}
 
 /* ---------- simulação (só no modo ensaio) ---------- */
 const NOMES_FAKE = ["Ana", "Bruno", "Carla", "Diego", "Elisa", "Fábio", "Gabi", "Hugo", "Isa", "João", "Karen", "Leo", "Marina", "Nando", "Olívia", "Pedro", "Quésia", "Rafa", "Sofia", "Tiago", "Úrsula", "Vini", "Wanda", "Yuri"];
@@ -3819,26 +4036,18 @@ async function simular() {
       await votar(Q_CONFERIU.id, () => pick(["tudo", "olhei", "olhei", "colei", "colei"]));
       return votar(Q_CONF_ANTES.id, () => pick(["2", "3", "3", "4", "4", "5"]));
     case "medico":
-      await votar(Q_MEDICO1.id, () => pick(["pergunta", "pergunta", "pergunta", "pergunta", "receita", "google"]));
-      return votar(Q_MEDICO2.id, () => pick(["remedio", "remedio", "remedio", "sintomas", "depende", "depende"]));
-    case "times": {
-      if (E.cartas) break;
-      const N = numCartas(); const livres = []; const usados = new Set(P.filter(p => p.numero).map(p => p.numero));
-      for (let k = 1; k <= N; k++) if (!usados.has(k)) livres.push(k);
-      const ord = shuffle(livres); const sem = fakes.filter(p => !p.numero).slice(0, Math.max(0, ord.length - 2));
-      return store.setMany("participantes", sem.map((p, i) => [p.id, { numero: ord[i] }]));
-    }
+      return votar(Q_MEDICO1.id, () => pick(["pergunta", "pergunta", "pergunta", "pergunta", "receita", "google"]));
+    case "times": if (E.cartas && !E.todasViradas) { const ab = Object.keys(E.cartas).map(Number).filter(k => !(E.viradas || []).includes(k)); if (ab.length) return virarCarta(pick(ab)); } break;
     case "quiz": if (E.sub === "votacao") { const qz = QUIZ[E.quizIdx || 0]; return votar(qz.id, () => Math.random() < .55 ? "c" : pick(["a", "b"])); } break;
     case "duelos": {
-      if (E.sub === "escolha" || !E.duelo) return votar("esc_" + (E.rodada || 1), () => pick(restantes()));
-      const d = DUELOS[E.duelo];
-      if (E.sub === "producao") return store.setMany("envios", fakes.slice(0, 10).map(p => [E.duelo + "__" + p.id, { duelo: E.duelo, pid: p.id, nome: p.nome, time: p.time, texto: p.time === "verde" ? "Prompt depois da conversa: " + d.cs.clareza + " " + d.cs.contexto : d.atalho, t: Date.now() }]));
+      if (!E.duelo) break;
+      if (E.sub === "producao" || E.sub === "briefing") { const vs = fakes.filter(p => p.time === "verde"); const f = pick(vs.length ? vs : fakes);
+        return store.add("envios", { duelo: E.duelo, pid: f.id, nome: f.nome, time: "verde", texto: pick(["Luz de fim de tarde vindo de trás da flor", "Lente macro, bem perto do miolo, fundo desfocado", "Campo de girassóis ao fundo, céu limpo", "Gotas de orvalho nas pétalas", "Vento leve balançando as pétalas", "Formato vertical para o Reels"]), t: Date.now() }); }
       if (E.sub === "votacao") { const bom = E.ordemA === "ferramenta" ? "A" : "B", ruim = bom === "A" ? "B" : "A"; return votar("duelo_" + E.duelo, () => Math.random() < 0.72 ? bom : ruim); }
       break;
     }
     case "cases": { const c = CASES[E.caseIdx || 0]; return votar("case_" + c.id, () => Math.random() < 0.6 ? c.certo : pick(["atalho", "ferramenta", "depende"])); }
     case "etica": return resp("etica", ["Na voz de alguém sem autorização", "Em depoimento real de cliente", "Em dado que eu não consigo conferir", "Para substituir minha opinião", "Em contrato sem revisão"]);
-    case "revanche": return store.setMany("envios", fakes.filter(p => p.time === "laranja").slice(0, 6).map(p => ["revanche__" + p.id, { duelo: "revanche", pid: p.id, nome: p.nome, time: p.time, texto: "Refiz conversando antes e o resultado ficou muito mais específico para o público.", t: Date.now() }]));
     case "compromisso": case "final":
       await votar(Q_CONF_DEPOIS.id, () => pick(["1", "2", "2", "3", "3"]));
       return resp("compromisso", ["O que você precisa saber sobre meu público antes de sugerir pautas?", "Como eu deveria pedir este vídeo para a IA de geração?", "Que perguntas faltam para montar minha proposta?"]);
@@ -3871,7 +4080,6 @@ async function iniciar() {
 }
 window.addEventListener("hashchange", () => { if (iniciado) location.reload(); else iniciar(); });
 iniciar();
-
 </script>
 </body>
 </html>

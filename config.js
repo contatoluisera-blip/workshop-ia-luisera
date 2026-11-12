@@ -31,12 +31,7 @@ Object.assign(CONFIG, {
   urlPlateia: "",
 
   // 5. Links do YouTube dos cases (o da Volkswagen já está preenchido).
-  videos: {
-    cadbury: "",
-    heinz: "",
-    coca: "",
-    elis: "https://www.youtube.com/watch?v=aMl54-kqphE"
-  },
+  videos: { cadbury: "", heinz: "", coca: "", elis: "" },
 
   // 6. Cupom da Creator Lab no fechamento (opcional).
   cupom: ""

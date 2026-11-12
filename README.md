@@ -32,7 +32,13 @@ Para testar: abra o telão no notebook e a plateia em 2 ou 3 celulares. O contad
 
 - `sessao`: um nome por turma. Trocar começa tudo do zero.
 - `pinTelao`: PIN opcional para o telão e o palco.
-- `videos`: links do YouTube dos cases. Sem internet no local, arraste o .mp4 para cima do vídeo no telão.
+- `videos`: deixe vazio para usar o link oficial de cada case (YouTube). Cole outro link só se quiser trocar. Sem internet no local, arraste o .mp4 para cima do vídeo no telão. Se o vídeo não rodar, o telão mostra o botão do YouTube e um QR Code para a sala abrir no celular.
+
+## Durante a aula
+
+- **Jogo das cartas:** quando todos tiverem entrado, avance para distribuir. Cada celular mostra o número da pessoa. Clique na carta que o voluntário escolher (no telão ou no Palco) e, no fim, avance para virar todas.
+- **Duelos:** ordem fixa, Prompt, Imagem e Vídeo, sempre com o girassol. Para trocar o prompt do Time Verde pelo que saiu da Creator Lab, passe o mouse no quadro e clique em “Colar prompt final”.
+- **Resultados no telão:** passe o mouse sobre o quadro do resultado e use Upload, Colar link ou Ctrl+V. Imagens ficam salvas no banco e aparecem também no Palco. Vídeo em arquivo fica só no computador do telão; para vídeo no celular, use um link (YouTube, Vimeo ou Google Drive compartilhado).
 - `cupom`: cupom da Creator Lab no fechamento.
 
 Os textos dos slides e as notas do palco ficam no bloco `ROTEIRO` dentro do `index.html`.
