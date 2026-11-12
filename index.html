@@ -287,6 +287,7 @@ textarea{resize:vertical;min-height:92px;line-height:1.45}
 .duel-cols.rodada{height:56vh}
 .rodada .pcard{max-height:31vh;flex:none;padding:1vw 1.3vw}
 .rodada .pc-txt.longo{font-size:.84vw;line-height:1.45}
+.rodada .pc-txt.longo2{font-size:.72vw;line-height:1.4}
 .rodada .sug{flex:1;min-height:0;overflow:hidden}
 .sug .sg.vazio{color:var(--mut2);font-size:.95vw}
 .cumpre .barra{margin:.2vw 0 .5vw}.cumpre .barra-top{font-size:.95vw}.cumpre .total{display:none}
@@ -461,8 +462,13 @@ const DUELOS = {
   },
   video: {
     nome: "Vídeo", rodada: "Rodada final · O vídeo", ferramenta: "Gerar Vídeo", tipo: "video",
-    briefing: "Uma das imagens ganha movimento: 5 a 10 segundos para abrir a campanha.",
+    briefing: "O rosto da campanha ganha movimento: 5 segundos do vendedor da rodada 1 para abrir o vídeo de verão.",
     atalho: "Anima essa imagem.",
+    verde: "[SHOT] Single continuous shot, vertical 4:5. Medium shot at eye level. Slow, steady leading shot on a gimbal: the camera moves backward in front of the vendor at his walking pace for the full 5 seconds, then decelerates and settles in the last half second.\n[ACTION] The vendor walks toward the camera across the dry sand at a relaxed, real-time pace. The weight of the two aluminum kegs pulls the straps into his shoulders and they sway slightly with each step; drops of condensation run down their sides. Around 3s he looks straight into the lens and his smile widens, with a small nod.\n[ENVIRONMENT] A light sea breeze moves his tank top and the plastic bag of biscuits. Small waves break on the left; in the softly blurred background, beachgoers move under colorful umbrellas. Background motion stays secondary and subtle.\n[LENS & LOOK] 85mm lens, shallow depth of field (f/2), follow focus locked on his face. Cinematic realism with a publicity look that feels like real footage: natural skin texture with pores and light sweat, fine film grain, natural motion blur with a 180° shutter and a 24fps feel, warm golden grade, real-time speed.\n[LIGHT] Keep the existing late-afternoon low side sunlight, golden on his face and rim-lighting the kegs; no new light sources.\n[CONTINUITY] His face, cap, tank top, the two kegs, the biscuit bag and the Dois Irmãos hill in the background remain identical to the input image throughout. Avoid cuts, morphing face or hands, extra people walking into the foreground, new text or logos, camera shake, slow motion.",
+    backup: {
+      atalho: "https://firebasestorage.googleapis.com/v0/b/luisera-lab.firebasestorage.app/o/gen-outputs%2Fp9UMCdWdRRTJfCjm5EfcwvCJbXq1%2F01794503123232-ba8ad348%2F0.mp4?alt=media&token=11d0b707-588e-4be6-9684-589df5d6ef79",
+      ferramenta: "https://firebasestorage.googleapis.com/v0/b/luisera-lab.firebasestorage.app/o/gen-outputs%2Fp9UMCdWdRRTJfCjm5EfcwvCJbXq1%2F01794503290374-002ad51f%2F0.mp4?alt=media&token=88b21af4-1dc8-4e80-ba2d-ca3832e99d13"
+    },
     estrutura: [
       ["Imagem de partida", "", "qual das imagens das rodadas anteriores"],
       ["Ação única", "", "o que se move e como se move"],
@@ -3712,7 +3718,7 @@ function htmlEstruturaT(d) {
 }
 function cardPrompt(id, lado) {
   const lar = lado === "atalho"; const fin = textoFerramenta(id);
-  const corpo = lar ? `<div class="pc-txt">“${esc(textoAtalho(id))}”</div>` : fin ? `<div class="pc-txt ${fin.length > 280 ? "longo" : ""}">${esc(fin)}</div>` : htmlEstruturaT(estruturaDe(id));
+  const corpo = lar ? `<div class="pc-txt">“${esc(textoAtalho(id))}”</div>` : fin ? `<div class="pc-txt ${fin.length > 1100 ? "longo longo2" : fin.length > 280 ? "longo" : ""}">${esc(fin)}</div>` : htmlEstruturaT(estruturaDe(id));
   return `<div class="pcard glass ${lar ? "lar-b" : "ver-b"}"><div class="pc-h"><span class="${lar ? "lar" : "em"}">${lar ? "Time Laranja · o prompt" : fin ? "Time Verde · o prompt" : "Time Verde · a estrutura"}</span>
     <span><button class="mini-t" data-act="editar-prompt" data-duelo="${id}" data-lado="${lado}">${lar ? "Editar" : fin ? "Editar prompt" : "Colar prompt final"}</button></span></div>${corpo}</div>`;
 }
@@ -3723,8 +3729,9 @@ function midiaDe(id, lado) {
   const lk = ((E.midia || {})[id] || {})[lado]; if (lk && lk.url) { const p = lerLink(lk.url, DUELOS[id].tipo === "video"); if (p) cand.push({ ...p, t: lk.t || 0 }); }
   const m = cand.filter(c => c.src).sort((a, b) => b.t - a.t)[0];
   if (m) return m;
-  const bk = backupDe(id, lado);
-  return bk ? { tipo: "img", src: bk, url: bk, t: 0, backup: true } : null;
+  const bk = backupDe(id, lado); if (!bk) return null;
+  const pb = lerLink(bk, DUELOS[id].tipo === "video") || { tipo: "img", src: bk };
+  return { ...pb, url: bk, t: 0, backup: true };
 }
 function slotMidia(id, lado, letra) {
   const m = midiaDe(id, lado); const alvo = id + "|" + lado;
@@ -4092,7 +4099,7 @@ function palcoExtra(it) {
 
     const lado = l => { const m = midiaDe(id, l); const a = id + "|" + l;
       return `<div class="pl-lado ${l === "atalho" ? "lar-b" : "ver-b"}"><b class="${l === "atalho" ? "lar" : "ver"}">${nomeTime(timeDeLado(l))}</b>
-        <div class="mut" style="font-size:12.5px;margin:4px 0 8px">${m ? (m.backup ? "Imagem de backup (gerada antes)" : m.local ? "Vídeo carregado no telão" : m.url ? "Link no telão" : "Imagem no telão") : "Sem resultado ainda"}</div>
+        <div class="mut" style="font-size:12.5px;margin:4px 0 8px">${m ? (m.backup ? (m.tipo === "video" ? "Vídeo de backup (gerado antes)" : "Imagem de backup (gerada antes)") : m.local ? "Vídeo carregado no telão" : m.url ? "Link no telão" : "Imagem no telão") : "Sem resultado ainda"}</div>
         ${m && m.tipo === "img" ? `<img src="${esc(m.src)}" alt="">` : ""}
         <div class="pl-tools" style="margin:8px 0 0">${d.tipo !== "texto" ? `<button data-act="upload" data-alvo="${a}">Enviar imagem</button><button data-act="colar-link" data-alvo="${a}">Colar link</button>${m && !m.backup ? `<button data-act="tirar-midia" data-alvo="${a}">${d.backup && d.backup[l] ? "Voltar ao backup" : "Remover"}</button>` : ""}` : ""}
         <button data-act="editar-prompt" data-duelo="${id}" data-lado="${l}">${l === "atalho" ? "Editar prompt" : "Colar prompt final"}</button></div></div>`; };
