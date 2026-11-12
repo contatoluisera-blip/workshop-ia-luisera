@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Só os dados do workshop ficam abertos. Depois do evento, troque "if true" por "if false".
+    match /workshops/{sessao}/{doc=**} {
+      allow read, write: if true;
+    }
+  }
+}
