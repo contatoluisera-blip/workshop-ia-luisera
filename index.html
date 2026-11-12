@@ -3671,12 +3671,15 @@ function midiaDe(id, lado) {
   const vl = TL.videosLocal[key]; if (vl) cand.push({ tipo: "video", src: vl.src, t: vl.t, local: true });
   const md = M.find(x => x.id === key); if (md && md.src) cand.push({ tipo: "img", src: md.src, t: md.t || 0 });
   const lk = ((E.midia || {})[id] || {})[lado]; if (lk && lk.url) { const p = lerLink(lk.url, DUELOS[id].tipo === "video"); if (p) cand.push({ ...p, t: lk.t || 0 }); }
-  return cand.sort((a, b) => b.t - a.t)[0] || null;
+  const m = cand.filter(c => c.src).sort((a, b) => b.t - a.t)[0];
+  if (m) return m;
+  const bk = DUELOS[id].backup && DUELOS[id].backup[lado];
+  return bk ? { tipo: "img", src: bk, url: bk, t: 0, backup: true } : null;
 }
 function slotMidia(id, lado, letra) {
   const m = midiaDe(id, lado); const alvo = id + "|" + lado;
   const bk = DUELOS[id].backup && DUELOS[id].backup[lado];
-  const tools = `<div class="ms-tools"><button data-act="upload" data-alvo="${alvo}">Upload</button><button data-act="colar-link" data-alvo="${alvo}">Colar link</button>${bk ? `<button data-act="usar-backup" data-alvo="${alvo}">Backup</button>` : ""}${m ? `<button data-act="tirar-midia" data-alvo="${alvo}">Remover</button>` : ""}</div>`;
+  const tools = `<div class="ms-tools"><button data-act="upload" data-alvo="${alvo}">Upload</button><button data-act="colar-link" data-alvo="${alvo}">Colar link</button>${bk && m && !m.backup ? `<button data-act="tirar-midia" data-alvo="${alvo}">Voltar ao backup</button>` : ""}${!bk && m ? `<button data-act="tirar-midia" data-alvo="${alvo}">Remover</button>` : ""}</div>`;
   let corpo;
   if (!m) corpo = `<div class="ms-vz"><b>${letra ? "Resultado " + letra : "Resultado do " + nomeTime(timeDeLado(lado))}</b><span>Arraste o arquivo aqui, cole com Ctrl+V ou use os botões abaixo.</span></div>`;
   else if (m.tipo === "img") corpo = `<img src="${esc(m.src)}" alt="" onerror="this.parentElement.classList.add('erro')"><div class="ms-erro"><span>Não consegui exibir este link.</span><a href="${esc(m.url || m.src)}" target="_blank" rel="noopener" class="btn-yt">Abrir em outra aba ↗</a></div>`;
@@ -3869,7 +3872,7 @@ function entrarPatch(it) {
     case "provocacao": return { ...base, votacao: true };
     case "medico": return { ...base, sub: "votacao", votacao: true };
     case "quiz": return { ...base, sub: "votacao", quizIdx: 0, votacao: true };
-    case "duelos": { const id = ORDEM_DUELOS.find(x => !(E.feitos || []).includes(x)) || ORDEM_DUELOS[0]; return { ...base, ...patchDuelo(id) }; }
+    case "duelos": return { ...base, ...patchDuelo(ORDEM_DUELOS[0]), feitos: [], placar: {} };
     case "cases": return { ...base, sub: "votacao", caseIdx: 0, votacao: true };
     case "compromisso": case "final": return { ...base, votacao: true };
   }
@@ -4023,9 +4026,9 @@ function palcoExtra(it) {
     const id = E.duelo || ORDEM_DUELOS[0]; const d = DUELOS[id];
     const lado = l => { const m = midiaDe(id, l); const a = id + "|" + l;
       return `<div class="pl-lado ${l === "atalho" ? "lar-b" : "ver-b"}"><b class="${l === "atalho" ? "lar" : "ver"}">${nomeTime(timeDeLado(l))}</b>
-        <div class="mut" style="font-size:12.5px;margin:4px 0 8px">${m ? (m.local ? "Vídeo carregado no telão" : m.url ? "Link no telão" : "Imagem no telão") : "Sem resultado ainda"}</div>
+        <div class="mut" style="font-size:12.5px;margin:4px 0 8px">${m ? (m.backup ? "Imagem de backup (gerada antes)" : m.local ? "Vídeo carregado no telão" : m.url ? "Link no telão" : "Imagem no telão") : "Sem resultado ainda"}</div>
         ${m && m.tipo === "img" ? `<img src="${esc(m.src)}" alt="">` : ""}
-        <div class="pl-tools" style="margin:8px 0 0">${d.tipo !== "texto" ? `<button data-act="upload" data-alvo="${a}">Enviar imagem</button><button data-act="colar-link" data-alvo="${a}">Colar link</button>${d.backup && d.backup[l] ? `<button data-act="usar-backup" data-alvo="${a}">Backup</button>` : ""}${m ? `<button data-act="tirar-midia" data-alvo="${a}">Remover</button>` : ""}` : ""}
+        <div class="pl-tools" style="margin:8px 0 0">${d.tipo !== "texto" ? `<button data-act="upload" data-alvo="${a}">Enviar imagem</button><button data-act="colar-link" data-alvo="${a}">Colar link</button>${m && !m.backup ? `<button data-act="tirar-midia" data-alvo="${a}">${d.backup && d.backup[l] ? "Voltar ao backup" : "Remover"}</button>` : ""}` : ""}
         <button data-act="editar-prompt" data-duelo="${id}" data-lado="${l}">${l === "atalho" ? "Editar prompt" : "Colar prompt final"}</button>${l === "ferramenta" && d.backupPrompt ? `<button data-act="prompt-backup" data-duelo="${id}">Prompt de backup</button>` : ""}</div></div>`; };
     const sug = S.filter(x => x.duelo === id && x.time === "verde").sort((a, b) => b.t - a.t);
     return `<div class="pl-now glass"><div class="eyebrow">Duelo ${ORDEM_DUELOS.indexOf(id) + 1} de 3 · ${esc(d.nome)} · resultados</div><div class="pl-lados">${lado("atalho")}${lado("ferramenta")}</div></div>
