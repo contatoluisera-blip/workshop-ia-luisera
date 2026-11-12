@@ -3,9 +3,15 @@
    Depois de salvar, a Netlify publica sozinha em cerca de 1 minuto.
    ============================================================ */
 Object.assign(CONFIG, {
-  // 1. Cole aqui a configuração do app web do Firebase (veja o README).
-  //    Enquanto ficar null, o site roda em MODO ENSAIO: cada aparelho fica isolado e a plateia não aparece no telão.
-  firebase: null,
+  // 1. Conexão com o Firebase (projeto workshop-ia-luisera). Se trocar por null, o site volta ao MODO ENSAIO.
+  firebase: {
+    apiKey: "AIzaSyB_1BhRDPQDVxUG7kZP3FozdThj-4hPDYY",
+    authDomain: "workshop-ia-luisera.firebaseapp.com",
+    projectId: "workshop-ia-luisera",
+    storageBucket: "workshop-ia-luisera.firebasestorage.app",
+    messagingSenderId: "723301154789",
+    appId: "1:723301154789:web:6b37ac48823c4d700af90c"
+  },
   /* Exemplo:
   firebase: {
     apiKey: "...",
