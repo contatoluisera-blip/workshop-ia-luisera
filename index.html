@@ -3936,6 +3936,17 @@ function listaPessoas() {
   return `<div class="pessoas">${recentes().map(p => `<div class="pessoa"><b>${esc(p.nome || "Sem nome")}</b>${p.time ? `<i class="${p.time === "laranja" ? "lar" : "ver"}">${esc(nomeTime(p.time))}</i>` : "<i></i>"}<em>${hora(p.t)}</em><span>${esc(p.funcao || "")}</span></div>`).join("")}</div>`;
 }
 
+function botaoZerarP() {
+  return `<button class="mini" data-act="zerar-participantes" style="border-color:var(--lar);color:var(--lar);margin-right:8px">${TL.confirmaZerarP ? "Toque de novo: todos saem e os times somem" : "Zerar participantes e times"}</button>`;
+}
+async function zerarParticipantes() {
+  if (temRespostas()) exportarRespostas();
+  const ids = P.map(p => p.id);
+  TL.cartasVistas.clear();
+  await Promise.all(ids.map(id => store.del("participantes", id)));
+  await store.setEstado({ cartas: null, cartasDono: null, viradas: [], todasViradas: false, timesSorteados: false });
+}
+
 /* ---------- registro das respostas (planilha) ---------- */
 const temRespostas = () => P.length + V.length + R.length + S.length + Q.length > 0;
 function rotuloOpt(opts, o) { const x = (opts || []).find(k => k.v === o); return x ? x.l : o; }
@@ -3984,11 +3995,11 @@ function exportarRespostas() {
 
 function drawerHTML() {
   if (TL.drawer === "perguntas") return `<div class="drawer"><h3>Perguntas e comentários <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaPerguntas()}</div>`;
-  if (TL.drawer === "pessoas") return `<div class="drawer"><h3>Quem entrou · ${P.length} <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaPessoas()}<div class="d-ato">Registro</div><div class="d-item"><button class="mini" data-act="exportar">Baixar todas as respostas (planilha)</button></div></div>`;
+  if (TL.drawer === "pessoas") return `<div class="drawer"><h3>Quem entrou · ${P.length} <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaPessoas()}<div class="d-ato">Registro</div><div class="d-item"><button class="mini" data-act="exportar">Baixar todas as respostas (planilha)</button></div><div class="d-ato">Recomeçar</div><div class="d-item">${botaoZerarP()}</div></div>`;
   if (TL.drawer === "roteiro") return `<div class="drawer"><h3>Roteiro <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaRoteiro()}
     <div class="d-ato">Ir direto para uma rodada (o rosto, o mascote, o cenário e o vídeo)</div><div class="d-item"><div class="acts">${ORDEM_DUELOS.map(id => `<button data-act="ir-duelo" data-id="${id}">${DUELOS[id].nome}${(E.feitos || []).includes(id) ? " ✓" : ""}</button>`).join("")}</div></div>
     ${E.cartas ? `<div class="d-ato">Jogo das cartas</div><div class="d-item"><div class="mut" style="margin-bottom:8px">Entrou muita gente depois? Distribua de novo: os times mudam.</div><button class="mini" data-act="redistribuir">${TL.confirmaRedist ? "Clique de novo para redistribuir" : "Distribuir as cartas de novo"}</button></div>` : ""}
-    <div class="d-ato">Sessão</div><div class="d-item"><div class="mut" style="margin-bottom:8px">“${esc(CONFIG.sessao)}” · ${store.modo} · zerar baixa as respostas antes</div><button class="mini" data-act="exportar" style="margin-right:8px">Baixar respostas</button><button class="mini" data-act="limpar" style="border-color:var(--lar);color:var(--lar)">${TL.confirmaLimpar ? "Clique de novo para apagar tudo" : "Zerar sessão"}</button></div></div>`;
+    <div class="d-ato">Sessão</div><div class="d-item"><div class="mut" style="margin-bottom:8px">“${esc(CONFIG.sessao)}” · ${store.modo} · zerar baixa as respostas antes</div><button class="mini" data-act="exportar" style="margin-right:8px">Baixar respostas</button>${botaoZerarP()}<button class="mini" data-act="limpar" style="border-color:var(--lar);color:var(--lar)">${TL.confirmaLimpar ? "Clique de novo para apagar tudo" : "Zerar sessão"}</button></div></div>`;
   return "";
 }
 function destaqueHTML() {
@@ -4077,6 +4088,8 @@ async function cliqueComando(ev) {
   const act = b.dataset.act;
   if (act !== "limpar") TL.confirmaLimpar = false;
   if (act !== "redistribuir") TL.confirmaRedist = false;
+  if (act !== "zerar-participantes") TL.confirmaZerarP = false;
+  if (act === "zerar-participantes") { if (!TL.confirmaZerarP) { TL.confirmaZerarP = true; return render(); } TL.confirmaZerarP = false; return zerarParticipantes(); }
   if (act === "next") return proximo();
   if (act === "prev") return anterior();
   if (act === "votacao") return store.setEstado({ votacao: !E.votacao });
@@ -4155,7 +4168,7 @@ function renderPalco() {
     <div class="pl-stats"><div class="glass" data-act="drawer" data-d="pessoas" style="cursor:pointer"><b>${P.length}</b><span>conectados</span></div><div class="glass"><b>${nVotos == null ? "–" : nVotos}</b><span>votos agora</span></div><div class="glass"><b>${pend}</b><span>perguntas</span></div></div>
     ${palcoExtra(it)}
     ${TL.drawer === "roteiro" ? `<div class="pl-now glass">${listaRoteiro()}</div>` : ""}
-    ${TL.drawer === "pessoas" ? `<div class="pl-now glass"><div class="eyebrow">Quem entrou · ${P.length}</div>${listaPessoas()}</div>` : ""}
+    ${TL.drawer === "pessoas" ? `<div class="pl-now glass"><div class="eyebrow">Quem entrou · ${P.length}</div>${listaPessoas()}<div style="margin-top:14px">${botaoZerarP()}</div></div>` : ""}
     <div class="pl-now glass"><div class="eyebrow">Perguntas e comentários</div>${listaPerguntas()}</div></div>${destaquePalco()}`;
   window.scrollTo(0, scroll);
 }
