@@ -347,6 +347,16 @@ textarea{resize:vertical;min-height:92px;line-height:1.45}
 .pl-stats b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em}
 .pl-stats span{font-family:var(--mono);font-size:11px;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
 @media (max-aspect-ratio: 4/3){ .t-h1{font-size:7vw} .mural{grid-template-columns:repeat(2,1fr)} }
+.nomes{display:flex;flex-wrap:wrap;gap:.5vw;margin-top:1.6vw;max-height:14vw;overflow:hidden}
+.nomes span{background:#151515;border-radius:99px;padding:.4vw .95vw;font-size:1.05vw;color:#fafafa;animation:entra .5s ease-out}
+.nomes span.nm-laranja{box-shadow:inset 0 0 0 1px var(--lar)}.nomes span.nm-verde{box-shadow:inset 0 0 0 1px var(--ver)}
+.nomes span.mais{background:none;color:var(--mut2);font-family:var(--mono)}
+@keyframes entra{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pessoas{display:flex;flex-direction:column}
+.pessoa{display:grid;grid-template-columns:1fr auto auto;gap:2px 10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;align-items:baseline}
+.pessoa b{font-weight:600}.pessoa i{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.pessoa em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--mut2)}
+.pessoa span{grid-column:1/-1;color:var(--mut);font-size:12.5px}
 </style>
 </head>
 <body>
@@ -3366,7 +3376,8 @@ async function cliquePlateia(ev) {
   if (b.dataset.vote) {
     const q = b.dataset.vote, o = b.dataset.o;
     PL.meusVotos[q] = o; salvarLocal(); renderPlateia();
-    try { await store.set("votos", q + "__" + PL.pid, { q, o, pid: PL.pid, t: Date.now() }); } catch (e) { avisoErro("Não foi possível registrar o voto."); }
+    const extra = q.startsWith("duelo_") && E.ordemA ? { lado: o === "A" ? E.ordemA : (E.ordemA === "atalho" ? "ferramenta" : "atalho") } : {};
+    try { await store.set("votos", q + "__" + PL.pid, { q, o, pid: PL.pid, t: Date.now(), ...extra }); } catch (e) { avisoErro("Não foi possível registrar o voto."); }
     return;
   }
   if (act === "entrar") {
@@ -3453,7 +3464,7 @@ function topoTelao() {
   const it = itemAtual(); const url = urlPlateia();
   return `<div class="t-top"><span class="t-ato">${it.ato ? `<b>Ato ${String(it.ato).padStart(2, "0")}</b> · ${esc(ATOS[it.ato])}` : `<b>IA como ferramenta</b>`}</span>
     <div class="cont">${store.modo === "ensaio" ? `<span class="pill ensaio">Modo ensaio</span>` : ""}
-    <span class="pill">${P.length} conectados</span><span>${esc(url.replace(/^https?:\/\//, ""))}</span>
+    <span class="pill" data-act="drawer" data-d="pessoas" style="cursor:pointer" title="Ver quem entrou">${P.length} conectados</span><span>${esc(url.replace(/^https?:\/\//, ""))}</span>
     <div class="qr-mini" data-act="qr" title="Ampliar QR Code">${qrSVG(url)}</div></div></div>`;
 }
 
@@ -3605,7 +3616,7 @@ const INTER = {
       <div class="t-col"><div class="t-eyebrow">Aponte a câmera do celular</div><div class="t-h1" style="font-size:4.8vw">Seu celular é o controle desta aula.</div>
       <div class="t-sub">Você vota, escolhe o caminho, recebe missões secretas e manda perguntas a qualquer momento.</div>
       <div style="margin-top:2.6vw;display:flex;align-items:baseline;gap:1.4vw"><span class="big-num em">${P.length}</span><span class="t-sub" style="margin:0">pessoas conectadas</span></div>
-      <div class="chips">${chips}</div></div></div>`;
+      <div class="chips">${chips}</div>${muralNomes()}</div></div>`;
   },
   ancora: () => { const n = R.filter(r => r.q === "ancora").length;
     return `<div class="t-eyebrow">A pergunta que guia a aula · ${n} resposta${n === 1 ? "" : "s"}</div><div class="t-h2">${esc(CONFIG.perguntaAncora)}</div>${mural("ancora")}`; },
@@ -3892,7 +3903,7 @@ function controles() {
     ${it.id === "cases" && E.sub !== "revelacao" ? `<button data-act="carregar-video">Carregar vídeo</button>` : ""}
     <button data-act="ancora" class="${E.mostrarAncora ? "on" : ""}" title="A">Âncora</button>
     <button data-act="drawer" data-d="perguntas" class="${TL.drawer === "perguntas" ? "on" : ""}">Perguntas${pend ? `<span class="badge">${pend}</span>` : ""}</button>
-    <button data-act="drawer" data-d="roteiro" class="${TL.drawer === "roteiro" ? "on" : ""}">Roteiro</button>
+    <button data-act="drawer" data-d="roteiro" class="${TL.drawer === "roteiro" ? "on" : ""}">Roteiro</button><button data-act="drawer" data-d="pessoas" class="${TL.drawer === "pessoas" ? "on" : ""}">Quem entrou</button>
     ${store.modo === "ensaio" ? `<button data-act="simular" title="Gera respostas falsas para ensaiar">Simular plateia</button><button data-act="ir-celular">Celular</button><button data-act="ir-palco">Palco</button>` : ""}
     <button data-act="fixar" title="Manter a barra visível">${TL.ctrlFixo ? "Soltar" : "Fixar"}</button><button data-act="fullscreen">⛶</button></div>`;
 }
@@ -3911,12 +3922,73 @@ function listaRoteiro() {
   });
   return h;
 }
+/* ---------- quem entrou ---------- */
+const recentes = () => P.slice().sort((a, b) => (b.t || 0) - (a.t || 0));
+function muralNomes() {
+  if (!P.length) return "";
+  const max = 48, lista = recentes();
+  const ch = lista.slice(0, max).map(p => `<span class="${p.time ? "nm-" + p.time : ""}">${esc(p.nome || "Sem nome")}</span>`).join("");
+  return `<div class="nomes">${ch}${lista.length > max ? `<span class="mais">+${lista.length - max}</span>` : ""}</div>`;
+}
+function listaPessoas() {
+  if (!P.length) return `<p class="mut" style="font-size:14px">Ninguém entrou ainda.</p>`;
+  const hora = t => t ? new Date(t).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) : "";
+  return `<div class="pessoas">${recentes().map(p => `<div class="pessoa"><b>${esc(p.nome || "Sem nome")}</b>${p.time ? `<i class="${p.time === "laranja" ? "lar" : "ver"}">${esc(nomeTime(p.time))}</i>` : "<i></i>"}<em>${hora(p.t)}</em><span>${esc(p.funcao || "")}</span></div>`).join("")}</div>`;
+}
+
+/* ---------- registro das respostas (planilha) ---------- */
+const temRespostas = () => P.length + V.length + R.length + S.length + Q.length > 0;
+function rotuloOpt(opts, o) { const x = (opts || []).find(k => k.v === o); return x ? x.l : o; }
+function descreverVoto(v) {
+  const q = v.q || "", o = v.o;
+  const simples = [Q_USOU, Q_CONFERIU, Q_MEDICO1].find(x => x.id === q);
+  if (simples) return [simples === Q_MEDICO1 ? "Analogia do médico" : "Provocação", simples.titulo, rotuloOpt(simples.opts, o)];
+  if (q === Q_CONF_ANTES.id) return ["Provocação", Q_CONF_ANTES.titulo, o + " de 5"];
+  if (q === Q_CONF_DEPOIS.id) return ["Os 4 Cs, antes e depois", Q_CONF_DEPOIS.titulo, o + " de 5"];
+  const qz = QUIZ.find(x => x.id === q);
+  if (qz) return ["Quiz", qz.titulo, String(o).toUpperCase() + ") " + rotuloOpt(qz.opts, o) + (o === qz.certo ? " (certa)" : "")];
+  if (q.startsWith("case_")) { const c = CASES.find(x => "case_" + x.id === q); return ["Cases", c ? c.nome : q, rotuloOpt(OPTS_CASE, o)]; }
+  if (q.startsWith("cumpre_")) { const d = DUELOS[q.slice(7)]; return [d ? d.rodada : q, "Cumpre o briefing?", rotuloOpt(OPTS_CUMPRE, o)]; }
+  if (q.startsWith("duelo_")) { const d = DUELOS[q.slice(6)];
+    const lado = v.lado ? (v.lado === "ferramenta" ? " (prompt completo, Time Verde)" : " (prompt curto, Time Laranja)") : "";
+    return [d ? d.rodada : q, d && d.verde ? "Qual cumpre melhor o briefing?" : "Qual resultado é melhor?", "Resultado " + o + lado]; }
+  return [q, q, o];
+}
+function tituloResposta(q) {
+  if (q === "ancora") return ["Pergunta-âncora", CONFIG.perguntaAncora];
+  const it = ROTEIRO.find(x => x.id === q); return [it ? it.titulo : q, it ? it.titulo : q];
+}
+function linhasRegistro() {
+  const pes = {}; P.forEach(p => pes[p.id] = p);
+  const quem = (pid, nome) => { const p = pes[pid] || {}; return [p.nome || nome || "", p.funcao || "", p.time ? nomeTime(p.time) : ""]; };
+  const L = [];
+  P.forEach(p => L.push([p.t, ...quem(p.id), "Entrada", "Entrou no workshop", "Função: " + (p.funcao || "-")]));
+  V.forEach(v => { const [m, perg, resp] = descreverVoto(v); L.push([v.t, ...quem(v.pid), m, perg, resp]); });
+  R.forEach(r => { const [m, perg] = tituloResposta(r.q); L.push([r.t, ...quem(r.pid, r.nome), m, perg, r.texto]); });
+  S.forEach(x => { const d = DUELOS[x.duelo]; L.push([x.t, ...quem(x.pid, x.nome), d ? d.rodada : x.duelo, x.time === "laranja" ? PERGUNTAS_LARANJA : PERGUNTAS_VERDE, x.texto]); });
+  Q.forEach(x => L.push([x.t, ...quem(x.pid, x.nome), x.tipo === "pergunta" ? "Pergunta para o palestrante" : "Comentário", x.tipo === "pergunta" ? "Pergunta" : "Comentário", x.texto]));
+  return L.sort((a, b) => (a[0] || 0) - (b[0] || 0));
+}
+function exportarRespostas() {
+  const cel = x => { const t = x == null ? "" : String(x); return /[";\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
+  const data = t => t ? new Date(t).toLocaleString("pt-BR").replace(",", "") : "";
+  const cab = ["Data e hora", "Pessoa", "Função", "Time", "Momento", "Pergunta", "Resposta"];
+  const linhas = linhasRegistro().map(([t, ...r]) => [data(t), ...r]);
+  const csv = "﻿" + [cab, ...linhas].map(l => l.map(cel).join(";")).join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  const d = new Date(), dd = n => String(n).padStart(2, "0");
+  a.download = `respostas-${CONFIG.sessao}-${d.getFullYear()}-${dd(d.getMonth() + 1)}-${dd(d.getDate())}-${dd(d.getHours())}h${dd(d.getMinutes())}.csv`;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
 function drawerHTML() {
   if (TL.drawer === "perguntas") return `<div class="drawer"><h3>Perguntas e comentários <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaPerguntas()}</div>`;
+  if (TL.drawer === "pessoas") return `<div class="drawer"><h3>Quem entrou · ${P.length} <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaPessoas()}<div class="d-ato">Registro</div><div class="d-item"><button class="mini" data-act="exportar">Baixar todas as respostas (planilha)</button></div></div>`;
   if (TL.drawer === "roteiro") return `<div class="drawer"><h3>Roteiro <button class="mini" data-act="drawer" data-d="">Fechar</button></h3>${listaRoteiro()}
     <div class="d-ato">Ir direto para uma rodada (o rosto, o mascote, o cenário e o vídeo)</div><div class="d-item"><div class="acts">${ORDEM_DUELOS.map(id => `<button data-act="ir-duelo" data-id="${id}">${DUELOS[id].nome}${(E.feitos || []).includes(id) ? " ✓" : ""}</button>`).join("")}</div></div>
     ${E.cartas ? `<div class="d-ato">Jogo das cartas</div><div class="d-item"><div class="mut" style="margin-bottom:8px">Entrou muita gente depois? Distribua de novo: os times mudam.</div><button class="mini" data-act="redistribuir">${TL.confirmaRedist ? "Clique de novo para redistribuir" : "Distribuir as cartas de novo"}</button></div>` : ""}
-    <div class="d-ato">Sessão</div><div class="d-item"><div class="mut" style="margin-bottom:8px">“${esc(CONFIG.sessao)}” · ${store.modo}</div><button class="mini" data-act="limpar" style="border-color:var(--lar);color:var(--lar)">${TL.confirmaLimpar ? "Clique de novo para apagar tudo" : "Zerar sessão"}</button></div></div>`;
+    <div class="d-ato">Sessão</div><div class="d-item"><div class="mut" style="margin-bottom:8px">“${esc(CONFIG.sessao)}” · ${store.modo} · zerar baixa as respostas antes</div><button class="mini" data-act="exportar" style="margin-right:8px">Baixar respostas</button><button class="mini" data-act="limpar" style="border-color:var(--lar);color:var(--lar)">${TL.confirmaLimpar ? "Clique de novo para apagar tudo" : "Zerar sessão"}</button></div></div>`;
   return "";
 }
 function destaqueHTML() {
@@ -4015,7 +4087,8 @@ async function cliqueComando(ev) {
   if (act === "feita") { const q = Q.find(x => x.id === b.dataset.id); return store.set("perguntas", b.dataset.id, { feita: !(q && q.feita) }); }
   if (act === "ir-passo") { TL.drawer = null; return irPasso(+b.dataset.i); }
   if (act === "ir-duelo") { TL.drawer = null; return abrirDuelo(b.dataset.id); }
-  if (act === "limpar") { if (!TL.confirmaLimpar) { TL.confirmaLimpar = true; return render(); } TL.confirmaLimpar = false; TL.hist = []; TL.videosLocal = {}; TL.cartasVistas.clear(); return store.limpar(); }
+  if (act === "exportar") return exportarRespostas();
+  if (act === "limpar") { if (!TL.confirmaLimpar) { TL.confirmaLimpar = true; return render(); } TL.confirmaLimpar = false; if (temRespostas()) exportarRespostas(); TL.hist = []; TL.videosLocal = {}; TL.cartasVistas.clear(); return store.limpar(); }
   if (act === "qr") { TL.qrGrande = !TL.qrGrande; return render(); }
   if (act === "fixar") { TL.ctrlFixo = !TL.ctrlFixo; return render(); }
   if (act === "fullscreen") { try { if (!document.fullscreenElement) await document.documentElement.requestFullscreen(); else await document.exitFullscreen(); } catch (e) {} return; }
@@ -4077,10 +4150,12 @@ function renderPalco() {
     <div class="pl-tools"><button data-act="votacao" class="${E.votacao ? "on" : ""}">${E.votacao ? "Votação aberta" : "Votação fechada"}</button>
       ${temTimer ? `<button data-act="timer">+1 min</button>` : ""}<button data-act="ancora" class="${E.mostrarAncora ? "on" : ""}">Âncora no telão</button>
       <button data-act="drawer" data-d="roteiro" class="${TL.drawer === "roteiro" ? "on" : ""}">Roteiro</button>
+      <button data-act="drawer" data-d="pessoas" class="${TL.drawer === "pessoas" ? "on" : ""}">Quem entrou</button><button data-act="exportar">Baixar respostas</button>
       ${store.modo === "ensaio" ? `<button data-act="simular">Simular plateia</button>` : ""}</div>
-    <div class="pl-stats"><div class="glass"><b>${P.length}</b><span>conectados</span></div><div class="glass"><b>${nVotos == null ? "–" : nVotos}</b><span>votos agora</span></div><div class="glass"><b>${pend}</b><span>perguntas</span></div></div>
+    <div class="pl-stats"><div class="glass" data-act="drawer" data-d="pessoas" style="cursor:pointer"><b>${P.length}</b><span>conectados</span></div><div class="glass"><b>${nVotos == null ? "–" : nVotos}</b><span>votos agora</span></div><div class="glass"><b>${pend}</b><span>perguntas</span></div></div>
     ${palcoExtra(it)}
     ${TL.drawer === "roteiro" ? `<div class="pl-now glass">${listaRoteiro()}</div>` : ""}
+    ${TL.drawer === "pessoas" ? `<div class="pl-now glass"><div class="eyebrow">Quem entrou · ${P.length}</div>${listaPessoas()}</div>` : ""}
     <div class="pl-now glass"><div class="eyebrow">Perguntas e comentários</div>${listaPerguntas()}</div></div>${destaquePalco()}`;
   window.scrollTo(0, scroll);
 }
@@ -4141,7 +4216,8 @@ async function simular() {
       }
       else if (E.sub === "producao" || E.sub === "briefing") { const vs = fakes.filter(p => p.time === "verde"); const f = pick(vs.length ? vs : fakes);
         return store.add("envios", { duelo: E.duelo, pid: f.id, nome: f.nome, time: "verde", texto: pick(["Luz de fim de tarde vindo de trás da flor", "Lente macro, bem perto do miolo, fundo desfocado", "Campo de girassóis ao fundo, céu limpo", "Gotas de orvalho nas pétalas", "Vento leve balançando as pétalas", "Formato vertical para o Reels"]), t: Date.now() }); }
-      if (E.sub === "votacao") { const bom = E.ordemA === "ferramenta" ? "A" : "B", ruim = bom === "A" ? "B" : "A"; return votar("duelo_" + E.duelo, () => Math.random() < 0.72 ? bom : ruim); }
+      if (E.sub === "votacao") { const bom = E.ordemA === "ferramenta" ? "A" : "B", ruim = bom === "A" ? "B" : "A";
+        return store.setMany("votos", fakes.map(p => { const o = Math.random() < 0.72 ? bom : ruim; return ["duelo_" + E.duelo + "__" + p.id, { q: "duelo_" + E.duelo, o, pid: p.id, t: Date.now(), lado: o === bom ? "ferramenta" : "atalho" }]; })); }
       break;
     }
     case "cases": { const c = CASES[E.caseIdx || 0]; return votar("case_" + c.id, () => Math.random() < 0.6 ? c.certo : pick(["atalho", "ferramenta", "depende"])); }
